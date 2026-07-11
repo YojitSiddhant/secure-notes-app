@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// The level of importance for a note.
+enum Priority {
+  /// Highest importance.
+  HIGH
+
+  /// Medium importance.
+  MEDIUM
+
+  /// Lowest importance.
+  LOW
+}
+
+/// A person who can own notes in the app.
+model User {
+  /// Unique identifier for the user.
+  id String @id @default(uuid()) @db.Uuid
+
+  /// The user's display name.
+  name String
+
+  /// The user's email address. This must be unique.
+  email String @unique
+
+  /// The user's hashed password.
+  password String
+
+  /// The time when the user record was created.
+  createdAt DateTime @default(now())
+
+  /// The time when the user record was last updated.
+  updatedAt DateTime @updatedAt
+
+  /// All notes that belong to this user.
+  notes Note[]
+}
+
+/// A note saved by a user.
+model Note {
+  /// Unique identifier for the note.
+  id String @id @default(uuid()) @db.Uuid
+
+  /// The note title shown in the UI.
+  title String
+
+  /// The note body or longer text.
+  description String
+
+  /// How important this note is.
+  priority Priority
+
+  /// The time when the note was created.
+  createdAt DateTime @default(now())
+
+  /// The time when the note was last updated.
+  updatedAt DateTime @updatedAt
+
+  /// The ID of the user who owns this note.
+  userId String @db.Uuid
+
+  /// The user who owns this note.
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
