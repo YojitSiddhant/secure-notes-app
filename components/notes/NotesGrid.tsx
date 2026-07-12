@@ -9,7 +9,12 @@ type NotesGridProps = {
 
 export function NotesGrid({ notes, onEdit, onDelete }: NotesGridProps) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    <div
+      className="grid gap-4 sm:gap-5"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
+      }}
+    >
       {notes.map((note) => (
         <NoteCard key={note.id} note={note} onEdit={onEdit} onDelete={onDelete} />
       ))}

@@ -5,11 +5,16 @@ export function DashboardSkeleton() {
         <div className="h-8 w-56 animate-pulse rounded-full bg-slate-200/80" />
         <div className="h-4 w-80 max-w-[90%] animate-pulse rounded-full bg-slate-200/80" />
       </div>
-      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <div
+        className="grid gap-4 sm:gap-5"
+        style={{
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 14rem), 1fr))",
+        }}
+      >
         {Array.from({ length: 4 }).map((_, index) => (
           <div
             key={index}
-            className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.18)]"
+            className="rounded-[1.75rem] border border-white/80 bg-white/90 p-5 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl"
           >
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-3">

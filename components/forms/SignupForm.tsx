@@ -325,7 +325,7 @@ export function SignupForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={primaryButtonClassName}
+        className={cn(primaryButtonClassName, "w-full")}
         aria-busy={isSubmitting}
       >
         {isSubmitting ? (

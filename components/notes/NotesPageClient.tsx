@@ -59,7 +59,7 @@ function NotesContent() {
           <button
             type="button"
             onClick={() => notesQuery.refetch()}
-            className="inline-flex h-11 items-center justify-center rounded-2xl bg-indigo-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 sm:w-auto"
           >
             Retry
           </button>
@@ -96,14 +96,14 @@ function NotesContent() {
           }
           action={
             hasFilters ? null : (
-              <button
-                type="button"
-                onClick={() => setManualCreateOpen(true)}
-                className="inline-flex h-11 items-center justify-center rounded-2xl bg-indigo-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
-              >
-                Create Note
-              </button>
-            )
+            <button
+              type="button"
+              onClick={() => setManualCreateOpen(true)}
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 sm:w-auto"
+            >
+              Create Note
+            </button>
+          )
           }
         />
       )}

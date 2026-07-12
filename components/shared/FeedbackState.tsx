@@ -20,7 +20,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-[2rem] border border-dashed border-slate-200 bg-white px-6 py-14 text-center shadow-[0_24px_70px_-42px_rgba(15,23,42,0.18)] sm:py-16",
+        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-dashed border-slate-200/80 bg-white/90 px-5 py-12 text-center shadow-[0_24px_70px_-42px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:px-6 sm:py-16",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function ErrorState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-[2rem] border border-rose-200 bg-white px-6 py-14 text-center shadow-[0_24px_70px_-42px_rgba(225,29,72,0.18)] sm:py-16",
+        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-rose-200/80 bg-white/90 px-5 py-12 text-center shadow-[0_24px_70px_-42px_rgba(225,29,72,0.16)] backdrop-blur-xl sm:px-6 sm:py-16",
         className
       )}
     >

@@ -47,7 +47,13 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
   const priority = priorityStyles[note.priority];
 
   return (
-    <article className={cn("group relative flex h-full flex-col overflow-hidden p-5 sm:p-6", cardShellInteractiveClassName, priority.shellClassName)}>
+    <article
+      className={cn(
+        "group relative flex h-full min-h-[18rem] flex-col overflow-hidden p-5 sm:p-6",
+        cardShellInteractiveClassName,
+        priority.shellClassName
+      )}
+    >
       <div className="flex items-start justify-between gap-3">
         <span
           className={cn(
@@ -62,7 +68,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
           <button
             type="button"
             onClick={() => onEdit(note)}
-            className={cn(iconButtonClassName, "h-10 w-10")}
+            className={iconButtonClassName}
             aria-label={`Edit note ${note.title}`}
           >
             <Edit3 className="h-4 w-4" />
@@ -72,7 +78,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
             onClick={() => onDelete(note)}
             className={cn(
               iconButtonClassName,
-              "h-10 w-10 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 focus:ring-4 focus:ring-rose-500/10"
+              "hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 focus:ring-4 focus:ring-rose-500/10"
             )}
             aria-label={`Delete note ${note.title}`}
           >
@@ -86,11 +92,11 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
           {note.title}
         </h3>
         <p
-          className={cn(helperTextClassName, "line-clamp-4")}
+          className={cn(helperTextClassName, "line-clamp-5")}
           style={{
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 4,
+            WebkitLineClamp: 5,
             overflow: "hidden",
           }}
         >
@@ -99,8 +105,8 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
       </div>
 
       <div className="mt-6 grid gap-3 border-t border-slate-100 pt-4 text-xs text-slate-500 sm:grid-cols-2">
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white px-3 py-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 px-3 py-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
             <CalendarDays className="h-4 w-4" />
           </div>
           <div className="min-w-0">
@@ -110,8 +116,8 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
             <p className="mt-1 text-sm font-medium text-slate-700">{formatDate(note.createdAt)}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white px-3 py-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
+        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 px-3 py-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
             <PencilLine className="h-4 w-4" />
           </div>
           <div className="min-w-0">

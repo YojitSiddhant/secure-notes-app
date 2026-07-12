@@ -54,7 +54,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-center justify-center px-4 py-6 sm:px-6"
+      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto px-3 py-3 sm:items-center sm:px-4 sm:py-6"
       role="presentation"
     >
       <button
@@ -69,11 +69,11 @@ export function Modal({
         aria-labelledby="modal-title"
         aria-describedby={description ? "modal-description" : undefined}
         className={cn(
-          "relative w-full overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_40px_120px_-48px_rgba(15,23,42,0.48)] motion-safe:animate-[ui-pop-in_180ms_ease-out]",
+          "relative flex w-full max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.5rem] border border-white/80 bg-white shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:rounded-[2rem]",
           maxWidthClassName
         )}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-slate-200 bg-white px-5 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-start justify-between gap-4 border-b border-slate-200/80 bg-white/95 px-4 py-4 sm:px-6 sm:py-5">
           <div className="min-w-0">
             <h2
               id="modal-title"
@@ -92,17 +92,17 @@ export function Modal({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
             aria-label="Close dialog"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="px-5 py-5 sm:px-6 sm:py-6">{children}</div>
+        <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">{children}</div>
 
         {footer ? (
-          <div className="border-t border-slate-200 px-5 py-4 sm:px-6">
+          <div className="border-t border-slate-200/80 px-4 py-4 sm:px-6">
             {footer}
           </div>
         ) : null}

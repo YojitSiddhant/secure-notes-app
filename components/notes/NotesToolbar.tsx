@@ -29,7 +29,7 @@ export function NotesToolbar({
   totalNotes,
 }: NotesToolbarProps) {
   return (
-    <section className={cn(sectionShellClassName, "p-4 sm:p-5")}>
+    <section className={cn(sectionShellClassName, "p-4 sm:p-5 lg:p-6")}>
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="space-y-1">
           <h2 className={sectionTitleClassName}>Notes</h2>
@@ -42,14 +42,14 @@ export function NotesToolbar({
         <button
           type="button"
           onClick={onCreateClick}
-          className={cn(primaryButtonClassName, "sm:w-auto")}
+          className={cn(primaryButtonClassName, "w-full sm:w-auto")}
         >
           <Plus className="h-4 w-4" />
           Create Note
         </button>
       </div>
 
-      <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px]">
+      <div className="mt-5 grid gap-3 md:grid-cols-[minmax(0,1fr)_minmax(13rem,18rem)]">
         <label className="relative block">
           <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
             <Search className="h-4 w-4" />

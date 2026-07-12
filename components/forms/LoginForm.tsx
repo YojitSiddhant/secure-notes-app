@@ -211,7 +211,7 @@ export function LoginForm() {
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-slate-600">
           <input
             type="checkbox"
@@ -236,7 +236,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={primaryButtonClassName}
+        className={cn(primaryButtonClassName, "w-full")}
         aria-busy={isSubmitting}
       >
         {isSubmitting ? (

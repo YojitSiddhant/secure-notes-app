@@ -246,7 +246,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className={secondaryButtonClassName}
+            className={cn(secondaryButtonClassName, "w-full sm:w-auto")}
           >
             Cancel
           </button>
@@ -254,7 +254,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
             type="submit"
             disabled={isSubmitting || createMutation.isPending || updateMutation.isPending}
             aria-busy={isSubmitting || createMutation.isPending || updateMutation.isPending}
-            className={primaryButtonClassName}
+            className={cn(primaryButtonClassName, "w-full sm:w-auto")}
           >
             {isSubmitting || createMutation.isPending || updateMutation.isPending ? (
               <>

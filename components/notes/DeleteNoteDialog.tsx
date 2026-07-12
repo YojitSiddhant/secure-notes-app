@@ -75,7 +75,7 @@ export function DeleteNoteDialog({
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className="inline-flex h-11 items-center justify-center rounded-2xl border border-slate-200 px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-900/5"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-900/5 sm:w-auto"
           >
             Cancel
           </button>
@@ -84,7 +84,7 @@ export function DeleteNoteDialog({
             onClick={handleDelete}
             disabled={deleteMutation.isPending || !note}
             aria-busy={deleteMutation.isPending}
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-rose-600 px-5 text-sm font-semibold text-white shadow-lg shadow-rose-500/20 transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-rose-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-500/20 transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
           >
             {deleteMutation.isPending ? (
               <>

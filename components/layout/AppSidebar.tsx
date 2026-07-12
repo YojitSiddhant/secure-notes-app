@@ -38,7 +38,7 @@ export function AppSidebar({
     <>
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-slate-200 bg-white text-slate-700 transition-[width] duration-300 md:flex",
+          "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-white/70 bg-white/85 text-slate-700 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.25)] backdrop-blur-xl transition-[width] duration-300 md:flex",
           isCollapsed ? "w-20" : "w-72",
           className
         )}
@@ -112,12 +112,12 @@ export function AppSidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-slate-200 bg-white text-slate-700 shadow-2xl shadow-slate-950/10 transition-transform duration-300 md:hidden",
+          "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-white/70 bg-white/95 text-slate-700 shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-300 md:hidden",
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
         aria-label="Mobile navigation drawer"
       >
-        <div className="flex h-16 items-center justify-between border-b border-slate-200 px-5">
+        <div className="flex min-h-16 items-center justify-between border-b border-slate-200/80 px-5 py-3">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm shadow-indigo-950/15">
               <span className="text-sm font-bold tracking-tight">SN</span>
@@ -133,7 +133,7 @@ export function AppSidebar({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/10"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
             aria-label="Close sidebar menu"
           >
             <span className="text-lg leading-none">×</span>

@@ -48,12 +48,17 @@ const statCards = [
 
 export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+    <div
+      className="grid gap-4 sm:gap-5"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 14rem), 1fr))",
+      }}
+    >
       {statCards.map(({ key, label, icon: Icon, labelClass, valueClass, iconClass }) => (
         <article
           key={label}
           className={cn(
-            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-slate-200 bg-white p-4 shadow-[0_18px_50px_-38px_rgba(15,23,42,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_22px_60px_-42px_rgba(15,23,42,0.24)] sm:min-h-[9rem] sm:p-5"
+            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-white/80 bg-white/90 p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
           )}
         >
           <div className="flex w-full items-center justify-between gap-4">
@@ -68,7 +73,7 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
               </p>
               <p
                 className={cn(
-                  "text-[2.45rem] font-semibold leading-none tracking-tight tabular-nums text-slate-950 sm:text-[2.8rem]",
+                  "text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-slate-950 sm:text-[2.75rem]",
                   valueClass
                 )}
               >

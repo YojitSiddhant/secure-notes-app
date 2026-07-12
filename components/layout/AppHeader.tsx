@@ -35,16 +35,16 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-30 border-b border-slate-200 bg-white",
+        "sticky top-0 z-30 border-b border-white/70 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70",
         className
       )}
     >
-      <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
           <button
             type="button"
             onClick={onMenuClick}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/10 md:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 md:hidden"
             aria-label="Open sidebar menu"
           >
             <Menu className="h-5 w-5" />
@@ -55,10 +55,10 @@ export function AppHeader({
               <span className="text-sm font-semibold tracking-tight">SN</span>
             </div>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold tracking-tight text-slate-950">
+              <p className="truncate text-sm font-semibold tracking-tight text-slate-950 sm:text-[0.95rem]">
                 Secure Notes
               </p>
-              <p className="truncate text-xs text-slate-500">
+              <p className="truncate text-xs text-slate-500 sm:text-sm">
                 Organized private note workspace
               </p>
             </div>
@@ -70,7 +70,7 @@ export function AppHeader({
             <button
               type="button"
               onClick={onSidebarToggle}
-              className="hidden h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/10 md:inline-flex"
+              className="hidden min-h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 md:inline-flex"
               aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
               {isSidebarCollapsed ? (
@@ -118,7 +118,7 @@ export function AppHeader({
                 }
               }}
               disabled={logoutMutation.isPending}
-              className="inline-flex h-9 items-center justify-center rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500/10"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
               aria-label="Logout"
               aria-busy={logoutMutation.isPending}
             >
