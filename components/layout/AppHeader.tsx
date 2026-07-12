@@ -50,14 +50,7 @@ export function AppHeader({
         )}
       >
         <div className={cn(mobileHeaderShellClassName, "md:hidden")}>
-          <button
-            type="button"
-            onClick={onMenuClick}
-            className={mobileHeaderActionButtonClassName}
-            aria-label="Open sidebar menu"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
+          <div aria-hidden="true" className="h-12 w-12 shrink-0" />
 
           <div className={mobileHeaderTitleClassName}>
             <p className="truncate">Secure Notes</p>
