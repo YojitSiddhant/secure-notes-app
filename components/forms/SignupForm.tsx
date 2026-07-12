@@ -8,8 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signUpSchema } from "@/lib/validations/auth";
 import { cn } from "@/lib/cn";
-import { ApiError } from "@/services/auth.service";
-import { useSignup } from "@/hooks/useSignup";
 import {
   fieldClassName,
   helperTextClassName,
@@ -28,12 +26,33 @@ const signUpFormSchema = signUpSchema
 
 type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
+type AuthDebugErrorResponse = {
+  error?: unknown;
+  stack?: unknown;
+  message?: string;
+  errors?: {
+    formErrors?: string[];
+    fieldErrors?: Record<string, string[]>;
+  };
+};
+
+function getDebugErrorMessage(responseBody: AuthDebugErrorResponse | null, fallback: string) {
+  if (typeof responseBody?.error === "string" && responseBody.error.trim().length > 0) {
+    return responseBody.error;
+  }
+
+  if (typeof responseBody?.message === "string" && responseBody.message.trim().length > 0) {
+    return responseBody.message;
+  }
+
+  return fallback;
+}
+
 export function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
-  const signupMutation = useSignup();
 
   const {
     register,
@@ -75,28 +94,45 @@ export function SignupForm() {
     };
 
     try {
-      const response = await signupMutation.mutateAsync(payload);
-      setSuccessMessage(response.message);
-    } catch (error) {
-      if (error instanceof ApiError) {
-        Object.entries(error.fieldErrors).forEach(([field, messages]) => {
-          const message = messages[0];
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-          if (field === "name" || field === "email" || field === "password") {
-            setError(field, {
-              type: "server",
-              message,
-            });
-          }
-        });
+      const responseBody = (await response.json().catch(() => null)) as AuthDebugErrorResponse | null;
+
+      if (!response.ok) {
+        if (typeof responseBody?.stack === "string" && responseBody.stack.trim().length > 0) {
+          console.error(responseBody.stack);
+        }
+
+        if (responseBody?.errors?.fieldErrors) {
+          Object.entries(responseBody.errors.fieldErrors).forEach(([field, messages]) => {
+            const message = messages[0];
+
+            if (field === "name" || field === "email" || field === "password") {
+              setError(field, {
+                type: "server",
+                message,
+              });
+            }
+          });
+        }
 
         setError("root", {
           type: "server",
-          message: error.formErrors[0] ?? error.message,
+          message: getDebugErrorMessage(responseBody, response.statusText || "Request failed."),
         });
         return;
       }
 
+      setSuccessMessage(responseBody?.message ?? "Account created successfully.");
+    } catch (error) {
       if (error instanceof Error) {
         setError("root", {
           type: "server",

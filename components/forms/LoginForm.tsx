@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2, Mail, Lock } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -8,8 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { loginSchema } from "@/lib/validations/auth";
 import { cn } from "@/lib/cn";
-import { ApiError } from "@/services/auth.service";
-import { useLogin } from "@/hooks/useLogin";
 import {
   fieldClassName,
   helperTextClassName,
@@ -23,9 +22,31 @@ const loginFormSchema = loginSchema.extend({
 
 type LoginFormValues = z.infer<typeof loginFormSchema>;
 
+type AuthDebugErrorResponse = {
+  error?: unknown;
+  stack?: unknown;
+  message?: string;
+  errors?: {
+    formErrors?: string[];
+    fieldErrors?: Record<string, string[]>;
+  };
+};
+
+function getDebugErrorMessage(responseBody: AuthDebugErrorResponse | null, fallback: string) {
+  if (typeof responseBody?.error === "string" && responseBody.error.trim().length > 0) {
+    return responseBody.error;
+  }
+
+  if (typeof responseBody?.message === "string" && responseBody.message.trim().length > 0) {
+    return responseBody.message;
+  }
+
+  return fallback;
+}
+
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const loginMutation = useLogin();
+  const router = useRouter();
 
   const {
     register,
@@ -52,27 +73,45 @@ export function LoginForm() {
     };
 
     try {
-      await loginMutation.mutateAsync(payload);
-    } catch (error) {
-      if (error instanceof ApiError) {
-        Object.entries(error.fieldErrors).forEach(([field, messages]) => {
-          const message = messages[0];
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        credentials: "include",
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-          if (field === "email" || field === "password") {
-            setError(field, {
-              type: "server",
-              message,
-            });
-          }
-        });
+      const responseBody = (await response.json().catch(() => null)) as AuthDebugErrorResponse | null;
+
+      if (!response.ok) {
+        if (typeof responseBody?.stack === "string" && responseBody.stack.trim().length > 0) {
+          console.error(responseBody.stack);
+        }
+
+        if (responseBody?.errors?.fieldErrors) {
+          Object.entries(responseBody.errors.fieldErrors).forEach(([field, messages]) => {
+            const message = messages[0];
+
+            if (field === "email" || field === "password") {
+              setError(field, {
+                type: "server",
+                message,
+              });
+            }
+          });
+        }
 
         setError("root", {
           type: "server",
-          message: error.formErrors[0] ?? error.message,
+          message: getDebugErrorMessage(responseBody, response.statusText || "Request failed."),
         });
         return;
       }
 
+      router.replace("/dashboard");
+    } catch (error) {
       if (error instanceof Error) {
         setError("root", {
           type: "server",
