@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { AppMobileBottomNav } from "@/components/layout/AppMobileBottomNav";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { cn } from "@/lib/cn";
 import type { AuthUser } from "@/services/auth.service";
@@ -21,6 +23,7 @@ export function AppLayout({
 }: AppLayoutProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div className={cn("relative min-h-screen overflow-x-clip", className)}>
@@ -48,12 +51,17 @@ export function AppLayout({
           />
 
           <main className="flex-1 overflow-y-auto">
-            <div className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-6 px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+            <div
+              key={pathname}
+              className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-5 px-4 py-4 pb-[calc(8rem+env(safe-area-inset-bottom))] motion-safe:max-md:animate-[ui-mobile-route-in_240ms_ease-out] sm:gap-6 sm:px-6 sm:py-6 md:pb-6 lg:px-8 lg:py-8"
+            >
               {children}
             </div>
           </main>
         </div>
       </div>
+
+      <AppMobileBottomNav />
     </div>
   );
 }

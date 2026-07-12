@@ -10,6 +10,11 @@ import {
   PanelLeftOpen,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import {
+  mobileHeaderActionButtonClassName,
+  mobileHeaderShellClassName,
+  mobileHeaderTitleClassName,
+} from "@/components/ui/styles";
 
 type AppHeaderProps = {
   onMenuClick?: () => void;
@@ -39,7 +44,41 @@ export function AppHeader({
         className
       )}
     >
-      <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+      <div className={cn(mobileHeaderShellClassName, "md:hidden")}>
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className={mobileHeaderActionButtonClassName}
+          aria-label="Open sidebar menu"
+        >
+          <Menu className="h-5 w-5" />
+        </button>
+
+        <div className={mobileHeaderTitleClassName}>
+          <p className="truncate">Secure Notes</p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            if (!logoutMutation.isPending) {
+              void logoutMutation.mutateAsync();
+            }
+          }}
+          disabled={logoutMutation.isPending}
+          className={mobileHeaderActionButtonClassName}
+          aria-label="Logout"
+          aria-busy={logoutMutation.isPending}
+          >
+          {isUserLoading ? (
+            <span className="h-5 w-5 animate-pulse rounded-full bg-indigo-200" />
+          ) : (
+            <CircleUserRound className="h-[22px] w-[22px] text-indigo-700" />
+          )}
+        </button>
+      </div>
+
+      <div className="hidden min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 md:flex">
         <div className="flex min-w-0 items-center gap-3">
           <button
             type="button"

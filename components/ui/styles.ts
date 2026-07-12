@@ -43,3 +43,30 @@ export const cardShellInteractiveClassName =
 
 export const badgeClassName =
   "inline-flex min-h-8 items-center rounded-full px-3 py-1 text-xs font-semibold tracking-tight ring-1 ring-inset transition-colors duration-200";
+
+export const mobileHeaderShellClassName =
+  "flex h-14 items-center gap-2 px-3 py-2.5";
+
+export const mobileHeaderTitleClassName =
+  "flex-1 min-w-0 px-2 text-center text-[0.98rem] font-semibold tracking-tight text-slate-950";
+
+export const mobileHeaderActionButtonClassName =
+  "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 active:scale-95 focus:outline-none focus:ring-4 focus:ring-indigo-500/10";
+
+export const mobileBottomNavShellClassName =
+  "rounded-t-[1.75rem] border border-b-0 border-white/70 bg-white/80 px-2.5 py-2.5 shadow-[0_-20px_60px_-35px_rgba(15,23,42,0.38)] backdrop-blur-2xl supports-[backdrop-filter]:bg-white/70";
+
+export const mobileBottomNavItemClassName =
+  "group relative flex min-h-14 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/15 active:scale-[0.98]";
+
+export const mobileBottomNavItemActiveClassName =
+  "bg-indigo-50 text-indigo-700 shadow-[0_10px_24px_-14px_rgba(79,70,229,0.45)]";
+
+export const mobileBottomNavItemInactiveClassName =
+  "text-slate-500 hover:bg-slate-50 hover:text-slate-900";
+
+export const mobileBottomNavIndicatorClassName =
+  "absolute inset-x-6 bottom-1 h-0.5 rounded-full bg-indigo-500 transition-all duration-200";
+
+export const mobileBottomNavIconClassName =
+  "shrink-0 transition-all duration-200";
