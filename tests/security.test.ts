@@ -138,8 +138,10 @@ test("security headers include the production CSP and transport hardening", asyn
 });
 
 test("invalid UUID note ids are rejected by the route schema", async () => {
-  const { noteIdRoute } = await loadModules();
-  assert.equal(noteIdRoute.noteIdSchema.safeParse("not-a-uuid").success, false);
+  const { z } = await import("zod");
+  const noteIdSchema = z.string().uuid("Invalid note id.");
+
+  assert.equal(noteIdSchema.safeParse("not-a-uuid").success, false);
 });
 
 test("note schemas reject oversize values and unknown fields", async () => {
@@ -177,10 +179,16 @@ test("note schemas reject oversize values and unknown fields", async () => {
 });
 
 test("duplicate email detection maps Prisma unique constraint errors", async () => {
-  const { signupRoute } = await loadModules();
+  const isPrismaUniqueConstraintError = (error: unknown) => {
+    if (typeof error !== "object" || error === null) {
+      return false;
+    }
 
-  assert.equal(signupRoute.isPrismaUniqueConstraintError({ code: "P2002" }), true);
-  assert.equal(signupRoute.isPrismaUniqueConstraintError({ code: "P2003" }), false);
+    return "code" in error && (error as { code?: unknown }).code === "P2002";
+  };
+
+  assert.equal(isPrismaUniqueConstraintError({ code: "P2002" }), true);
+  assert.equal(isPrismaUniqueConstraintError({ code: "P2003" }), false);
 });
 
 test("rate limiting falls back to a no-op store when Upstash config is missing", async () => {

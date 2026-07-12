@@ -324,11 +324,11 @@ export function SignupForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting || signupMutation.isPending}
+        disabled={isSubmitting}
         className={primaryButtonClassName}
-        aria-busy={isSubmitting || signupMutation.isPending}
+        aria-busy={isSubmitting}
       >
-        {isSubmitting || signupMutation.isPending ? (
+        {isSubmitting ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
             Creating Account

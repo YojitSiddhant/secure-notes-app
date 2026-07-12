@@ -16,7 +16,7 @@ export const runtime = "nodejs";
 
 const SALT_ROUNDS = 12;
 
-export function isPrismaUniqueConstraintError(error: unknown) {
+function isPrismaUniqueConstraintError(error: unknown) {
   if (typeof error !== "object" || error === null) {
     return false;
   }

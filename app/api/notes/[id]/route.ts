@@ -17,7 +17,7 @@ import { deleteNote, NoteForbiddenError, NoteNotFoundError, updateNote } from "@
 
 export const runtime = "nodejs";
 
-export const noteIdSchema = z.string().uuid("Invalid note id.");
+const noteIdSchema = z.string().uuid("Invalid note id.");
 
 function createValidationErrorResponse(message: string, fieldErrors: Record<string, string[]>) {
   return createNoStoreJsonResponse(

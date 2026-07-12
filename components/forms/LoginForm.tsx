@@ -235,11 +235,11 @@ export function LoginForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting || loginMutation.isPending}
+        disabled={isSubmitting}
         className={primaryButtonClassName}
-        aria-busy={isSubmitting || loginMutation.isPending}
+        aria-busy={isSubmitting}
       >
-        {isSubmitting || loginMutation.isPending ? (
+        {isSubmitting ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
             Signing In
