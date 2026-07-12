@@ -49,7 +49,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
   return (
     <article
       className={cn(
-        "group relative flex h-full min-h-[18rem] flex-col overflow-hidden p-5 sm:p-6",
+        "group relative flex h-full min-h-[16rem] flex-col overflow-hidden p-5 sm:min-h-[18rem] sm:p-6",
         cardShellInteractiveClassName,
         priority.shellClassName
       )}

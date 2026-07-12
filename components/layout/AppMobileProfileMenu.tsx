@@ -23,7 +23,7 @@ export function AppMobileProfileMenu({
   onLogout,
   triggerRef,
 }: AppMobileProfileMenuProps) {
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const logoutButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isRendered, setIsRendered] = useState(open);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
@@ -58,7 +58,7 @@ export function AppMobileProfileMenu({
     document.body.style.overflow = "hidden";
 
     const focusTimer = window.setTimeout(() => {
-      closeButtonRef.current?.focus();
+      logoutButtonRef.current?.focus();
     }, 0);
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -142,7 +142,7 @@ export function AppMobileProfileMenu({
           aria-labelledby="mobile-profile-menu-title"
           className="flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/95 shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
         >
-          <div className="flex items-start justify-between gap-4 border-b border-slate-200/80 px-4 py-4">
+          <div className="border-b border-slate-200/80 px-4 py-4">
             <div className="flex min-w-0 items-center gap-3">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-100">
                 {isUserLoading ? (
@@ -163,20 +163,11 @@ export function AppMobileProfileMenu({
                 </p>
               </div>
             </div>
-
-            <button
-              ref={closeButtonRef}
-              type="button"
-              onClick={handleClose}
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
-              aria-label="Close profile menu"
-            >
-              <span className="text-xl leading-none">×</span>
-            </button>
           </div>
 
           <div className="border-t border-slate-200/80 px-4 py-4">
             <button
+              ref={logoutButtonRef}
               type="button"
               onClick={() => setLogoutConfirmOpen(true)}
               className="flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-rose-600 transition-all duration-200 hover:bg-rose-50 focus:outline-none focus:ring-4 focus:ring-rose-500/10 active:scale-[0.99]"
