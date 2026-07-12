@@ -106,6 +106,7 @@ export async function POST(request: Request) {
       );
     }
 
+    console.error("Signup error:", error);
     console.error("Signup API error:", error);
     return createGenericServerErrorResponse();
   }
