@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
 
 import { createAuthCookieValue, signAuthToken } from "@/lib/auth";
 import { getPrismaClient } from "@/lib/prisma";
 import { enforceAuthRateLimit } from "@/lib/rate-limit";
 import {
-  createGenericServerErrorResponse,
   createNoStoreJsonResponse,
   enforceTrustedOrigin,
   JSON_BODY_LIMITS,
@@ -105,6 +105,16 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Login error:", error);
     console.error("Login API error:", error);
-    return createGenericServerErrorResponse();
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : String(error),
+        stack:
+          process.env.NODE_ENV !== "production" && error instanceof Error
+            ? error.stack
+            : undefined,
+      },
+      { status: 500 },
+    );
   }
 }
