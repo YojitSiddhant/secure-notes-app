@@ -146,7 +146,7 @@ export function AppMobileProfileMenu({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-[65] bg-slate-950/40 backdrop-blur-sm transition-opacity duration-200 md:hidden",
+          "fixed inset-0 z-[65] h-[100dvh] w-[100dvw] bg-slate-950/40 backdrop-blur-sm transition-opacity duration-200 md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden="true"
@@ -155,7 +155,7 @@ export function AppMobileProfileMenu({
 
       <div
         className={cn(
-          "fixed inset-x-0 bottom-0 z-[66] flex justify-center px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 md:hidden",
+          "fixed inset-x-0 bottom-0 z-[66] flex w-[100dvw] justify-center px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 md:hidden",
           "transition-transform duration-300",
           open ? "translate-y-0" : "pointer-events-none translate-y-full"
         )}
