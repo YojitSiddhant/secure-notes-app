@@ -42,7 +42,6 @@ export function AppLayout({
       <div className={isSidebarCollapsed ? "md:pl-20" : "md:pl-72"}>
         <div className="flex min-h-screen flex-col bg-transparent">
           <AppHeader
-            onMenuClick={() => setIsMobileOpen(true)}
             onSidebarToggle={() => setIsSidebarCollapsed((value) => !value)}
             isSidebarCollapsed={isSidebarCollapsed}
             isSidebarToggleVisible

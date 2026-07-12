@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { LayoutDashboard, LogOut, NotebookPen, UserRound } from "lucide-react";
+import { LogOut, UserRound } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Modal } from "@/components/shared/Modal";
 import type { AuthUser } from "@/services/auth.service";
@@ -17,25 +15,6 @@ type AppMobileProfileMenuProps = {
   triggerRef: RefObject<HTMLButtonElement | null>;
 };
 
-type MenuItem = {
-  label: string;
-  href: string;
-  icon: typeof LayoutDashboard;
-};
-
-const menuItems: MenuItem[] = [
-  {
-    label: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    label: "Notes",
-    href: "/notes",
-    icon: NotebookPen,
-  },
-];
-
 export function AppMobileProfileMenu({
   open,
   user,
@@ -44,14 +23,10 @@ export function AppMobileProfileMenu({
   onLogout,
   triggerRef,
 }: AppMobileProfileMenuProps) {
-  const pathname = usePathname();
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isRendered, setIsRendered] = useState(open);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
-
-  const isActive = (href: string) =>
-    pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
 
   useEffect(() => {
     if (open) {
@@ -155,7 +130,7 @@ export function AppMobileProfileMenu({
 
       <div
         className={cn(
-          "fixed inset-x-0 bottom-0 z-[66] flex w-[100dvw] justify-center px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 md:hidden",
+          "fixed inset-0 z-[66] flex items-center justify-center px-3 py-3 md:hidden",
           "transition-transform duration-300",
           open ? "translate-y-0" : "pointer-events-none translate-y-full"
         )}
@@ -165,7 +140,7 @@ export function AppMobileProfileMenu({
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-profile-menu-title"
-          className="w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/90 shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
+          className="flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/95 shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
         >
           <div className="flex items-start justify-between gap-4 border-b border-slate-200/80 px-4 py-4">
             <div className="flex min-w-0 items-center gap-3">
@@ -200,40 +175,7 @@ export function AppMobileProfileMenu({
             </button>
           </div>
 
-          <div className="px-3 py-3">
-            <div className="rounded-[1.5rem] border border-slate-200/80 bg-white/80 p-2 shadow-[0_12px_32px_-24px_rgba(15,23,42,0.18)]">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                const active = isActive(item.href);
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={handleClose}
-                    className={cn(
-                      "flex min-h-12 items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 active:scale-[0.99]",
-                      active
-                        ? "bg-indigo-50 text-indigo-700 shadow-[0_10px_24px_-14px_rgba(79,70,229,0.32)]"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "flex h-9 w-9 items-center justify-center rounded-2xl transition-colors duration-200",
-                        active ? "bg-white text-indigo-600" : "bg-slate-50 text-slate-400"
-                      )}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <span className="flex-1">{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="border-t border-slate-200/80 px-3 py-3">
+          <div className="border-t border-slate-200/80 px-4 py-4">
             <button
               type="button"
               onClick={() => setLogoutConfirmOpen(true)}

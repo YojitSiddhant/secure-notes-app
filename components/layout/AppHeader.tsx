@@ -6,7 +6,6 @@ import { useLogout } from "@/hooks/useLogout";
 import {
   CircleUserRound,
   LogOut,
-  Menu,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
@@ -19,7 +18,6 @@ import {
 } from "@/components/ui/styles";
 
 type AppHeaderProps = {
-  onMenuClick?: () => void;
   onSidebarToggle?: () => void;
   isSidebarCollapsed?: boolean;
   isSidebarToggleVisible?: boolean;
@@ -29,7 +27,6 @@ type AppHeaderProps = {
 };
 
 export function AppHeader({
-  onMenuClick,
   onSidebarToggle,
   isSidebarCollapsed = false,
   isSidebarToggleVisible = true,
@@ -75,15 +72,6 @@ export function AppHeader({
 
         <div className="hidden min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 md:flex">
           <div className="flex min-w-0 items-center gap-3">
-            <button
-              type="button"
-              onClick={onMenuClick}
-              className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 md:hidden"
-              aria-label="Open sidebar menu"
-            >
-              <Menu className="h-5 w-5" />
-            </button>
-
             <div className="flex min-w-0 items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm shadow-indigo-950/20">
                 <span className="text-sm font-semibold tracking-tight">SN</span>
