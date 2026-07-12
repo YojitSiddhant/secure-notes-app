@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+  <TestSummary>
+    <ProjectName>secure-notes-app</ProjectName>
+    <Environment>
+      <Build>npm run build</Build>
+      <Lint>npm run lint</Lint>
+      <ProductionServer>npm run start -- --hostname 127.0.0.1 --port 3002</ProductionServer>
+      <DevServer>npm run dev -- --hostname 127.0.0.1 --port 3001</DevServer>
+    </Environment>
+    <OverallResult>Passed</OverallResult>
+    <PassCount>25</PassCount>
+    <FailCount>0</FailCount>
+  </TestSummary>
+  <TestCases>
+    <Passed>
+      <TestCase id="TC-001">
+        <Area>Build</Area>
+        <Name>Lint and production build</Name>
+        <Status>Passed</Status>
+        <Evidence>npm run lint completed successfully and npm run build completed successfully.</Evidence>
+      </TestCase>
+      <TestCase id="TC-002">
+        <Area>Authentication</Area>
+        <Name>Signup success</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/signup returned 201 with Account created successfully.</Evidence>
+      </TestCase>
+      <TestCase id="TC-003">
+        <Area>Authentication</Area>
+        <Name>Duplicate signup</Name>
+        <Status>Passed</Status>
+        <Evidence>Repeated signup returned 409 with Account already exists.</Evidence>
+      </TestCase>
+      <TestCase id="TC-004">
+        <Area>Authentication</Area>
+        <Name>Invalid login credentials</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/login with an invalid password returned 401 with Invalid email or password.</Evidence>
+      </TestCase>
+      <TestCase id="TC-005">
+        <Area>Authentication</Area>
+        <Name>Login success</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/login returned 200 and issued auth_token.</Evidence>
+      </TestCase>
+      <TestCase id="TC-006">
+        <Area>Authentication</Area>
+        <Name>Session persistence</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/auth/me with the issued auth_token returned the authenticated user payload.</Evidence>
+      </TestCase>
+      <TestCase id="TC-007">
+        <Area>Authentication</Area>
+        <Name>Logout</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/logout returned 200 and cleared auth_token in the response.</Evidence>
+      </TestCase>
+      <TestCase id="TC-008">
+        <Area>Authentication</Area>
+        <Name>Authentication validation</Name>
+        <Status>Passed</Status>
+        <Evidence>Invalid signup and login payloads returned 400 validation responses with field errors.</Evidence>
+      </TestCase>
+      <TestCase id="TC-009">
+        <Area>Protected Routes</Area>
+        <Name>Dashboard redirect without session</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /dashboard without a session returned 307 redirect to /login?next=%2Fdashboard.</Evidence>
+      </TestCase>
+      <TestCase id="TC-010">
+        <Area>Protected Routes</Area>
+        <Name>Notes redirect without session</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /notes without a session returned 307 redirect to /login?next=%2Fnotes.</Evidence>
+      </TestCase>
+      <TestCase id="TC-011">
+        <Area>Protected Routes</Area>
+        <Name>Settings redirect without session</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /settings without a session returned 307 redirect to /login?next=%2Fsettings.</Evidence>
+      </TestCase>
+      <TestCase id="TC-012">
+        <Area>Protected Routes</Area>
+        <Name>Authenticated dashboard render</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /dashboard with a valid auth_token returned the protected dashboard HTML.</Evidence>
+      </TestCase>
+      <TestCase id="TC-013">
+        <Area>Protected Routes</Area>
+        <Name>Authenticated notes render</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /notes with a valid auth_token returned the protected notes HTML.</Evidence>
+      </TestCase>
+      <TestCase id="TC-014">
+        <Area>Protected Routes</Area>
+        <Name>Authenticated settings render</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /settings with a valid auth_token returned the protected settings HTML.</Evidence>
+      </TestCase>
+      <TestCase id="TC-015">
+        <Area>Notes</Area>
+        <Name>Note validation</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/notes with an empty title returned 400 validation failure.</Evidence>
+      </TestCase>
+      <TestCase id="TC-016">
+        <Area>Notes</Area>
+        <Name>Create note</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/notes returned 201 with a new note payload.</Evidence>
+      </TestCase>
+      <TestCase id="TC-017">
+        <Area>Notes</Area>
+        <Name>Edit note</Name>
+        <Status>Passed</Status>
+        <Evidence>PUT /api/notes/{id} returned 200 and updated the note title, description, priority, and updatedAt.</Evidence>
+      </TestCase>
+      <TestCase id="TC-018">
+        <Area>Notes</Area>
+        <Name>Delete note</Name>
+        <Status>Passed</Status>
+        <Evidence>DELETE /api/notes/{id} returned 200 and the deleted note no longer appeared in list results.</Evidence>
+      </TestCase>
+      <TestCase id="TC-019">
+        <Area>Notes</Area>
+        <Name>Search notes</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/notes?search=Alpha returned only matching notes.</Evidence>
+      </TestCase>
+      <TestCase id="TC-020">
+        <Area>Notes</Area>
+        <Name>Priority filter</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/notes?priority=LOW returned only low-priority notes.</Evidence>
+      </TestCase>
+      <TestCase id="TC-021">
+        <Area>Dashboard</Area>
+        <Name>Statistics synchronization</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/dashboard reflected the current note counts after create, edit, and delete operations.</Evidence>
+      </TestCase>
+      <TestCase id="TC-022">
+        <Area>Navigation and Settings</Area>
+        <Name>Sidebar and settings page</Name>
+        <Status>Passed</Status>
+        <Evidence>The rendered HTML included Dashboard, Notes, and Settings navigation items plus the Settings empty state.</Evidence>
+      </TestCase>
+      <TestCase id="TC-023">
+        <Area>Responsive</Area>
+        <Name>Responsive layout markup</Name>
+        <Status>Passed</Status>
+        <Evidence>The rendered HTML included responsive mobile and desktop navigation variants and responsive utility classes.</Evidence>
+      </TestCase>
+      <TestCase id="TC-024">
+        <Area>Accessibility</Area>
+        <Name>Labels and focusable controls</Name>
+        <Status>Passed</Status>
+        <Evidence>Forms and navigation rendered labels, aria-labels, aria-describedby hooks, and keyboard-focusable buttons/links.</Evidence>
+      </TestCase>
+      <TestCase id="TC-025">
+        <Area>Browser and Network</Area>
+        <Name>No runtime errors or unexpected responses</Name>
+        <Status>Passed</Status>
+        <Evidence>Server logs showed only expected 2xx/3xx/4xx responses during QA, with no JavaScript, React, or hydration errors recorded.</Evidence>
+      </TestCase>
+    </Passed>
+    <Failed />
+  </TestCases>
+  <Bugs />
+  <Recommendations>
+    <Recommendation>Keep the local rate-limit fallback and route guard covered by automated regression tests.</Recommendation>
+    <Recommendation>Retain the proxy-based protection for static protected routes to prevent unauthenticated HTML from ever rendering.</Recommendation>
+    <Recommendation>When testing locally in a browser, use HTTPS or a secure tunnel if you want secure cookies to behave exactly like production.</Recommendation>
+  </Recommendations>
+  <ProductionReadiness>
+    <Status>READY</Status>
+    <Reason>The two QA blockers were fixed, lint and build pass, the protected routes now redirect server-side, and the authentication flow no longer crashes when Upstash is absent.</Reason>
+  </ProductionReadiness>
+</Project>

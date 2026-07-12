@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+  <TestSummary>
+    <ProjectName>secure-notes-app</ProjectName>
+    <Environment>
+      <Build>npm run build</Build>
+      <Lint>npm run lint</Lint>
+      <DevServer>npm run dev -- --hostname 127.0.0.1 --port 3001</DevServer>
+      <ProductionServer>npm run start -- --hostname 127.0.0.1 --port 3000</ProductionServer>
+    </Environment>
+    <OverallResult>Partially Passed</OverallResult>
+    <PassCount>15</PassCount>
+    <FailCount>2</FailCount>
+  </TestSummary>
+  <TestCases>
+    <Passed>
+      <TestCase id="TC-001">
+        <Area>Build and Lint</Area>
+        <Name>Production build and lint checks</Name>
+        <Status>Passed</Status>
+        <Evidence>npm run lint passed; npm run build passed.</Evidence>
+      </TestCase>
+      <TestCase id="TC-002">
+        <Area>Authentication</Area>
+        <Name>Signup success</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/signup returned 201 with {"success":true,"message":"Account created successfully."} in dev mode.</Evidence>
+      </TestCase>
+      <TestCase id="TC-003">
+        <Area>Authentication</Area>
+        <Name>Duplicate signup</Name>
+        <Status>Passed</Status>
+        <Evidence>Repeated signup returned 409 with {"success":false,"message":"Account already exists."}.</Evidence>
+      </TestCase>
+      <TestCase id="TC-004">
+        <Area>Authentication</Area>
+        <Name>Invalid login credentials</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/login with wrong password returned 401 with {"success":false,"message":"Invalid email or password."}.</Evidence>
+      </TestCase>
+      <TestCase id="TC-005">
+        <Area>Authentication</Area>
+        <Name>Login success and session persistence</Name>
+        <Status>Passed</Status>
+        <Evidence>Login returned 200 and set auth_token cookie; subsequent GET /api/auth/me returned the authenticated user payload.</Evidence>
+      </TestCase>
+      <TestCase id="TC-006">
+        <Area>Authentication</Area>
+        <Name>Logout and session invalidation</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/logout returned 200, cleared auth_token, and subsequent GET /api/auth/me returned 401 when the cookie jar was updated like a browser.</Evidence>
+      </TestCase>
+      <TestCase id="TC-007">
+        <Area>Authentication</Area>
+        <Name>Unauthorized API access</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/auth/me and GET /api/notes without a session returned 401 Unauthorized.</Evidence>
+      </TestCase>
+      <TestCase id="TC-008">
+        <Area>Authentication</Area>
+        <Name>Signup validation</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/signup with short name, bad email, and short password returned 400 with field-level validation errors.</Evidence>
+      </TestCase>
+      <TestCase id="TC-009">
+        <Area>Authentication</Area>
+        <Name>Login validation</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/auth/login missing password returned 400 with a password validation error.</Evidence>
+      </TestCase>
+      <TestCase id="TC-010">
+        <Area>Notes</Area>
+        <Name>Create note</Name>
+        <Status>Passed</Status>
+        <Evidence>POST /api/notes returned 201 and created note records with the expected note payload.</Evidence>
+      </TestCase>
+      <TestCase id="TC-011">
+        <Area>Notes</Area>
+        <Name>Edit note</Name>
+        <Status>Passed</Status>
+        <Evidence>PUT /api/notes/{id} returned 200 and updated the note title, description, priority, and updatedAt timestamp.</Evidence>
+      </TestCase>
+      <TestCase id="TC-012">
+        <Area>Notes</Area>
+        <Name>Delete note</Name>
+        <Status>Passed</Status>
+        <Evidence>DELETE /api/notes/{id} returned 200 and removed the note from subsequent list/dashboard checks.</Evidence>
+      </TestCase>
+      <TestCase id="TC-013">
+        <Area>Notes</Area>
+        <Name>Search and priority filter</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/notes?search=Alpha returned the matching note; GET /api/notes?priority=LOW returned an empty set after the remaining note was MEDIUM.</Evidence>
+      </TestCase>
+      <TestCase id="TC-014">
+        <Area>Notes</Area>
+        <Name>Dashboard stats synchronization</Name>
+        <Status>Passed</Status>
+        <Evidence>GET /api/dashboard reflected note mutations immediately with totalNotes/highPriority/mediumPriority/lowPriority counts matching the database state.</Evidence>
+      </TestCase>
+      <TestCase id="TC-015">
+        <Area>Notes</Area>
+        <Name>Ownership enforcement</Name>
+        <Status>Passed</Status>
+        <Evidence>A second user attempting PUT /api/notes/{id} on another user&apos;s note received 403 Forbidden.</Evidence>
+      </TestCase>
+      <TestCase id="TC-016">
+        <Area>Notes</Area>
+        <Name>Not-found handling</Name>
+        <Status>Passed</Status>
+        <Evidence>Authenticated DELETE /api/notes/00000000-0000-0000-0000-000000000000 returned 404 with {"success":false,"message":"Note not found."}.</Evidence>
+      </TestCase>
+    </Passed>
+    <Failed>
+      <TestCase id="TC-F01">
+        <Area>Authentication</Area>
+        <Name>Production server auth flow</Name>
+        <Status>Failed</Status>
+        <Severity>High</Severity>
+        <Priority>P1</Priority>
+        <StepsToReproduce>
+          <Step>Run npm run start -- --hostname 127.0.0.1 --port 3000 with the provided local .env.</Step>
+          <Step>POST /api/auth/signup with valid JSON.</Step>
+        </StepsToReproduce>
+        <ExpectedResult>Signup should create the account and return 201.</ExpectedResult>
+        <ActualResult>The route returned 500 Internal Server Error with {"success":false,"message":"An unexpected error occurred."} and the server logged that rate limiting is not configured because UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN are missing in production.</ActualResult>
+        <SuggestedFix>Make production startup resilient when Upstash rate limiting is unavailable, or require/document the env vars before starting production. A local/prod-safe fallback should be selected without crashing auth routes.</SuggestedFix>
+      </TestCase>
+      <TestCase id="TC-F02">
+        <Area>Protected Routes</Area>
+        <Name>Server-side protection for dashboard route</Name>
+        <Status>Failed</Status>
+        <Severity>Medium</Severity>
+        <Priority>P2</Priority>
+        <StepsToReproduce>
+          <Step>Request GET /dashboard without a session cookie.</Step>
+        </StepsToReproduce>
+        <ExpectedResult>Unauthenticated users should be redirected to /login or receive an unauthorized response before any protected shell is rendered.</ExpectedResult>
+        <ActualResult>The route returned 200 HTML containing the dashboard shell, sidebar, header, and loading skeleton, which means protection is happening only after client hydration.</ActualResult>
+        <SuggestedFix>Move the auth gate to the server layer or middleware so unauthenticated requests are redirected before the protected UI shell is rendered.</SuggestedFix>
+      </TestCase>
+    </Failed>
+  </TestCases>
+  <Bugs>
+    <Bug>
+      <BugID>BUG-001</BugID>
+      <Title>Auth routes crash in production because local Upstash config is missing</Title>
+      <Severity>High</Severity>
+      <Priority>P1</Priority>
+      <StepsToReproduce>
+        <Step>Start the app with npm run start.</Step>
+        <Step>Submit valid signup or login data.</Step>
+      </StepsToReproduce>
+      <ExpectedResult>Auth requests should succeed in the local production server or fail with a clear configuration message before runtime.</ExpectedResult>
+      <ActualResult>Signup returned 500 and the server logged a rate-limiting configuration error.</ActualResult>
+      <SuggestedFix>Provide a production-safe fallback when Upstash env vars are absent, or enforce and document the required production configuration separately from local QA.</SuggestedFix>
+    </Bug>
+    <Bug>
+      <BugID>BUG-002</BugID>
+      <Title>Protected routes are not blocked server-side</Title>
+      <Severity>Medium</Severity>
+      <Priority>P2</Priority>
+      <StepsToReproduce>
+        <Step>Request /dashboard without a valid session.</Step>
+      </StepsToReproduce>
+      <ExpectedResult>Unauthenticated users should not receive the protected dashboard shell and should be redirected or denied immediately.</ExpectedResult>
+      <ActualResult>The route served a 200 response with the full app shell and loading skeleton.</ActualResult>
+      <SuggestedFix>Use server-side session verification and redirect unauthenticated traffic before rendering protected layouts.</SuggestedFix>
+    </Bug>
+  </Bugs>
+  <Recommendations>
+    <Recommendation>Separate local QA configuration from production startup requirements so auth can be verified without hidden external services.</Recommendation>
+    <Recommendation>Add server-side route guarding for dashboard, notes, and settings to avoid protected-shell flashes and tighten access control.</Recommendation>
+    <Recommendation>Keep the current API contract tests in a lightweight automated suite because the runtime behavior is sensitive to environment settings.</Recommendation>
+  </Recommendations>
+  <ProductionReadiness>
+    <Status>Not Ready</Status>
+    <Reason>Core auth works in development, but the production server path fails without Upstash rate limiting config and protected routes are only client-gated.</Reason>
+    <Blockers>
+      <Blocker>Auth endpoints must not 500 on a standard local production startup.</Blocker>
+      <Blocker>Protected routes should be enforced before the protected shell is rendered.</Blocker>
+    </Blockers>
+  </ProductionReadiness>
+</Project>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectSecurityAudit>
+  <ExecutiveSummary>
+    <Finding>The application now enforces stronger JWT validation, CSRF origin checks, cookie hardening, production-safe rate limiting, owner-scoped note mutations, stricter input validation, and security headers.</Finding>
+    <Finding>Development-mode end-to-end smoke tests passed for signup, login, logout, session persistence, protected routes, notes CRUD, search, filters, dashboard counts, CSRF rejection, and cross-user access prevention.</Finding>
+    <Finding>Production build passes, but production auth routes intentionally fail closed with a configuration error until real Upstash rate-limiting credentials are present.</Finding>
+  </ExecutiveSummary>
+  <ThreatModel>
+    <Entry>Cookie-based JWT sessions exposed the app to token forgery, CSRF, and session fixation risks.</Entry>
+    <Entry>Notes ownership and search paths could leak or mutate another user&#39;s data if query scoping was incomplete.</Entry>
+    <Entry>Production dependencies and runtime configuration needed to fail safely without leaking internals or silently weakening rate limiting.</Entry>
+  </ThreatModel>
+  <FilesReviewed>
+    <File path="lib/auth.ts" />
+    <File path="lib/env.ts" />
+    <File path="lib/rate-limit.ts" />
+    <File path="lib/security.ts" />
+    <File path="lib/validations/auth.ts" />
+    <File path="lib/validations/note.ts" />
+    <File path="services/note.service.ts" />
+    <File path="services/http.ts" />
+    <File path="proxy.ts" />
+    <File path="next.config.ts" />
+    <File path="app/api/auth/login/route.ts" />
+    <File path="app/api/auth/logout/route.ts" />
+    <File path="app/api/auth/me/route.ts" />
+    <File path="app/api/auth/signup/route.ts" />
+    <File path="app/api/dashboard/route.ts" />
+    <File path="app/api/notes/route.ts" />
+    <File path="app/api/notes/[id]/route.ts" />
+    <File path="app/(auth)/login/page.tsx" />
+    <File path="app/(auth)/signup/page.tsx" />
+    <File path="components/forms/LoginForm.tsx" />
+    <File path="components/forms/SignupForm.tsx" />
+    <File path="tests/security.test.ts" />
+    <File path="test/ts-loader.mjs" />
+  </FilesReviewed>
+  <VulnerabilitiesFound>
+    <Vulnerability>
+      <ID>VULN-001</ID>
+      <Title>JWT verification lacked issuer, audience, and explicit algorithm enforcement</Title>
+      <Severity>High</Severity>
+      <AffectedFile>lib/auth.ts</AffectedFile>
+      <Risk>Forged or malformed tokens could be accepted if they were signed with the right secret but wrong claims or algorithm.</Risk>
+      <Reproduction>Before the fix, tokens with the wrong issuer, audience, or algorithm were not explicitly rejected by the verifier.</Reproduction>
+      <Fix>JWT signing now sets subject, issued-at, expiration, issuer, and audience; verification only accepts HS256 and validates the expected claims; JWT secrets must be at least 32 characters.</Fix>
+      <Verification>Unit tests now confirm rejection of malformed, forged, expired, wrong-issuer, wrong-audience, and wrong-algorithm tokens.</Verification>
+    </Vulnerability>
+    <Vulnerability>
+      <ID>VULN-002</ID>
+      <Title>Production rate limiting could silently fall back to a local store</Title>
+      <Severity>High</Severity>
+      <AffectedFile>lib/rate-limit.ts</AffectedFile>
+      <Risk>Production brute-force protection could degrade to an insecure in-memory/file-based fallback or behave inconsistently across instances.</Risk>
+      <Reproduction>Before the fix, missing or failed Upstash configuration could still allow a local fallback path.</Reproduction>
+      <Fix>Production now fails closed with a safe configuration error when Upstash credentials are absent, while local fallback is preserved only for development/test.</Fix>
+      <Verification>Production-mode smoke testing returned a generic configuration error instead of silently falling back; development-mode smoke tests passed with the local fallback.</Verification>
+    </Vulnerability>
+    <Vulnerability>
+      <ID>VULN-003</ID>
+      <Title>Note update and delete used a fetch-then-mutate ownership pattern</Title>
+      <Severity>Medium</Severity>
+      <AffectedFile>services/note.service.ts</AffectedFile>
+      <Risk>A time-of-check/time-of-use gap could allow stale ownership checks or leakage of note existence/ownership details.</Risk>
+      <Reproduction>Before the fix, note ownership was checked in a separate read before update/delete.</Reproduction>
+      <Fix>Update and delete now use compound `id` + `userId` filters, then safely distinguish 404 from 403 without reading note contents from another user.</Fix>
+      <Verification>Unit tests cover own-note success, cross-user forbidden access, and not-found behavior.</Verification>
+    </Vulnerability>
+    <Vulnerability>
+      <ID>VULN-004</ID>
+      <Title>State-changing routes lacked CSRF origin validation</Title>
+      <Severity>Medium</Severity>
+      <AffectedFile>app/api/auth/login/route.ts</AffectedFile>
+      <AffectedFile>app/api/auth/signup/route.ts</AffectedFile>
+      <AffectedFile>app/api/auth/logout/route.ts</AffectedFile>
+      <AffectedFile>app/api/notes/route.ts</AffectedFile>
+      <AffectedFile>app/api/notes/[id]/route.ts</AffectedFile>
+      <Risk>Cookie-authenticated requests could be triggered cross-site if origin checks were absent.</Risk>
+      <Reproduction>Before the fix, the app did not verify the Origin header for POST/PUT/DELETE requests.</Reproduction>
+      <Fix>All state-changing routes now reject missing or untrusted origins with a generic 403 response, while allowing same-origin and configured trusted origins.</Fix>
+      <Verification>Development-mode smoke tests confirmed a cross-origin signup attempt returns 403.</Verification>
+    </Vulnerability>
+    <Vulnerability>
+      <ID>VULN-005</ID>
+      <Title>Password policy and login timing leaks were too weak</Title>
+      <Severity>Medium</Severity>
+      <AffectedFile>lib/validations/auth.ts</AffectedFile>
+      <AffectedFile>app/api/auth/login/route.ts</AffectedFile>
+      <Risk>Short passwords and distinct unknown-user timing could make brute-force or enumeration easier.</Risk>
+      <Reproduction>Before the fix, signup only required an 8-character password and login returned earlier for unknown users.</Reproduction>
+      <Fix>Signup now requires 12+ characters and blocks a small weak-password list; login performs a dummy bcrypt comparison for unknown users and keeps a generic failure message.</Fix>
+      <Verification>Unit tests cover password validation and login helper behavior, and the dev smoke test completed login successfully.</Verification>
+    </Vulnerability>
+    <Vulnerability>
+      <ID>VULN-006</ID>
+      <Title>Security headers and caching controls were incomplete</Title>
+      <Severity>Low</Severity>
+      <AffectedFile>next.config.ts</AffectedFile>
+      <AffectedFile>services/http.ts</AffectedFile>
+      <AffectedFile>app/api/auth/*</AffectedFile>
+      <AffectedFile>app/api/notes/*</AffectedFile>
+      <AffectedFile>app/api/dashboard/route.ts</AffectedFile>
+      <Risk>Missing anti-clickjacking, resource isolation, HSTS, and no-store headers could increase exposure or allow unintended caching of private data.</Risk>
+      <Reproduction>Before the fix, production headers were missing several hardening directives and API responses did not explicitly opt out of caching.</Reproduction>
+      <Fix>Production now emits X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-Frame-Options, COOP, CORP, HSTS, and a stricter CSP; sensitive API responses use `Cache-Control: no-store`.</Fix>
+      <Verification>Unit tests check the production header set, and the production smoke test observed the headers on real responses.</Verification>
+    </Vulnerability>
+  </VulnerabilitiesFound>
+  <FixesApplied>
+    <Fix>Added shared security helpers for cookie naming, origin checks, safe redirects, JSON body limits, no-store responses, and security logging.</Fix>
+    <Fix>Hardened JWT issuance and verification and moved session cookies to `__Host-` in production.</Fix>
+    <Fix>Enforced CSRF origin validation on all state-changing routes and rejected oversized or malformed JSON bodies.</Fix>
+    <Fix>Scoped note queries and mutations by authenticated user, and rejected invalid UUIDs before database access.</Fix>
+    <Fix>Improved password validation, login timing behavior, and generic auth failure responses.</Fix>
+    <Fix>Added production security headers and applied no-store to auth/dashboard/notes responses and client API requests.</Fix>
+    <Fix>Added a custom TypeScript-aware security test runner and focused regression tests for the new controls.</Fix>
+  </FixesApplied>
+  <TestsPerformed>
+    <Test>npm run lint - passed</Test>
+    <Test>npm test - passed (12 security-focused tests)</Test>
+    <Test>npm run build - passed</Test>
+    <Test>Development-mode smoke test on localhost:3000 - passed for signup, login, logout, session persistence, protected routes, notes CRUD, search, priority filter, dashboard counts, CSRF rejection, and cross-user access prevention</Test>
+    <Test>Production-mode smoke test on localhost:3001 - passed for protected-route redirect, security headers, and safe failure when Upstash config is absent</Test>
+  </TestsPerformed>
+  <DependencyAudit>
+    <NpmAuditResult>5 moderate severity vulnerabilities remain in transitive dependencies. The reported issues come from @hono/node-server via prisma dev tooling and postcss via next. Fixes would require breaking upgrades, so no unsafe upgrade was applied.</NpmAuditResult>
+    <NpmOutdatedResult>Outdated packages were reported for @types/node, eslint, react, react-dom, and typescript, but the currently installed versions already match the project&#39;s wanted ranges; no risky major upgrade was performed.</NpmOutdatedResult>
+  </DependencyAudit>
+  <EnvironmentSecurity>
+    <Note>.env files remain ignored by .gitignore and `.env.example` contains placeholders only.</Note>
+    <Note>No secrets were printed in this report.</Note>
+    <RequiredVariable name="DATABASE_URL">Required in all environments.</RequiredVariable>
+    <RequiredVariable name="JWT_SECRET">Required in all environments; must be at least 32 characters.</RequiredVariable>
+    <RequiredVariable name="NODE_ENV">Must be `production` in production deployments.</RequiredVariable>
+    <RequiredVariable name="APP_ORIGIN">Recommended for production CSRF/origin allow-listing and redirect trust.</RequiredVariable>
+    <RequiredVariable name="TRUSTED_ORIGINS">Optional comma-separated list for additional trusted deployment origins.</RequiredVariable>
+    <RequiredVariable name="UPSTASH_REDIS_REST_URL">Required in production for distributed rate limiting.</RequiredVariable>
+    <RequiredVariable name="UPSTASH_REDIS_REST_TOKEN">Required in production for distributed rate limiting.</RequiredVariable>
+  </EnvironmentSecurity>
+  <RemainingRisks>
+    <Risk>Production auth and note write routes will continue to fail closed until real Upstash credentials are provisioned.</Risk>
+    <Risk>Production CSP still uses `unsafe-inline` for Next.js compatibility; removing it would require a larger nonce-based integration.</Risk>
+    <Risk>npm audit still reports unresolved moderate vulnerabilities in upstream dependencies; fixing them safely requires framework/tooling upgrades.</Risk>
+    <Risk>Live database and Upstash verification were not possible in this local environment without production credentials.</Risk>
+  </RemainingRisks>
+  <DeploymentRequirements>
+    <Requirement>Provision `DATABASE_URL`, `JWT_SECRET`, `UPSTASH_REDIS_REST_URL`, and `UPSTASH_REDIS_REST_TOKEN` as Vercel Sensitive Environment Variables.</Requirement>
+    <Requirement>Set `APP_ORIGIN` to the canonical production origin and add any preview or alternate domains to `TRUSTED_ORIGINS`.</Requirement>
+    <Requirement>Use Prisma migrations for production schema changes and avoid `prisma db push` for deployment.</Requirement>
+    <Requirement>Use least-privilege PostgreSQL credentials with TLS enabled.</Requirement>
+    <Requirement>Rotate JWT and Upstash secrets separately for development, preview, and production.</Requirement>
+  </DeploymentRequirements>
+  <ProductionReadiness>
+    <Status>Conditionally ready</Status>
+    <Details>The codebase now passes lint, unit security tests, and production build checks. A production deployment is still blocked until the required production secrets and Upstash credentials are supplied. Once those variables are set, the app is ready for deployment.</Details>
+  </ProductionReadiness>
+</ProjectSecurityAudit>
