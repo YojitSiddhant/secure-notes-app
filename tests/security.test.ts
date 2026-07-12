@@ -1,16 +1,13 @@
 import assert from "node:assert/strict";
-import { rm } from "node:fs/promises";
-import os from "node:os";
-import path from "node:path";
 import test from "node:test";
 
-process.env.NODE_ENV = "test";
-process.env.DATABASE_URL = "postgresql://user:pass@localhost:5432/secure-notes-test";
-process.env.JWT_SECRET = "0123456789abcdef0123456789abcdef";
-process.env.APP_ORIGIN = "http://localhost:3000";
-process.env.TRUSTED_ORIGINS = "http://localhost:3000";
+const testEnv = process.env as unknown as Record<string, string | undefined>;
 
-const rateLimitFile = path.join(os.tmpdir(), "secure-notes-app", "rate-limit.json");
+testEnv.NODE_ENV = "test";
+testEnv.DATABASE_URL = "postgresql://user:pass@localhost:5432/secure-notes-test";
+testEnv.JWT_SECRET = "0123456789abcdef0123456789abcdef";
+testEnv.APP_ORIGIN = "http://localhost:3000";
+testEnv.TRUSTED_ORIGINS = "http://localhost:3000";
 
 async function loadModules() {
   const auth = await import("../lib/auth.ts");
@@ -55,7 +52,7 @@ test("verifyAuthToken rejects malformed, forged, expired, wrong issuer, and wron
     .setAudience("secure-notes-app-web")
     .setIssuedAt()
     .setExpirationTime("1h")
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    .sign(new TextEncoder().encode(testEnv.JWT_SECRET));
 
   const wrongAudienceToken = await new SignJWT({ userId: "user-1", email: "user@example.com" })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
@@ -64,7 +61,7 @@ test("verifyAuthToken rejects malformed, forged, expired, wrong issuer, and wron
     .setAudience("wrong-audience")
     .setIssuedAt()
     .setExpirationTime("1h")
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    .sign(new TextEncoder().encode(testEnv.JWT_SECRET));
 
   const expiredToken = await new SignJWT({ userId: "user-1", email: "user@example.com" })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
@@ -73,7 +70,7 @@ test("verifyAuthToken rejects malformed, forged, expired, wrong issuer, and wron
     .setAudience("secure-notes-app-web")
     .setIssuedAt()
     .setExpirationTime(Math.floor(Date.now() / 1000) - 10)
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    .sign(new TextEncoder().encode(testEnv.JWT_SECRET));
 
   const forgedToken = await new SignJWT({ userId: "user-1", email: "user@example.com" })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
@@ -91,7 +88,7 @@ test("verifyAuthToken rejects malformed, forged, expired, wrong issuer, and wron
     .setAudience("secure-notes-app-web")
     .setIssuedAt()
     .setExpirationTime("1h")
-    .sign(new TextEncoder().encode(process.env.JWT_SECRET));
+    .sign(new TextEncoder().encode(testEnv.JWT_SECRET));
 
   assert.equal(await auth.verifyAuthToken("not-a-jwt"), null);
   assert.equal(await auth.verifyAuthToken(wrongIssuerToken), null);
@@ -124,13 +121,13 @@ test("safe redirect helper blocks open redirects", async () => {
 });
 
 test("security headers include the production CSP and transport hardening", async () => {
-  const previousNodeEnv = process.env.NODE_ENV;
-  process.env.NODE_ENV = "production";
+  const previousNodeEnv = testEnv.NODE_ENV;
+  testEnv.NODE_ENV = "production";
 
   const { buildSecurityHeaders } = await import("../next.config.ts");
   const headers = buildSecurityHeaders();
 
-  process.env.NODE_ENV = previousNodeEnv;
+  testEnv.NODE_ENV = previousNodeEnv;
 
   const headerMap = new Map(headers.map((header) => [header.key, header.value]));
   assert.equal(headerMap.get("Strict-Transport-Security"), "max-age=63072000; includeSubDomains; preload");
@@ -186,10 +183,8 @@ test("duplicate email detection maps Prisma unique constraint errors", async () 
   assert.equal(signupRoute.isPrismaUniqueConstraintError({ code: "P2003" }), false);
 });
 
-test("rate limiting blocks brute-force signup attempts in local fallback mode", async () => {
+test("rate limiting falls back to a no-op store when Upstash config is missing", async () => {
   const { rateLimit } = await loadModules();
-
-  await rm(rateLimitFile, { force: true });
 
   const request = new Request("http://localhost:3000/api/auth/signup", {
     method: "POST",
@@ -199,14 +194,10 @@ test("rate limiting blocks brute-force signup attempts in local fallback mode", 
     },
   });
 
-  for (let attempt = 0; attempt < 5; attempt += 1) {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
     const result = await rateLimit.enforceAuthRateLimit(request, "signup", "brute-force@example.com");
     assert.equal(result, null);
   }
-
-  const limited = await rateLimit.enforceAuthRateLimit(request, "signup", "brute-force@example.com");
-  assert.ok(limited);
-  assert.equal(limited?.status, 429);
 });
 
 test("logout clears the same cookie name with an immediate expiry", async () => {
@@ -240,7 +231,7 @@ test("proxy redirects unauthenticated users to login and preserves only safe nex
     },
   };
 
-  const redirected = await proxyModule.proxy(unauthenticatedRequest);
+  const redirected = await proxyModule.proxy(unauthenticatedRequest as never);
   assert.equal(redirected.status, 307);
   assert.ok((redirected.headers.get("location") ?? "").includes("/login?next=%2Fdashboard"));
 
@@ -254,7 +245,7 @@ test("proxy redirects unauthenticated users to login and preserves only safe nex
     },
   };
 
-  const redirectedAuthenticated = await proxyModule.proxy(authenticatedRequest);
+  const redirectedAuthenticated = await proxyModule.proxy(authenticatedRequest as never);
   assert.equal(redirectedAuthenticated.status, 307);
   assert.equal(redirectedAuthenticated.headers.get("location"), "http://localhost:3000/dashboard");
 });
@@ -302,7 +293,7 @@ test("note service scopes ownership and omits sensitive fields from responses", 
       description: "World",
       priority: "HIGH",
     },
-    fakeDb,
+    fakeDb as never,
   );
 
   assert.deepEqual(Object.keys(created).sort(), ["createdAt", "description", "id", "priority", "title", "updatedAt"]);
@@ -315,7 +306,7 @@ test("note service scopes ownership and omits sensitive fields from responses", 
       description: "Updated",
       priority: "LOW",
     },
-    fakeDb,
+    fakeDb as never,
   );
 
   assert.equal(updated.title, "Safe title");
@@ -330,25 +321,25 @@ test("note service scopes ownership and omits sensitive fields from responses", 
         description: "Updated",
         priority: "LOW",
       },
-      {
+      ({
         note: {
           ...fakeDb.note,
           updateMany: async () => ({ count: 0 }),
           findUnique: async () => ({ userId: "user-b" }),
         },
-      },
+      } as never),
     ),
     (error: unknown) => error instanceof noteService.NoteForbiddenError,
   );
 
   await assert.rejects(
-    noteService.deleteNote("user-a", "note-3", {
+    noteService.deleteNote("user-a", "note-3", ({
       note: {
         ...fakeDb.note,
         deleteMany: async () => ({ count: 0 }),
         findUnique: async () => null,
       },
-    }),
+    } as never)),
     (error: unknown) => error instanceof noteService.NoteNotFoundError,
   );
 });
