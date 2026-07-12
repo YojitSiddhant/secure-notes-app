@@ -113,7 +113,7 @@ export function AppSidebar({
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-white/70 bg-white/95 text-slate-700 shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-300 md:hidden",
-          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+          isMobileOpen ? "pointer-events-auto translate-x-0" : "pointer-events-none -translate-x-full"
         )}
         aria-label="Mobile navigation drawer"
       >

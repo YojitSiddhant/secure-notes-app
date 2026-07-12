@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import type { AuthUser } from "@/services/auth.service";
 import { useLogout } from "@/hooks/useLogout";
 import {
@@ -10,6 +11,7 @@ import {
   PanelLeftOpen,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
 import {
   mobileHeaderActionButtonClassName,
   mobileHeaderShellClassName,
@@ -36,6 +38,8 @@ export function AppHeader({
   className,
 }: AppHeaderProps) {
   const logoutMutation = useLogout();
+  const profileTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   return (
     <header
@@ -59,17 +63,14 @@ export function AppHeader({
         </div>
 
         <button
+          ref={profileTriggerRef}
           type="button"
-          onClick={() => {
-            if (!logoutMutation.isPending) {
-              void logoutMutation.mutateAsync();
-            }
-          }}
-          disabled={logoutMutation.isPending}
+          onClick={() => setIsProfileMenuOpen((value) => !value)}
           className={mobileHeaderActionButtonClassName}
-          aria-label="Logout"
-          aria-busy={logoutMutation.isPending}
-          >
+          aria-label="Open profile menu"
+          aria-expanded={isProfileMenuOpen}
+          aria-haspopup="dialog"
+        >
           {isUserLoading ? (
             <span className="h-5 w-5 animate-pulse rounded-full bg-indigo-200" />
           ) : (
@@ -169,6 +170,19 @@ export function AppHeader({
           </div>
         </div>
       </div>
+
+      <AppMobileProfileMenu
+        open={isProfileMenuOpen}
+        triggerRef={profileTriggerRef}
+        user={user}
+        isUserLoading={isUserLoading}
+        onClose={() => setIsProfileMenuOpen(false)}
+        onLogout={() => {
+          if (!logoutMutation.isPending) {
+            void logoutMutation.mutateAsync();
+          }
+        }}
+      />
     </header>
   );
 }
