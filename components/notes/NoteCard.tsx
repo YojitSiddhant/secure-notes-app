@@ -20,18 +20,18 @@ const priorityStyles: Record<
 > = {
   HIGH: {
     label: "High",
-    className: "bg-rose-100 text-rose-700 ring-rose-200",
-    shellClassName: "border-slate-200 bg-white",
+    className: "bg-[color:var(--danger-soft)] text-[color:var(--danger)] ring-[color:var(--danger-soft)]",
+    shellClassName: "border-[color:var(--border)] bg-[color:var(--surface-elevated)]",
   },
   MEDIUM: {
     label: "Medium",
-    className: "bg-amber-100 text-amber-700 ring-amber-200",
-    shellClassName: "border-slate-200 bg-white",
+    className: "bg-[color:var(--warning-soft)] text-[color:var(--warning)] ring-[color:var(--warning-soft)]",
+    shellClassName: "border-[color:var(--border)] bg-[color:var(--surface-elevated)]",
   },
   LOW: {
     label: "Low",
-    className: "bg-emerald-100 text-emerald-700 ring-emerald-200",
-    shellClassName: "border-slate-200 bg-white",
+    className: "bg-[color:var(--success-soft)] text-[color:var(--success)] ring-[color:var(--success-soft)]",
+    shellClassName: "border-[color:var(--border)] bg-[color:var(--surface-elevated)]",
   },
 };
 
@@ -54,7 +54,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
         priority.shellClassName
       )}
     >
-      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start justify-between gap-3">
         <span
           className={cn(
             badgeClassName,
@@ -78,7 +78,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
             onClick={() => onDelete(note)}
             className={cn(
               iconButtonClassName,
-              "hover:border-rose-300 hover:bg-rose-50 hover:text-rose-700 focus:ring-4 focus:ring-rose-500/10"
+              "hover:border-[color:var(--danger-soft)] hover:bg-[color:var(--danger-soft)] hover:text-[color:var(--danger)] focus:ring-4 focus:ring-rose-500/10"
             )}
             aria-label={`Delete note ${note.title}`}
           >
@@ -88,7 +88,7 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
       </div>
 
       <div className="mt-5 space-y-3">
-        <h3 className="text-[1.05rem] font-semibold leading-6 tracking-tight text-slate-950 sm:text-[1.1rem]">
+        <h3 className="text-[1.05rem] font-semibold leading-6 tracking-tight text-[color:var(--foreground)] sm:text-[1.1rem]">
           {note.title}
         </h3>
         <p
@@ -104,27 +104,27 @@ export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
         </p>
       </div>
 
-      <div className="mt-6 grid gap-3 border-t border-slate-100 pt-4 text-xs text-slate-500 sm:grid-cols-2">
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 px-3 py-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+      <div className="mt-6 grid gap-3 border-t border-[color:var(--border)] pt-4 text-xs text-[color:var(--muted-foreground)] sm:grid-cols-2">
+        <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)] px-3 py-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
             <CalendarDays className="h-4 w-4" />
           </div>
           <div className="min-w-0">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[color:var(--muted-foreground)]">
               Created
             </p>
-            <p className="mt-1 text-sm font-medium text-slate-700">{formatDate(note.createdAt)}</p>
+            <p className="mt-1 text-sm font-medium text-[color:var(--foreground)]">{formatDate(note.createdAt)}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 px-3 py-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
+        <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)] px-3 py-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--info-soft)] text-[color:var(--info)]">
             <PencilLine className="h-4 w-4" />
           </div>
           <div className="min-w-0">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-[color:var(--muted-foreground)]">
               Updated
             </p>
-            <p className="mt-1 text-sm font-medium text-slate-700">{formatDate(note.updatedAt)}</p>
+            <p className="mt-1 text-sm font-medium text-[color:var(--foreground)]">{formatDate(note.updatedAt)}</p>
           </div>
         </div>
       </div>

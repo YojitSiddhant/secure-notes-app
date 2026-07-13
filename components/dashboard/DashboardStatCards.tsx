@@ -16,33 +16,33 @@ const statCards = [
     key: "totalNotes",
     label: "Total Notes",
     icon: NotebookPen,
-    labelClass: "text-slate-900",
-    valueClass: "text-slate-950",
-    iconClass: "text-indigo-600",
+    labelClass: "text-[color:var(--foreground)]",
+    valueClass: "text-[color:var(--foreground)]",
+    iconClass: "text-[color:var(--primary)]",
   },
   {
     key: "highPriority",
     label: "High Priority",
     icon: AlertCircle,
-    labelClass: "text-slate-900",
-    valueClass: "text-slate-950",
-    iconClass: "text-rose-600",
+    labelClass: "text-[color:var(--foreground)]",
+    valueClass: "text-[color:var(--foreground)]",
+    iconClass: "text-[color:var(--danger)]",
   },
   {
     key: "mediumPriority",
     label: "Medium Priority",
     icon: ChartColumn,
-    labelClass: "text-slate-900",
-    valueClass: "text-slate-950",
-    iconClass: "text-amber-600",
+    labelClass: "text-[color:var(--foreground)]",
+    valueClass: "text-[color:var(--foreground)]",
+    iconClass: "text-[color:var(--warning)]",
   },
   {
     key: "lowPriority",
     label: "Low Priority",
     icon: CircleDot,
-    labelClass: "text-slate-900",
-    valueClass: "text-slate-950",
-    iconClass: "text-emerald-600",
+    labelClass: "text-[color:var(--foreground)]",
+    valueClass: "text-[color:var(--foreground)]",
+    iconClass: "text-[color:var(--success)]",
   },
 ] as const;
 
@@ -58,14 +58,14 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
         <article
           key={label}
           className={cn(
-            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-white/80 bg-white/90 p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
+            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
           )}
         >
           <div className="flex w-full items-center justify-between gap-4">
             <div className="min-w-0 space-y-1">
               <p
                 className={cn(
-                  "whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-slate-500 sm:text-xs",
+                  "whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--muted-foreground)] sm:text-xs",
                   labelClass
                 )}
               >
@@ -73,14 +73,14 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
               </p>
               <p
                 className={cn(
-                  "text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-slate-950 sm:text-[2.75rem]",
+                  "text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-[color:var(--foreground)] sm:text-[2.75rem]",
                   valueClass
                 )}
               >
                 {stats[key].toLocaleString()}
               </p>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 ring-1 ring-inset ring-slate-200 transition-transform duration-200 group-hover:scale-[1.02] sm:h-14 sm:w-14">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--surface-muted)] ring-1 ring-inset ring-[color:var(--border)] transition-transform duration-200 group-hover:scale-[1.02] sm:h-14 sm:w-14">
               <Icon className={cn("h-5.5 w-5.5 sm:h-6 sm:w-6", iconClass)} />
             </div>
           </div>

@@ -127,7 +127,7 @@ export function LoginForm() {
         <div
           role="alert"
           aria-live="polite"
-          className="rounded-2xl border border-rose-200 bg-white px-4 py-3 text-sm text-rose-700"
+          className="rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--danger)]"
         >
           {errors.root.message}
         </div>
@@ -138,7 +138,7 @@ export function LoginForm() {
           Email
         </label>
         <div className="relative">
-          <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[color:var(--muted-foreground)]" />
           <input
             id="email"
             type="email"
@@ -150,13 +150,13 @@ export function LoginForm() {
               fieldClassName,
               "pl-11",
               errors.email &&
-                "border-rose-300 focus:border-rose-500 focus:ring-rose-500/10"
+                "border-[color:var(--danger)] focus:border-rose-500 focus:ring-rose-500/10"
             )}
             {...register("email")}
           />
         </div>
         {errors.email ? (
-          <p id="email-error" className="text-sm text-rose-600">
+          <p id="email-error" className="text-sm text-[color:var(--danger)]">
             {errors.email.message}
           </p>
         ) : (
@@ -171,7 +171,7 @@ export function LoginForm() {
           Password
         </label>
         <div className="relative">
-          <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+          <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[color:var(--muted-foreground)]" />
           <input
             id="password"
             type={showPassword ? "text" : "password"}
@@ -183,14 +183,14 @@ export function LoginForm() {
               fieldClassName,
               "pl-11 pr-12",
               errors.password &&
-                "border-rose-300 focus:border-rose-500 focus:ring-rose-500/10"
+                "border-[color:var(--danger)] focus:border-rose-500 focus:ring-rose-500/10"
             )}
             {...register("password")}
           />
           <button
             type="button"
             onClick={() => setShowPassword((value) => !value)}
-            className="absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-slate-500 transition hover:bg-slate-50 hover:text-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-900/5"
+            className="absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl text-[color:var(--muted-foreground)] transition hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)] focus:outline-none focus:ring-4 focus:ring-slate-900/5"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
@@ -201,7 +201,7 @@ export function LoginForm() {
           </button>
         </div>
         {errors.password ? (
-          <p id="password-error" className="text-sm text-rose-600">
+          <p id="password-error" className="text-sm text-[color:var(--danger)]">
             {errors.password.message}
           </p>
         ) : (
@@ -212,11 +212,11 @@ export function LoginForm() {
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-slate-600">
+        <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-[color:var(--muted-foreground)]">
           <input
             type="checkbox"
             className={cn(
-              "h-4 w-4 rounded border-slate-300 text-slate-950 focus:ring-4 focus:ring-slate-900/5"
+              "h-4 w-4 rounded border-[color:var(--border)] text-[color:var(--foreground)] focus:ring-4 focus:ring-slate-900/5"
             )}
             {...register("rememberMe")}
             aria-label="Remember me"
@@ -226,7 +226,7 @@ export function LoginForm() {
 
         <button
           type="button"
-          className="text-sm font-medium text-indigo-700 underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+          className="text-sm font-medium text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
           aria-label="Forgot password placeholder"
         >
           Forgot Password?
@@ -249,11 +249,11 @@ export function LoginForm() {
         )}
       </button>
 
-      <p className="text-center text-sm text-slate-600">
+      <p className="text-center text-sm text-[color:var(--muted-foreground)]">
         Don&apos;t have an account?{" "}
         <Link
           href="/signup"
-          className="font-semibold text-indigo-700 underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+          className="font-semibold text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
         >
           Sign Up
         </Link>

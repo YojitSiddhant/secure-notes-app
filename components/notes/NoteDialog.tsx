@@ -130,7 +130,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
           <div
             role="alert"
             aria-live="polite"
-            className="rounded-2xl border border-rose-200 bg-white px-4 py-3 text-sm leading-6 text-rose-700"
+            className="rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm leading-6 text-[color:var(--danger)]"
           >
             {errors.root.message}
           </div>
@@ -142,7 +142,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
               Title
             </label>
             <div className="relative">
-              <PenSquare className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <PenSquare className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[color:var(--muted-foreground)]" />
               <input
                 id="note-title"
                 type="text"
@@ -153,13 +153,13 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
                   fieldClassName,
                   "pl-11",
                   errors.title &&
-                    "border-rose-300 focus:border-rose-500 focus:ring-rose-500/10"
+                    "border-[color:var(--danger)] focus:border-rose-500 focus:ring-rose-500/10"
                 )}
                 {...register("title")}
               />
             </div>
             {errors.title ? (
-              <p id="note-title-error" className="text-sm text-rose-600">
+              <p id="note-title-error" className="text-sm text-[color:var(--danger)]">
                 {errors.title.message}
               </p>
             ) : (
@@ -187,13 +187,13 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
                   textareaClassName,
                   "pl-11",
                   errors.description &&
-                    "border-rose-300 focus:border-rose-500 focus:ring-rose-500/10"
+                    "border-[color:var(--danger)] focus:border-rose-500 focus:ring-rose-500/10"
                 )}
                 {...register("description")}
               />
             </div>
             {errors.description ? (
-              <p id="note-description-error" className="text-sm text-rose-600">
+              <p id="note-description-error" className="text-sm text-[color:var(--danger)]">
                 {errors.description.message}
               </p>
             ) : (
@@ -219,7 +219,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
                   selectClassName,
                   "pl-11 pr-4",
                   errors.priority &&
-                    "border-rose-300 focus:border-rose-500 focus:ring-rose-500/10"
+                    "border-[color:var(--danger)] focus:border-rose-500 focus:ring-rose-500/10"
                 )}
                 {...register("priority")}
               >
@@ -231,7 +231,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
               </select>
             </div>
             {errors.priority ? (
-              <p id="note-priority-error" className="text-sm text-rose-600">
+              <p id="note-priority-error" className="text-sm text-[color:var(--danger)]">
                 {errors.priority.message}
               </p>
             ) : (

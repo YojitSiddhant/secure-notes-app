@@ -140,13 +140,13 @@ export function AppMobileProfileMenu({
           role="dialog"
           aria-modal="true"
           aria-labelledby="mobile-profile-menu-title"
-          className="flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/95 shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
+          className="flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
         >
-          <div className="border-b border-slate-200/80 px-4 py-4">
+          <div className="border-b border-[color:var(--border)] px-4 py-4">
             <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-100">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)] ring-1 ring-inset ring-[color:var(--primary-border)]">
                 {isUserLoading ? (
-                  <span className="h-5 w-5 animate-pulse rounded-full bg-indigo-200" />
+                  <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary-soft)]" />
                 ) : (
                   <UserRound className="h-6 w-6" />
                 )}
@@ -154,25 +154,25 @@ export function AppMobileProfileMenu({
               <div className="min-w-0">
                 <h2
                   id="mobile-profile-menu-title"
-                  className="truncate text-sm font-semibold tracking-tight text-slate-950"
+                  className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)]"
                 >
                   {isUserLoading ? "Loading profile" : user?.name ?? "Workspace Member"}
                 </h2>
-                <p className="truncate text-sm text-slate-500">
+                <p className="truncate text-sm text-[color:var(--muted-foreground)]">
                   {isUserLoading ? "Loading email" : user?.email ?? " "}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-slate-200/80 px-4 py-4">
+          <div className="border-t border-[color:var(--border)] px-4 py-4">
             <button
               ref={logoutButtonRef}
               type="button"
               onClick={() => setLogoutConfirmOpen(true)}
-              className="flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-rose-600 transition-all duration-200 hover:bg-rose-50 focus:outline-none focus:ring-4 focus:ring-rose-500/10 active:scale-[0.99]"
+              className="flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-[color:var(--danger)] transition-all duration-200 hover:bg-[color:var(--danger-soft)] focus:outline-none focus:ring-4 focus:ring-rose-500/10 active:scale-[0.99]"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-rose-50 text-rose-600">
+              <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[color:var(--danger-soft)] text-[color:var(--danger)]">
                 <LogOut className="h-5 w-5" />
               </span>
               <span className="flex-1 text-left">Logout</span>
@@ -192,7 +192,7 @@ export function AppMobileProfileMenu({
             <button
               type="button"
               onClick={() => setLogoutConfirmOpen(false)}
-              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-5 py-2.5 text-sm font-semibold text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
             >
               Cancel
             </button>
@@ -200,15 +200,15 @@ export function AppMobileProfileMenu({
               type="button"
               onClick={handleLogout}
               disabled={isLoggingOut}
-              className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-rose-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-950/15 transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-[color:var(--danger)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-950/15 transition hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isLoggingOut ? "Logging out" : "Logout"}
             </button>
           </div>
         }
-      >
+        >
         <div className="space-y-3">
-          <p className="text-sm leading-6 text-slate-600">
+          <p className="text-sm leading-6 text-[color:var(--muted-foreground)]">
             This will end your current session on this device.
           </p>
         </div>

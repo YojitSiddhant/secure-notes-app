@@ -51,7 +51,7 @@ export function NotesToolbar({
 
       <div className="mt-5 grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(13rem,18rem)]">
         <label className="relative block">
-          <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+          <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
             <Search className="h-4 w-4" />
           </span>
           <input
@@ -65,7 +65,7 @@ export function NotesToolbar({
         </label>
 
         <label className="relative block">
-          <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+          <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
             <SlidersHorizontal className="h-4 w-4" />
           </span>
           <select

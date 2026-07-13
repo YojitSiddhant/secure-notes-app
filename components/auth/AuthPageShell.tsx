@@ -33,18 +33,18 @@ export function AuthPageShell({
       </div>
 
       <div className="mx-auto grid min-h-[calc(100dvh-2rem)] w-full max-w-7xl items-center gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(20rem,28rem)] xl:gap-10">
-        <section className="hidden flex-col justify-between rounded-[2.5rem] border border-white/80 bg-white/70 p-8 shadow-[0_30px_90px_-50px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:flex">
+        <section className="hidden flex-col justify-between rounded-[2.5rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-8 shadow-[0_30px_90px_-50px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:flex">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-3 py-1 text-xs font-semibold text-indigo-700 shadow-sm shadow-indigo-950/5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-indigo-950/5">
               <BadgeIcon className="h-3.5 w-3.5" />
               {badgeLabel}
             </div>
 
             <div className="space-y-4">
-              <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-slate-950 xl:text-[3.15rem]">
+              <h1 className="max-w-xl text-4xl font-semibold tracking-tight text-[color:var(--foreground)] xl:text-[3.15rem]">
                 {title}
               </h1>
-              <p className="max-w-xl text-base leading-7 text-slate-600">
+              <p className="max-w-xl text-base leading-7 text-[color:var(--muted-foreground)]">
                 {description}
               </p>
             </div>
@@ -57,16 +57,16 @@ export function AuthPageShell({
               return (
                 <div
                   key={highlight.title}
-                  className="flex items-start gap-4 rounded-[1.75rem] border border-slate-200/80 bg-white/80 p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.16)]"
+                  className="flex items-start gap-4 rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.16)]"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 ring-1 ring-inset ring-indigo-100">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[color:var(--primary-soft)] text-[color:var(--primary)] ring-1 ring-inset ring-[color:var(--primary-border)]">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-sm font-semibold tracking-tight text-slate-950">
+                    <p className="text-sm font-semibold tracking-tight text-[color:var(--foreground)]">
                       {highlight.title}
                     </p>
-                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                    <p className="mt-1 text-sm leading-6 text-[color:var(--muted-foreground)]">
                       {highlight.description}
                     </p>
                   </div>
@@ -77,20 +77,20 @@ export function AuthPageShell({
         </section>
 
         <section className="space-y-4 sm:space-y-5">
-          <div className="rounded-[2rem] border border-white/80 bg-white/85 p-5 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:hidden sm:p-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50/80 px-3 py-1 text-xs font-semibold text-indigo-700 shadow-sm shadow-indigo-950/5">
+          <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:hidden sm:p-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-indigo-950/5">
               <BadgeIcon className="h-3.5 w-3.5" />
               {badgeLabel}
             </div>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-[2.4rem]">
+            <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[2.4rem]">
               {title}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[color:var(--muted-foreground)] sm:text-base">
               {description}
             </p>
           </div>
 
-          <div className="rounded-[2rem] border border-white/80 bg-white/90 p-5 shadow-[0_30px_90px_-52px_rgba(15,23,42,0.24)] backdrop-blur-xl sm:p-6 lg:p-8">
+          <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_30px_90px_-52px_rgba(15,23,42,0.24)] backdrop-blur-xl sm:p-6 lg:p-8">
             {children}
           </div>
         </section>

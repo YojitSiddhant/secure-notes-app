@@ -69,20 +69,20 @@ export function Modal({
         aria-labelledby="modal-title"
         aria-describedby={description ? "modal-description" : undefined}
         className={cn(
-          "relative flex w-full max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.5rem] border border-white/80 bg-white shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:rounded-[2rem]",
+          "relative flex w-full max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:rounded-[2rem]",
           maxWidthClassName
         )}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-slate-200/80 bg-white/95 px-4 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-start justify-between gap-4 border-b border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-4 sm:px-6 sm:py-5">
           <div className="min-w-0">
             <h2
               id="modal-title"
-              className="text-base font-semibold tracking-tight text-slate-950 sm:text-lg"
+              className="text-base font-semibold tracking-tight text-[color:var(--foreground)] sm:text-lg"
             >
               {title}
             </h2>
             {description ? (
-              <p id="modal-description" className="mt-1 text-sm leading-6 text-slate-500">
+              <p id="modal-description" className="mt-1 text-sm leading-6 text-[color:var(--muted-foreground)]">
                 {description}
               </p>
             ) : null}
@@ -92,7 +92,7 @@ export function Modal({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--muted-foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
             aria-label="Close dialog"
           >
             <X className="h-4 w-4" />
@@ -102,7 +102,7 @@ export function Modal({
         <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">{children}</div>
 
         {footer ? (
-          <div className="border-t border-slate-200/80 px-4 py-4 sm:px-6">
+          <div className="border-t border-[color:var(--border)] px-4 py-4 sm:px-6">
             {footer}
           </div>
         ) : null}

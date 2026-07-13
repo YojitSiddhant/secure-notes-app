@@ -40,7 +40,7 @@ export function AppHeader({
     <>
       <header
         className={cn(
-          "sticky top-0 z-30 border-b border-white/70 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70",
+          "sticky top-0 z-30 border-b border-[color:var(--border)] bg-[color:var(--surface-elevated)] backdrop-blur-xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]",
           className
         )}
       >
@@ -51,7 +51,7 @@ export function AppHeader({
             className={mobileHeaderActionButtonClassName}
             aria-label="Open navigation menu"
           >
-            <Menu className="h-[22px] w-[22px] text-indigo-700" />
+            <Menu className="h-[22px] w-[22px] text-[color:var(--primary)]" />
           </button>
 
           <div className={mobileHeaderTitleClassName}>
@@ -68,30 +68,30 @@ export function AppHeader({
             aria-haspopup="dialog"
           >
             {isUserLoading ? (
-              <span className="h-5 w-5 animate-pulse rounded-full bg-indigo-200" />
+              <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary-soft)]" />
             ) : (
-              <CircleUserRound className="h-[22px] w-[22px] text-indigo-700" />
+              <CircleUserRound className="h-[22px] w-[22px] text-[color:var(--primary)]" />
             )}
           </button>
         </div>
 
         <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm shadow-indigo-950/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-indigo-950/20">
               <span className="text-sm font-semibold tracking-tight">SN</span>
             </div>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold tracking-tight text-slate-950 sm:text-[0.95rem]">
+              <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[0.95rem]">
                 Secure Notes
               </p>
-              <p className="truncate text-xs text-slate-500 sm:text-sm">
+              <p className="truncate text-xs text-[color:var(--muted-foreground)] sm:text-sm">
                 Organized private note workspace
               </p>
             </div>
           </div>
 
           <nav className="mx-4 flex flex-1 items-center justify-center" aria-label="Primary">
-            <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/90 p-1 shadow-sm">
+            <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] p-1 shadow-sm">
               {appNavItems.map((item) => {
                 const Icon = item.icon;
                 const active = isActive(item.href);
@@ -103,8 +103,8 @@ export function AppHeader({
                     className={cn(
                       "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 xl:px-4",
                       active
-                        ? "bg-indigo-600 text-white shadow-md shadow-indigo-950/15"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-indigo-950/15"
+                        : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
                     )}
                     aria-current={active ? "page" : undefined}
                   >
@@ -117,27 +117,27 @@ export function AppHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
+            <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 shadow-sm">
               {isUserLoading ? (
                 <>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
-                    <span className="h-5 w-5 animate-pulse rounded-full bg-indigo-200" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
+                    <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary)]/20" />
                   </div>
                   <div className="hidden min-w-0 space-y-1 sm:block">
-                    <div className="h-4 w-28 animate-pulse rounded-full bg-slate-200/80" />
-                    <div className="h-3 w-24 animate-pulse rounded-full bg-slate-200/80" />
+                    <div className="h-4 w-28 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
+                    <div className="h-3 w-24 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 text-indigo-700">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
                     <CircleUserRound className="h-5 w-5" />
                   </div>
                   <div className="hidden min-w-0 sm:block">
-                    <p className="truncate text-sm font-medium text-slate-950">
+                    <p className="truncate text-sm font-medium text-[color:var(--foreground)]">
                       {user?.name ?? "Workspace Member"}
                     </p>
-                    <p className="truncate text-xs text-slate-500">
+                    <p className="truncate text-xs text-[color:var(--muted-foreground)]">
                       Workspace Member
                     </p>
                   </div>
@@ -151,7 +151,7 @@ export function AppHeader({
                   }
                 }}
                 disabled={logoutMutation.isPending}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
                 aria-label="Logout"
                 aria-busy={logoutMutation.isPending}
               >
