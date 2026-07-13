@@ -54,7 +54,7 @@ export const mobileHeaderActionButtonClassName =
   "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 active:scale-95 focus:outline-none focus:ring-4 focus:ring-indigo-500/10";
 
 export const mobileBottomNavShellClassName =
-  "rounded-t-[1.75rem] border border-b-0 border-white/70 bg-white/80 px-2.5 py-2.5 shadow-[0_-20px_60px_-35px_rgba(15,23,42,0.38)] backdrop-blur-2xl supports-[backdrop-filter]:bg-white/70";
+  "overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/90 px-2.5 py-2.5 shadow-[0_18px_60px_-30px_rgba(15,23,42,0.28)] backdrop-blur-2xl supports-[backdrop-filter]:bg-white/80";
 
 export const mobileBottomNavItemClassName =
   "group relative flex min-h-14 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-200 ease-out focus:outline-none focus:ring-4 focus:ring-indigo-500/15 active:scale-[0.98]";

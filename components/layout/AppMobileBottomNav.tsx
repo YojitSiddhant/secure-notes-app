@@ -32,7 +32,7 @@ export function AppMobileBottomNav() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-20 md:hidden">
-      <div className="mx-auto w-full max-w-2xl px-3 pb-[calc(0.5rem+env(safe-area-inset-bottom))] pt-2">
+      <div className="mx-auto w-full max-w-2xl px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2">
         <nav aria-label="Primary mobile" className={mobileBottomNavShellClassName}>
           <div className="grid grid-cols-2 gap-2">
             {mobileNavItems.map((item) => {
