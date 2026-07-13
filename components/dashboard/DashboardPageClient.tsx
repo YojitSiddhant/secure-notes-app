@@ -6,7 +6,7 @@ import { Sparkles } from "lucide-react";
 import { ProtectedAppShell } from "@/components/auth/ProtectedAppShell";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { DashboardStatCards } from "@/components/dashboard/DashboardStatCards";
-import { EmptyState, ErrorState } from "@/components/shared/FeedbackState";
+import { ErrorState } from "@/components/shared/FeedbackState";
 import { NoteDialog } from "@/components/notes/NoteDialog";
 import { cn } from "@/lib/cn";
 import { useDashboardStats } from "@/hooks/useDashboardStats";
@@ -97,23 +97,6 @@ function DashboardContent() {
       </section>
 
       <DashboardStatCards stats={stats} />
-
-      {stats.totalNotes === 0 ? (
-        <EmptyState
-          icon={<Sparkles className="h-7 w-7" />}
-          title="Your workspace is ready for its first note."
-          description="Create a first note to start organizing ideas, tasks, and reminders."
-          action={
-            <button
-              type="button"
-              onClick={() => setManualCreateOpen(true)}
-              className={cn(primaryButtonClassName, "w-full sm:w-auto")}
-            >
-              Create Note
-            </button>
-          }
-        />
-      ) : null}
 
       <NoteDialog
         open={isCreateOpen}
