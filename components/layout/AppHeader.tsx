@@ -44,7 +44,7 @@ export function AppHeader({
           className
         )}
       >
-        <div className={cn(mobileHeaderShellClassName, "md:hidden")}>
+        <div className={cn(mobileHeaderShellClassName, "lg:hidden")}>
           <button
             type="button"
             onClick={onMobileMenuOpen}
@@ -75,7 +75,7 @@ export function AppHeader({
           </button>
         </div>
 
-        <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 md:flex">
+        <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
           <div className="flex min-w-0 items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm shadow-indigo-950/20">
               <span className="text-sm font-semibold tracking-tight">SN</span>
@@ -90,8 +90,8 @@ export function AppHeader({
             </div>
           </div>
 
-          <nav className="mx-4 hidden flex-1 items-center justify-center md:flex" aria-label="Primary">
-            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 p-1 shadow-sm">
+          <nav className="mx-4 flex flex-1 items-center justify-center" aria-label="Primary">
+            <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/90 p-1 shadow-sm">
               {appNavItems.map((item) => {
                 const Icon = item.icon;
                 const active = isActive(item.href);
@@ -101,7 +101,7 @@ export function AppHeader({
                     key={item.label}
                     href={item.href}
                     className={cn(
-                      "inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10",
+                      "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 xl:px-4",
                       active
                         ? "bg-indigo-600 text-white shadow-md shadow-indigo-950/15"
                         : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
