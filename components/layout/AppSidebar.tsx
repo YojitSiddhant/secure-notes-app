@@ -42,7 +42,7 @@ export function AppSidebar({
       >
         <div className="flex min-h-16 items-center justify-between border-b border-[color:var(--border)] px-5 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-indigo-950/15">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-neutral-950/15">
               <span className="text-sm font-bold tracking-tight">SN</span>
             </div>
             <div>

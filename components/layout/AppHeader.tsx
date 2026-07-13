@@ -9,6 +9,7 @@ import { CircleUserRound, LogOut, Menu } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
 import { appNavItems } from "@/components/layout/navigation";
+import { ThemeToggleSwitch } from "@/components/theme/ThemeToggleSwitch";
 import {
   mobileHeaderActionButtonClassName,
   mobileHeaderShellClassName,
@@ -58,6 +59,8 @@ export function AppHeader({
             <p className="truncate">Secure Notes</p>
           </div>
 
+          <ThemeToggleSwitch className="scale-[0.82] sm:scale-90" />
+
           <button
             ref={profileTriggerRef}
             type="button"
@@ -77,7 +80,7 @@ export function AppHeader({
 
         <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-indigo-950/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-neutral-950/20">
               <span className="text-sm font-semibold tracking-tight">SN</span>
             </div>
             <div className="min-w-0">
@@ -103,7 +106,7 @@ export function AppHeader({
                     className={cn(
                       "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-500/20 xl:px-4",
                       active
-                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-indigo-950/15"
+                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-neutral-950/15"
                         : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
                     )}
                     aria-current={active ? "page" : undefined}
@@ -117,6 +120,8 @@ export function AppHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
+            <ThemeToggleSwitch className="scale-90 lg:scale-100" />
+
             <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 shadow-sm">
               {isUserLoading ? (
                 <>

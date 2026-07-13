@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
+import { ThemeToggleSwitch } from "@/components/theme/ThemeToggleSwitch";
 
 type AuthHighlight = {
   title: string;
@@ -26,6 +27,10 @@ export function AuthPageShell({
 }: AuthPageShellProps) {
   return (
     <main className="relative isolate min-h-[100dvh] overflow-x-clip bg-transparent px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+      <div className="absolute right-4 top-4 z-10 sm:right-6 sm:top-6 lg:right-8 lg:top-8">
+        <ThemeToggleSwitch />
+      </div>
+
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[-7rem] top-[-7rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute right-[-6rem] top-[8rem] h-80 w-80 rounded-full bg-white/5 blur-3xl" />
@@ -35,7 +40,7 @@ export function AuthPageShell({
       <div className="mx-auto grid min-h-[calc(100dvh-2rem)] w-full max-w-7xl items-center gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(20rem,28rem)] xl:gap-10">
         <section className="hidden flex-col justify-between rounded-[2.5rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-8 shadow-[0_30px_90px_-50px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:flex">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-indigo-950/5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-neutral-950/5">
               <BadgeIcon className="h-3.5 w-3.5" />
               {badgeLabel}
             </div>
@@ -78,7 +83,7 @@ export function AuthPageShell({
 
         <section className="space-y-4 sm:space-y-5">
           <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_80px_-48px_rgba(15,23,42,0.24)] backdrop-blur-xl xl:hidden sm:p-6">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-indigo-950/5">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-neutral-950/5">
               <BadgeIcon className="h-3.5 w-3.5" />
               {badgeLabel}
             </div>
