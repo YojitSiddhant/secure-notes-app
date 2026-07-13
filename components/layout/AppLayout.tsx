@@ -22,7 +22,6 @@ export function AppLayout({
   className,
 }: AppLayoutProps) {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -34,30 +33,25 @@ export function AppLayout({
       </div>
 
       <AppSidebar
-        isCollapsed={isSidebarCollapsed}
         isMobileOpen={isMobileOpen}
         onCloseMobile={() => setIsMobileOpen(false)}
       />
 
-      <div className={isSidebarCollapsed ? "md:pl-20" : "md:pl-72"}>
-        <div className="flex min-h-screen flex-col bg-transparent">
-          <AppHeader
-            onSidebarToggle={() => setIsSidebarCollapsed((value) => !value)}
-            isSidebarCollapsed={isSidebarCollapsed}
-            isSidebarToggleVisible
-            user={currentUser}
-            isUserLoading={isCurrentUserLoading}
-          />
+      <div className="flex min-h-screen flex-col bg-transparent">
+        <AppHeader
+          onMobileMenuOpen={() => setIsMobileOpen(true)}
+          user={currentUser}
+          isUserLoading={isCurrentUserLoading}
+        />
 
-          <main className="flex-1 overflow-y-auto">
-            <div
-              key={pathname}
-              className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-5 px-4 py-4 pb-[calc(8rem+env(safe-area-inset-bottom))] motion-safe:max-md:animate-[ui-mobile-route-in_240ms_ease-out] sm:gap-6 sm:px-6 sm:py-6 md:pb-6 lg:px-8 lg:py-8"
-            >
-              {children}
-            </div>
-          </main>
-        </div>
+        <main className="flex-1 overflow-y-auto">
+          <div
+            key={pathname}
+            className="mx-auto flex w-full max-w-[92rem] flex-1 flex-col gap-5 px-4 py-4 pb-[calc(8rem+env(safe-area-inset-bottom))] motion-safe:max-md:animate-[ui-mobile-route-in_240ms_ease-out] sm:gap-6 sm:px-6 sm:py-6 md:pb-6 lg:px-8 lg:py-8"
+          >
+            {children}
+          </div>
+        </main>
       </div>
 
       <AppMobileBottomNav />

@@ -1,16 +1,14 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { AuthUser } from "@/services/auth.service";
 import { useLogout } from "@/hooks/useLogout";
-import {
-  CircleUserRound,
-  LogOut,
-  PanelLeftClose,
-  PanelLeftOpen,
-} from "lucide-react";
+import { CircleUserRound, LogOut, Menu } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
+import { appNavItems } from "@/components/layout/navigation";
 import {
   mobileHeaderActionButtonClassName,
   mobileHeaderShellClassName,
@@ -18,18 +16,14 @@ import {
 } from "@/components/ui/styles";
 
 type AppHeaderProps = {
-  onSidebarToggle?: () => void;
-  isSidebarCollapsed?: boolean;
-  isSidebarToggleVisible?: boolean;
+  onMobileMenuOpen?: () => void;
   user?: AuthUser | null;
   isUserLoading?: boolean;
   className?: string;
 };
 
 export function AppHeader({
-  onSidebarToggle,
-  isSidebarCollapsed = false,
-  isSidebarToggleVisible = true,
+  onMobileMenuOpen,
   user,
   isUserLoading = false,
   className,
@@ -37,6 +31,10 @@ export function AppHeader({
   const logoutMutation = useLogout();
   const profileTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
 
   return (
     <>
@@ -47,7 +45,14 @@ export function AppHeader({
         )}
       >
         <div className={cn(mobileHeaderShellClassName, "md:hidden")}>
-          <div aria-hidden="true" className="h-12 w-12 shrink-0" />
+          <button
+            type="button"
+            onClick={onMobileMenuOpen}
+            className={mobileHeaderActionButtonClassName}
+            aria-label="Open navigation menu"
+          >
+            <Menu className="h-[22px] w-[22px] text-indigo-700" />
+          </button>
 
           <div className={mobileHeaderTitleClassName}>
             <p className="truncate">Secure Notes</p>
@@ -70,8 +75,8 @@ export function AppHeader({
           </button>
         </div>
 
-        <div className="hidden min-h-16 items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 md:flex">
-          <div className="hidden min-w-0 items-center gap-3 lg:flex">
+        <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 md:flex">
+          <div className="flex min-w-0 items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-sm shadow-indigo-950/20">
               <span className="text-sm font-semibold tracking-tight">SN</span>
             </div>
@@ -85,25 +90,33 @@ export function AppHeader({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            {isSidebarToggleVisible ? (
-              <button
-                type="button"
-                onClick={onSidebarToggle}
-                className="hidden min-h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-slate-50 hover:text-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 md:inline-flex"
-                aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              >
-                {isSidebarCollapsed ? (
-                  <PanelLeftOpen className="h-4 w-4" />
-                ) : (
-                  <PanelLeftClose className="h-4 w-4" />
-                )}
-                <span className="hidden lg:inline">
-                  {isSidebarCollapsed ? "Expand" : "Collapse"}
-                </span>
-              </button>
-            ) : null}
+          <nav className="mx-4 hidden flex-1 items-center justify-center md:flex" aria-label="Primary">
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 p-1 shadow-sm">
+              {appNavItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
 
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10",
+                      active
+                        ? "bg-indigo-600 text-white shadow-md shadow-indigo-950/15"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    )}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    <Icon className="h-4 w-4 shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+
+          <div className="ml-auto flex items-center gap-2 sm:gap-3">
             <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
               {isUserLoading ? (
                 <>
