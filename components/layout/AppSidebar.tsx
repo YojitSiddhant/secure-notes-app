@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { appNavItems } from "@/components/layout/navigation";
 
 type AppSidebarProps = {
@@ -42,9 +43,7 @@ export function AppSidebar({
       >
         <div className="flex min-h-16 items-center justify-between border-b border-[color:var(--border)] px-5 py-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-neutral-950/15">
-              <span className="text-sm font-bold tracking-tight">SN</span>
-            </div>
+            <BrandLogo variant="sidebar" />
             <div>
               <p className="text-sm font-semibold tracking-tight text-[color:var(--foreground)]">
                 Secure Notes

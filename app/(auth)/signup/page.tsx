@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { BookMarked, ShieldCheck, Sparkles, UserPlus } from "lucide-react";
+import { BookMarked, ShieldCheck, Sparkles } from "lucide-react";
 import { AuthPageShell } from "@/components/auth/AuthPageShell";
 import { SignupForm } from "@/components/forms/SignupForm";
 import { getAuthenticatedUserFromCookies } from "@/lib/auth";
@@ -33,7 +33,6 @@ export default async function SignUpPage() {
   return (
     <AuthPageShell
       badgeLabel="Secure Notes"
-      badgeIcon={UserPlus}
       title="Create your account"
       description="Set up your private notes workspace in seconds. Capture ideas, organize priorities, and keep everything accessible with a polished, responsive interface."
       highlights={[

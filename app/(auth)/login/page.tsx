@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { LogIn, ShieldCheck, Sparkles, Workflow } from "lucide-react";
+import { ShieldCheck, Sparkles, Workflow } from "lucide-react";
 import { AuthPageShell } from "@/components/auth/AuthPageShell";
 import { LoginForm } from "@/components/forms/LoginForm";
 import { getAuthenticatedUserFromCookies } from "@/lib/auth";
@@ -33,7 +33,6 @@ export default async function LoginPage() {
   return (
     <AuthPageShell
       badgeLabel="Secure Notes"
-      badgeIcon={LogIn}
       title="Welcome back"
       description="Sign in to continue to your private notes dashboard, review priorities, and keep your workspace organized across every device."
       highlights={[

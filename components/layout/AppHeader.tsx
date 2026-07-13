@@ -7,6 +7,7 @@ import type { AuthUser } from "@/services/auth.service";
 import { useLogout } from "@/hooks/useLogout";
 import { CircleUserRound, LogOut, Menu } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
 import { appNavItems } from "@/components/layout/navigation";
 import { ThemeToggleSwitch } from "@/components/theme/ThemeToggleSwitch";
@@ -55,8 +56,8 @@ export function AppHeader({
             <Menu className="h-[22px] w-[22px] text-[color:var(--primary)]" />
           </button>
 
-          <div className={mobileHeaderTitleClassName}>
-            <p className="truncate">Secure Notes</p>
+          <div className={cn(mobileHeaderTitleClassName, "flex items-center justify-center")}>
+            <BrandLogo variant="mobile" className="w-[6.5rem] sm:w-[7rem]" />
           </div>
 
           <ThemeToggleSwitch className="scale-[0.82] sm:scale-90" />
@@ -80,9 +81,7 @@ export function AppHeader({
 
         <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-sm shadow-neutral-950/20">
-              <span className="text-sm font-semibold tracking-tight">SN</span>
-            </div>
+            <BrandLogo variant="header" />
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[0.95rem]">
                 Secure Notes
