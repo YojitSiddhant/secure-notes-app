@@ -58,7 +58,7 @@ export function AppMobileBottomNav() {
                   <Icon
                     className={cn(
                       mobileBottomNavIconClassName,
-                      active ? "h-6 w-6 scale-110 text-indigo-600" : "h-[22px] w-[22px] text-slate-400 group-hover:text-slate-600"
+                      active ? "h-6 w-6 scale-110 text-[color:var(--primary)]" : "h-[22px] w-[22px] text-[color:var(--muted-foreground)] group-hover:text-[color:var(--foreground)]"
                     )}
                   />
                   <span className="text-[0.9rem] font-medium tracking-tight">{item.label}</span>

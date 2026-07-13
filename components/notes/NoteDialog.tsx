@@ -174,7 +174,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
               Description
             </label>
             <div className="relative">
-              <TextCursorInput className="pointer-events-none absolute left-4 top-4 h-4 w-4 text-indigo-500" />
+              <TextCursorInput className="pointer-events-none absolute left-4 top-4 h-4 w-4 text-[color:var(--muted-foreground)]" />
               <textarea
                 id="note-description"
                 rows={8}
@@ -208,7 +208,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
               Priority
             </label>
             <div className="relative">
-              <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-indigo-500" />
+              <Lock className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[color:var(--muted-foreground)]" />
               <select
                 id="note-priority"
                 aria-invalid={errors.priority ? "true" : "false"}

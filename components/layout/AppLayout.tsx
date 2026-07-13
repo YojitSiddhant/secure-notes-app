@@ -27,9 +27,9 @@ export function AppLayout({
   return (
     <div className={cn("relative min-h-screen overflow-x-clip", className)}>
       <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-24 right-[-6rem] h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
-        <div className="absolute left-[-8rem] top-1/3 h-80 w-80 rounded-full bg-cyan-200/25 blur-3xl" />
-        <div className="absolute bottom-[-8rem] right-1/4 h-80 w-80 rounded-full bg-sky-200/20 blur-3xl" />
+        <div className="absolute -top-24 right-[-6rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute left-[-8rem] top-1/3 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute bottom-[-8rem] right-1/4 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
       </div>
 
       <AppSidebar

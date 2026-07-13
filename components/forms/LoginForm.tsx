@@ -226,7 +226,7 @@ export function LoginForm() {
 
         <button
           type="button"
-          className="text-sm font-medium text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+          className="text-sm font-medium text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-slate-500/20"
           aria-label="Forgot password placeholder"
         >
           Forgot Password?
@@ -253,7 +253,7 @@ export function LoginForm() {
         Don&apos;t have an account?{" "}
         <Link
           href="/signup"
-          className="font-semibold text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+          className="font-semibold text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-slate-500/20"
         >
           Sign Up
         </Link>

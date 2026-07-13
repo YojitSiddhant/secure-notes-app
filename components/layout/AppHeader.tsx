@@ -101,7 +101,7 @@ export function AppHeader({
                     key={item.label}
                     href={item.href}
                     className={cn(
-                      "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 xl:px-4",
+                      "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-slate-500/20 xl:px-4",
                       active
                         ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-indigo-950/15"
                         : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
@@ -151,7 +151,7 @@ export function AppHeader({
                   }
                 }}
                 disabled={logoutMutation.isPending}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
                 aria-label="Logout"
                 aria-busy={logoutMutation.isPending}
               >

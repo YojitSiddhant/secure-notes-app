@@ -56,7 +56,7 @@ export function AppSidebar({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border)] text-[color:var(--muted-foreground)] transition hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)] focus:outline-none focus:ring-4 focus:ring-indigo-500/10"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border)] text-[color:var(--muted-foreground)] transition hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
             aria-label="Close sidebar menu"
           >
             <span className="text-lg leading-none">×</span>
@@ -75,7 +75,7 @@ export function AppSidebar({
                     href={item.href}
                     onClick={() => onCloseMobile?.()}
                     className={cn(
-                      "group relative flex h-12 w-full items-center rounded-2xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/10",
+                      "group relative flex h-12 w-full items-center rounded-2xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500/20",
                       "gap-3 px-3 pl-4",
                       active
                         ? "bg-[color:var(--primary-soft)] text-[color:var(--primary)] shadow-sm shadow-slate-950/5"

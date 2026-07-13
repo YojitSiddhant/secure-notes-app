@@ -38,7 +38,7 @@ function DashboardContent() {
         : "Please try again.";
 
     return (
-      <ErrorState
+        <ErrorState
         icon={<Sparkles className="h-7 w-7" />}
         title="We couldn&apos;t load your dashboard."
         description={description}
@@ -46,7 +46,7 @@ function DashboardContent() {
             <button
               type="button"
               onClick={() => dashboardQuery.refetch()}
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-950/15 transition hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 sm:w-auto"
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-lg shadow-rose-950/10 transition hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 sm:w-auto"
             >
               Retry
             </button>

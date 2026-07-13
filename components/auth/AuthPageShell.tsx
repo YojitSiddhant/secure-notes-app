@@ -27,9 +27,9 @@ export function AuthPageShell({
   return (
     <main className="relative isolate min-h-[100dvh] overflow-x-clip bg-transparent px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-[-7rem] top-[-7rem] h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
-        <div className="absolute right-[-6rem] top-[8rem] h-80 w-80 rounded-full bg-cyan-200/25 blur-3xl" />
-        <div className="absolute bottom-[-8rem] left-1/3 h-80 w-80 rounded-full bg-sky-200/25 blur-3xl" />
+        <div className="absolute left-[-7rem] top-[-7rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute right-[-6rem] top-[8rem] h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute bottom-[-8rem] left-1/3 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
       </div>
 
       <div className="mx-auto grid min-h-[calc(100dvh-2rem)] w-full max-w-7xl items-center gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(20rem,28rem)] xl:gap-10">
