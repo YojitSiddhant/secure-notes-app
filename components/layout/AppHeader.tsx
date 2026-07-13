@@ -57,7 +57,7 @@ export function AppHeader({
           </button>
 
           <div className={cn(mobileHeaderTitleClassName, "flex items-center justify-center")}>
-            <BrandLogo variant="mobile" className="w-[6.5rem] sm:w-[7rem]" />
+            <BrandLogo variant="mobile" />
           </div>
 
           <ThemeToggleSwitch className="scale-[0.82] sm:scale-90" />
