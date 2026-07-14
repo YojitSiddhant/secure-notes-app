@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { BrandLogo } from "@/components/shared/BrandLogo";
-import { ThemeToggleSwitch } from "@/components/theme/ThemeToggleSwitch";
 
 type AuthHighlight = {
   title: string;
@@ -26,10 +25,6 @@ export function AuthPageShell({
 }: AuthPageShellProps) {
   return (
     <main className="relative isolate min-h-[100dvh] overflow-x-clip bg-transparent px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
-      <div className="absolute right-4 top-4 z-10 sm:right-6 sm:top-6 lg:right-8 lg:top-8">
-        <ThemeToggleSwitch />
-      </div>
-
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[-7rem] top-[-7rem] h-72 w-72 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute right-[-6rem] top-[8rem] h-80 w-80 rounded-full bg-white/5 blur-3xl" />

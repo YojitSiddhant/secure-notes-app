@@ -10,7 +10,6 @@ import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
 import { appNavItems } from "@/components/layout/navigation";
-import { ThemeToggleSwitch } from "@/components/theme/ThemeToggleSwitch";
 import {
   mobileHeaderActionButtonClassName,
   mobileHeaderShellClassName,
@@ -59,8 +58,6 @@ export function AppHeader({
           <div className={cn(mobileHeaderTitleClassName, "flex items-center justify-center")}>
             <BrandLogo variant="mobile" />
           </div>
-
-          <ThemeToggleSwitch className="scale-[0.82] sm:scale-90" />
 
           <button
             ref={profileTriggerRef}
@@ -119,8 +116,6 @@ export function AppHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            <ThemeToggleSwitch className="scale-90 lg:scale-100" />
-
             <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 shadow-sm">
               {isUserLoading ? (
                 <>

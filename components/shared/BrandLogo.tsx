@@ -24,7 +24,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-full border border-[color:var(--border)] bg-white shadow-sm dark:bg-[color:var(--surface-elevated)] dark:shadow-md dark:shadow-black/30",
+        "relative overflow-hidden rounded-full border border-[color:var(--border)] bg-white shadow-sm",
         variantClasses[variant],
         className
       )}
@@ -35,7 +35,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
         fill
         priority
         sizes={variantSizes[variant]}
-        className="object-contain p-1.5 dark:mix-blend-multiply dark:brightness-105 dark:contrast-105 dark:saturate-125"
+        className="object-contain p-1.5"
       />
     </div>
   );
