@@ -112,6 +112,17 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
   const dominantInsight = insights.reduce((winner, current) =>
     current.value > winner.value ? current : winner
   );
+  const values = [stats.highPriority, stats.mediumPriority, stats.lowPriority];
+  const spread = Math.max(...values) - Math.min(...values);
+  const balanceScore = totalNotes === 0 ? 0 : Math.max(35, 100 - spread * 22);
+  const nextCue =
+    totalNotes === 0
+      ? "Create a few notes and this section will start highlighting your workflow."
+      : dominantInsight.key === "highPriority"
+        ? "Clear the urgent lane first so the rest of the workspace can settle."
+        : dominantInsight.key === "mediumPriority"
+          ? "Batch the middle lane into a focused review block."
+          : "Use low-priority notes as your idea parking lot and keep moving.";
 
   const chartGradient =
     totalNotes > 0
@@ -167,7 +178,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
         </div>
 
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1.2fr)_minmax(19rem,0.8fr)]">
-          <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6">
+          <div className="flex h-full flex-col rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6">
             <div className="grid gap-6 lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] lg:items-center">
               <div className="relative mx-auto flex w-full max-w-[16rem] items-center justify-center">
                 <div className="absolute inset-0 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]" />
@@ -188,70 +199,128 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
                     <p className="mt-1 text-xs font-medium text-[color:var(--muted-foreground)]">
                       {totalNotes > 0 ? `${dominantInsight.label} is leading` : "Capture your first note"}
                     </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.14)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                  Balance score
+                </p>
+                <div className="mt-3 flex items-end justify-between gap-3">
+                  <div>
+                    <p className="text-3xl font-semibold tracking-tight text-[color:var(--foreground)]">
+                      {balanceScore}
+                    </p>
+                    <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">
+                      {balanceScore >= 85
+                        ? "Very even spread"
+                        : balanceScore >= 65
+                          ? "Moderately mixed"
+                          : "Heavily skewed"}
+                    </p>
+                  </div>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
+                    <BarChart3 className="h-5 w-5" />
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.18)]">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-                        Priority mix
-                      </p>
-                      <p className="mt-1 text-sm font-medium text-[color:var(--foreground)]">
-                        How your workspace is split today
-                      </p>
-                    </div>
-                    <Sparkles className="h-5 w-5 text-[color:var(--primary)]" />
+              <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.14)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                  Leading lane
+                </p>
+                <div className="mt-3 flex items-end justify-between gap-3">
+                  <div>
+                    <p className={cn("text-3xl font-semibold tracking-tight", dominantInsight.accentClassName)}>
+                      {dominantInsight.label}
+                    </p>
+                    <p className="mt-1 text-sm text-[color:var(--muted-foreground)]">
+                      {dominantInsight.value} note{dominantInsight.value === 1 ? "" : "s"}
+                    </p>
                   </div>
+                  <div
+                    className="h-12 w-12 rounded-2xl ring-1 ring-inset"
+                    style={{
+                      backgroundColor: dominantInsight.color,
+                      boxShadow: `0 10px 24px -16px ${dominantInsight.color}`,
+                      borderColor: dominantInsight.color,
+                    }}
+                  />
+                </div>
+              </div>
 
-                  <div className="mt-4 space-y-3">
-                    {insights.map((item) => {
-                      const percent = formatPercent(item.value, totalNotes);
+              <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.14)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                  Next cue
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[color:var(--foreground)]">
+                  {nextCue}
+                </p>
+              </div>
+            </div>
 
-                      return (
-                        <div key={item.key} className="space-y-2">
-                          <div className="flex items-center justify-between gap-3 text-sm">
-                            <div className="flex items-center gap-2">
-                              <span
-                                className="h-2.5 w-2.5 rounded-full"
-                                style={{ backgroundColor: item.color }}
-                              />
-                              <span className="font-medium text-[color:var(--foreground)]">
-                                {item.label}
-                              </span>
-                            </div>
-                            <span className="tabular-nums text-[color:var(--muted-foreground)]">
-                              {item.value} note{item.value === 1 ? "" : "s"} · {percent}%
+            <div className="mt-6 space-y-4">
+              <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.18)]">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                      Priority mix
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-[color:var(--foreground)]">
+                      How your workspace is split today
+                    </p>
+                  </div>
+                  <Sparkles className="h-5 w-5 text-[color:var(--primary)]" />
+                </div>
+
+                <div className="mt-4 space-y-3">
+                  {insights.map((item) => {
+                    const percent = formatPercent(item.value, totalNotes);
+
+                    return (
+                      <div key={item.key} className="space-y-2">
+                        <div className="flex items-center justify-between gap-3 text-sm">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className="h-2.5 w-2.5 rounded-full"
+                              style={{ backgroundColor: item.color }}
+                            />
+                            <span className="font-medium text-[color:var(--foreground)]">
+                              {item.label}
                             </span>
                           </div>
-                          <div className="h-2 overflow-hidden rounded-full bg-[color:var(--surface-muted)]">
-                            <div
-                              className="h-full rounded-full transition-all duration-500"
-                              style={{
-                                width: `${percent}%`,
-                                background: `linear-gradient(90deg, ${item.softColor}, ${item.color})`,
-                              }}
-                            />
-                          </div>
+                          <span className="tabular-nums text-[color:var(--muted-foreground)]">
+                            {item.value} note{item.value === 1 ? "" : "s"} · {percent}%
+                          </span>
                         </div>
-                      );
-                    })}
-                  </div>
+                        <div className="h-2 overflow-hidden rounded-full bg-[color:var(--surface-muted)]">
+                          <div
+                            className="h-full rounded-full transition-all duration-500"
+                            style={{
+                              width: `${percent}%`,
+                              background: `linear-gradient(90deg, ${item.softColor}, ${item.color})`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
 
-                <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.18)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
-                    Workspace signal
-                  </p>
-                  <p className="mt-2 text-lg font-semibold tracking-tight text-[color:var(--foreground)]">
-                    {signal.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
-                    {signal.description}
-                  </p>
-                </div>
+              <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.18)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+                  Workspace signal
+                </p>
+                <p className="mt-2 text-lg font-semibold tracking-tight text-[color:var(--foreground)]">
+                  {signal.title}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
+                  {signal.description}
+                </p>
               </div>
             </div>
           </div>
