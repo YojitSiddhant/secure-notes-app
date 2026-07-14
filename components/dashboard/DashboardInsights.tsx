@@ -371,7 +371,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
               </div>
             </div>
 
-            <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:p-6">
+            <div className="mt-1 rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_18px_50px_-36px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:mt-2 sm:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
                 Workspace signal
               </p>
