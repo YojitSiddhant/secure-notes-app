@@ -13,7 +13,6 @@ import { appNavItems } from "@/components/layout/navigation";
 import {
   mobileHeaderActionButtonClassName,
   mobileHeaderShellClassName,
-  mobileHeaderTitleClassName,
 } from "@/components/ui/styles";
 
 type AppHeaderProps = {
@@ -54,10 +53,6 @@ export function AppHeader({
           >
             <Menu className="h-[22px] w-[22px] text-[color:var(--primary)]" />
           </button>
-
-          <div className={cn(mobileHeaderTitleClassName, "flex items-center justify-center")}>
-            <BrandLogo variant="mobile" />
-          </div>
 
           <button
             ref={profileTriggerRef}

@@ -45,7 +45,7 @@ export const badgeClassName =
   "inline-flex min-h-8 items-center rounded-full px-3 py-1 text-xs font-semibold tracking-tight ring-1 ring-inset transition-colors duration-200";
 
 export const mobileHeaderShellClassName =
-  "flex h-14 items-center gap-2 px-3 py-2.5";
+  "flex h-14 items-center justify-between gap-2 px-3 py-2.5";
 
 export const mobileHeaderTitleClassName =
   "flex-1 min-w-0 px-2 text-center text-[0.98rem] font-semibold tracking-tight text-[color:var(--foreground)]";
