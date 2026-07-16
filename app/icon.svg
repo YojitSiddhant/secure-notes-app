@@ -1,0 +1,35 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="96" y1="76" x2="432" y2="436" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="150" y1="140" x2="362" y2="368" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#4F46E5"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="232" fill="url(#bg)" stroke="#E2E8F0" stroke-width="12"/>
+  <circle cx="256" cy="256" r="170" fill="#EEF2FF" opacity="0.75"/>
+  <path
+    d="M170 336L198 260L334 124C344 114 360 114 370 124L388 142C398 152 398 168 388 178L252 314L170 336Z"
+    fill="url(#ink)"
+  />
+  <path
+    d="M220 300L252 332"
+    stroke="#FFFFFF"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+  <path
+    d="M344 130L382 168"
+    stroke="#FFFFFF"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+  <path
+    d="M166 338L152 360C150 364 152 368 156 368L180 366L170 336L166 338Z"
+    fill="#1E293B"
+    opacity="0.16"
+  />
+</svg>
