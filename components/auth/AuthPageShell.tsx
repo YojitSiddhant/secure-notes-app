@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Atom } from "lucide-react";
+import { PencilLine } from "lucide-react";
 
 type AuthPageShellProps = {
   children: ReactNode;
@@ -20,7 +20,7 @@ export function AuthPageShell({
         <section className="w-full">
           <div className="mb-4 flex justify-center sm:mb-5">
             <div className="flex h-24 w-24 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.24)] backdrop-blur-xl sm:h-28 sm:w-28 sm:p-5">
-              <Atom className="h-full w-full text-[color:var(--primary)]" strokeWidth={1.8} />
+              <PencilLine className="h-full w-full text-[color:var(--primary)]" strokeWidth={1.8} />
             </div>
           </div>
 
