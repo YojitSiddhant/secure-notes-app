@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { PencilLine } from "lucide-react";
+import { BrandLogo } from "@/components/shared/BrandLogo";
 
 type AuthPageShellProps = {
   children: ReactNode;
@@ -19,9 +19,7 @@ export function AuthPageShell({
       <div className="mx-auto flex min-h-[calc(100dvh-2rem)] w-full max-w-xl items-center">
         <section className="w-full">
           <div className="mb-4 flex justify-center sm:mb-5">
-            <div className="flex h-24 w-24 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-30px_rgba(15,23,42,0.24)] backdrop-blur-xl sm:h-28 sm:w-28 sm:p-5">
-              <PencilLine className="h-full w-full text-[color:var(--primary)]" strokeWidth={1.8} />
-            </div>
+            <BrandLogo variant="auth" />
           </div>
 
           <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_30px_90px_-52px_rgba(15,23,42,0.24)] backdrop-blur-xl sm:p-6 lg:p-8">
