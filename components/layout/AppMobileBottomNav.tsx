@@ -32,7 +32,7 @@ export function AppMobileBottomNav() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-20 md:hidden">
-      <div className="mx-auto w-full max-w-2xl px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2">
+      <div className="mx-auto w-full max-w-[24rem] px-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2">
         <nav aria-label="Primary mobile" className={mobileBottomNavShellClassName}>
           <div className="grid grid-cols-2 gap-2">
             {mobileNavItems.map((item) => {
@@ -58,7 +58,9 @@ export function AppMobileBottomNav() {
                   <Icon
                     className={cn(
                       mobileBottomNavIconClassName,
-                      active ? "h-6 w-6 scale-110 text-[color:var(--primary)]" : "h-[22px] w-[22px] text-[color:var(--muted-foreground)] group-hover:text-[color:var(--foreground)]"
+                      active
+                        ? "h-6 w-6 scale-110 text-[color:var(--primary)]"
+                        : "h-[22px] w-[22px] text-[color:var(--muted-foreground)] group-hover:text-[color:var(--foreground)]"
                     )}
                   />
                   <span className="text-[0.9rem] font-medium tracking-tight">{item.label}</span>
