@@ -45,13 +45,13 @@ export const badgeClassName =
   "inline-flex min-h-8 items-center rounded-full px-3 py-1 text-xs font-semibold tracking-tight ring-1 ring-inset transition-colors duration-200";
 
 export const mobileHeaderShellClassName =
-  "flex h-14 items-center justify-between gap-2 px-3 py-2.5";
+  "flex h-14 items-center justify-between gap-2 px-3 py-2.5 landscape:h-12 landscape:px-2.5 landscape:py-2";
 
 export const mobileHeaderTitleClassName =
   "flex-1 min-w-0 px-2 text-center text-[0.98rem] font-semibold tracking-tight text-[color:var(--foreground)]";
 
 export const mobileHeaderActionButtonClassName =
-  "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--foreground)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20";
+  "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--foreground)] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 landscape:h-10 landscape:w-10";
 
 export const mobileBottomNavShellClassName =
   "overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-2.5 py-2.5 shadow-[0_18px_60px_-30px_rgba(15,23,42,0.28)] backdrop-blur-2xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]";

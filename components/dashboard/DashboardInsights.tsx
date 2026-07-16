@@ -92,7 +92,12 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
           </div>
 
           <div className="mt-6">
-            <div className="grid min-h-72 grid-cols-3 items-end gap-3 rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:gap-4 sm:p-5">
+            <div
+              className="grid min-h-72 items-end gap-3 rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:gap-4 sm:p-5"
+              style={{
+                gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr))",
+              }}
+            >
               {insights.map((item) => {
                 const percent = formatPercent(item.value, totalNotes);
                 const heightPercent = maxValue === 0 ? 0 : Math.max(8, (item.value / maxValue) * 100);

@@ -51,7 +51,7 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
     <div
       className="grid gap-4 sm:gap-5"
       style={{
-        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 14rem), 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 13rem), 1fr))",
       }}
     >
       {statCards.map(({ key, label, icon: Icon, labelClass, valueClass, iconClass }) => (

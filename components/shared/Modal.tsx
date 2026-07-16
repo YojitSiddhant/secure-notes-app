@@ -54,7 +54,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto px-3 py-3 sm:items-center sm:px-4 sm:py-6"
+      className="fixed inset-0 z-[70] flex items-start justify-center overflow-y-auto px-2 py-2 sm:items-center sm:px-4 sm:py-6 landscape:items-start landscape:px-3 landscape:py-3"
       role="presentation"
     >
       <button
@@ -69,11 +69,11 @@ export function Modal({
         aria-labelledby="modal-title"
         aria-describedby={description ? "modal-description" : undefined}
         className={cn(
-          "relative flex w-full max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:rounded-[2rem]",
+          "relative flex w-full max-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-[1.25rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:max-h-[calc(100dvh-3rem)] sm:rounded-[2rem]",
           maxWidthClassName
         )}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-4 sm:px-6 sm:py-5">
+        <div className="flex items-start justify-between gap-3 border-b border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-4 sm:px-6 sm:py-5">
           <div className="min-w-0">
             <h2
               id="modal-title"
@@ -99,7 +99,7 @@ export function Modal({
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">{children}</div>
+        <div className="flex-1 overflow-y-auto px-4 py-4 sm:px-6 sm:py-6">{children}</div>
 
         {footer ? (
           <div className="border-t border-[color:var(--border)] px-4 py-4 sm:px-6">
