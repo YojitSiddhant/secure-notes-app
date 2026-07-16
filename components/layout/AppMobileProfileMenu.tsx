@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { LogOut, UserRound } from "lucide-react";
+import { LogOut, UserRound, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { Modal } from "@/components/shared/Modal";
 import type { AuthUser } from "@/services/auth.service";
@@ -143,25 +143,36 @@ export function AppMobileProfileMenu({
           className="flex w-full max-w-md max-h-[calc(100dvh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_30px_90px_-48px_rgba(15,23,42,0.42)] backdrop-blur-2xl"
         >
           <div className="border-b border-[color:var(--border)] px-4 py-4">
-            <div className="flex min-w-0 items-center gap-3">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)] ring-1 ring-inset ring-[color:var(--primary-border)]">
-                {isUserLoading ? (
-                  <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary-soft)]" />
-                ) : (
-                  <UserRound className="h-6 w-6" />
-                )}
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)] ring-1 ring-inset ring-[color:var(--primary-border)]">
+                  {isUserLoading ? (
+                    <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary-soft)]" />
+                  ) : (
+                    <UserRound className="h-6 w-6" />
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <h2
+                    id="mobile-profile-menu-title"
+                    className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)]"
+                  >
+                    {isUserLoading ? "Loading profile" : user?.name ?? "Workspace Member"}
+                  </h2>
+                  <p className="truncate text-sm text-[color:var(--muted-foreground)]">
+                    {isUserLoading ? "Loading email" : user?.email ?? " "}
+                  </p>
+                </div>
               </div>
-              <div className="min-w-0">
-                <h2
-                  id="mobile-profile-menu-title"
-                  className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)]"
-                >
-                  {isUserLoading ? "Loading profile" : user?.name ?? "Workspace Member"}
-                </h2>
-                <p className="truncate text-sm text-[color:var(--muted-foreground)]">
-                  {isUserLoading ? "Loading email" : user?.email ?? " "}
-                </p>
-              </div>
+
+              <button
+                type="button"
+                onClick={handleClose}
+                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--muted-foreground)] transition duration-150 ease-out hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
+                aria-label="Close profile menu"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
           </div>
 
