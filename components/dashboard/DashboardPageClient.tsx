@@ -5,7 +5,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import { ProtectedAppShell } from "@/components/auth/ProtectedAppShell";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
-import { DashboardInsights } from "@/components/dashboard/DashboardInsights";
 import { DashboardStatCards } from "@/components/dashboard/DashboardStatCards";
 import { ErrorState } from "@/components/shared/FeedbackState";
 import { NoteDialog } from "@/components/notes/NoteDialog";
@@ -98,8 +97,6 @@ function DashboardContent() {
       </section>
 
       <DashboardStatCards stats={stats} />
-
-      <DashboardInsights stats={stats} />
 
       <NoteDialog
         open={isCreateOpen}
