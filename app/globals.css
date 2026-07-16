@@ -81,7 +81,7 @@ button {
 @keyframes ui-pop-in {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(4px) scale(0.992);
   }
 
   to {
@@ -93,7 +93,7 @@ button {
 @keyframes ui-mobile-route-in {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.992);
+    transform: translateY(6px) scale(0.996);
   }
 
   to {

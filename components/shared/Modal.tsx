@@ -60,7 +60,7 @@ export function Modal({
       <button
         type="button"
         aria-label="Close dialog overlay"
-        className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm motion-safe:animate-[ui-fade-in_160ms_ease-out]"
+        className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm motion-safe:animate-[ui-fade-in_120ms_ease-out]"
         onClick={onClose}
       />
       <section
@@ -69,7 +69,7 @@ export function Modal({
         aria-labelledby="modal-title"
         aria-describedby={description ? "modal-description" : undefined}
         className={cn(
-          "relative flex w-full max-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-[1.25rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_180ms_ease-out] sm:max-h-[calc(100dvh-3rem)] sm:rounded-[2rem]",
+          "relative flex w-full max-h-[calc(100dvh-1rem)] flex-col overflow-hidden rounded-[1.25rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] shadow-[0_40px_120px_-52px_rgba(15,23,42,0.42)] motion-safe:animate-[ui-pop-in_160ms_ease-out] sm:max-h-[calc(100dvh-3rem)] sm:rounded-[2rem]",
           maxWidthClassName
         )}
       >

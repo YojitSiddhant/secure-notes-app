@@ -26,7 +26,7 @@ export function AppSidebar({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-sm transition-opacity lg:hidden",
+          "fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-sm transition-opacity duration-150 ease-out lg:hidden",
           isMobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden="true"
@@ -35,7 +35,7 @@ export function AppSidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-300 lg:hidden",
+          "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-180 ease-out lg:hidden",
           isMobileOpen ? "pointer-events-auto translate-x-0" : "pointer-events-none -translate-x-full",
           className
         )}
@@ -74,7 +74,7 @@ export function AppSidebar({
                     href={item.href}
                     onClick={() => onCloseMobile?.()}
                     className={cn(
-                      "group relative flex h-12 w-full items-center rounded-2xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-slate-500/20",
+                      "group relative flex h-12 w-full items-center rounded-2xl text-sm font-medium transition-all duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-slate-500/20",
                       "gap-3 px-3 pl-4",
                       active
                         ? "bg-[color:var(--primary-soft)] text-[color:var(--primary)] shadow-sm shadow-slate-950/5"
@@ -83,7 +83,7 @@ export function AppSidebar({
                   >
                     <Icon
                       className={cn(
-                        "h-5 w-5 shrink-0 transition",
+                        "h-5 w-5 shrink-0 transition duration-150 ease-out",
                         active ? "text-[color:var(--primary)]" : "text-[color:var(--muted-foreground)] group-hover:text-[color:var(--foreground)]"
                       )}
                     />

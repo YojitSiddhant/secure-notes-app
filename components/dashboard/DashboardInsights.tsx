@@ -119,7 +119,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
                     <div className="relative flex flex-1 items-end justify-center rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(148,163,184,0.06),rgba(148,163,184,0.02))] px-2 py-3">
                       <div className="absolute inset-x-3 bottom-3 h-px bg-[color:var(--border)]" />
                       <div
-                        className="relative w-full max-w-20 rounded-[1rem] border border-white/60 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.32)] transition-all duration-500"
+                        className="relative w-full max-w-20 rounded-[1rem] border border-white/60 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.32)] transition-all duration-180 ease-out"
                         style={{
                           height: `${heightPercent}%`,
                           minHeight: item.value === 0 ? "0.5rem" : "1.25rem",

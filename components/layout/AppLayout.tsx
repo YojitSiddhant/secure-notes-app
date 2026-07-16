@@ -47,7 +47,7 @@ export function AppLayout({
         <main className="flex-1 overflow-y-auto">
           <div
             key={pathname}
-            className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col gap-4 px-3 py-3 pb-[calc(9rem+env(safe-area-inset-bottom))] motion-safe:max-md:animate-[ui-mobile-route-in_240ms_ease-out] sm:gap-6 sm:px-6 sm:py-6 landscape:pb-6 md:pb-8 lg:px-8 lg:py-8"
+            className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col gap-4 px-3 py-3 pb-[calc(9rem+env(safe-area-inset-bottom))] motion-safe:max-md:animate-[ui-mobile-route-in_180ms_ease-out] sm:gap-6 sm:px-6 sm:py-6 landscape:pb-6 md:pb-8 lg:px-8 lg:py-8"
           >
             {children}
           </div>

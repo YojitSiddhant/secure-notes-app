@@ -44,7 +44,7 @@ export function AppMobileProfileMenu({
 
     const timeout = window.setTimeout(() => {
       setIsRendered(false);
-    }, 240);
+    }, 180);
 
     return () => window.clearTimeout(timeout);
   }, [isRendered, open]);
@@ -121,7 +121,7 @@ export function AppMobileProfileMenu({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-[65] h-[100dvh] w-[100dvw] bg-slate-950/40 backdrop-blur-sm transition-opacity duration-200 md:hidden",
+          "fixed inset-0 z-[65] h-[100dvh] w-[100dvw] bg-slate-950/40 backdrop-blur-sm transition-opacity duration-150 ease-out md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden="true"
@@ -131,7 +131,7 @@ export function AppMobileProfileMenu({
       <div
         className={cn(
           "fixed inset-0 z-[66] flex items-center justify-center px-3 py-3 md:hidden",
-          "transition-transform duration-300",
+          "transition-transform duration-180 ease-out",
           open ? "translate-y-0" : "pointer-events-none translate-y-full"
         )}
         role="presentation"
@@ -170,7 +170,7 @@ export function AppMobileProfileMenu({
               ref={logoutButtonRef}
               type="button"
               onClick={() => setLogoutConfirmOpen(true)}
-              className="flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-[color:var(--danger)] transition-all duration-200 hover:bg-[color:var(--danger-soft)] focus:outline-none focus:ring-4 focus:ring-rose-500/10 active:scale-[0.99]"
+              className="flex min-h-12 w-full items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium text-[color:var(--danger)] transition-all duration-150 ease-out hover:bg-[color:var(--danger-soft)] focus:outline-none focus:ring-4 focus:ring-rose-500/10 active:scale-[0.99]"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[color:var(--danger-soft)] text-[color:var(--danger)]">
                 <LogOut className="h-5 w-5" />
@@ -192,7 +192,7 @@ export function AppMobileProfileMenu({
             <button
               type="button"
               onClick={() => setLogoutConfirmOpen(false)}
-              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-5 py-2.5 text-sm font-semibold text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-5 py-2.5 text-sm font-semibold text-[color:var(--foreground)] transition duration-150 ease-out hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
             >
               Cancel
             </button>
@@ -200,7 +200,7 @@ export function AppMobileProfileMenu({
               type="button"
               onClick={handleLogout}
               disabled={isLoggingOut}
-              className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-[color:var(--danger)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-950/15 transition hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-[color:var(--danger)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-950/15 transition duration-150 ease-out hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isLoggingOut ? "Logging out" : "Logout"}
             </button>
