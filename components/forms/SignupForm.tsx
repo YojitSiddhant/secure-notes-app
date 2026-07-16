@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, Lock, Mail, UserRound } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -340,13 +341,12 @@ export function SignupForm() {
 
       <p className="text-center text-sm text-[color:var(--muted-foreground)]">
         Already have an account?{" "}
-        <button
-          type="button"
+        <Link
+          href="/login"
           className="font-semibold text-[color:var(--primary)] underline-offset-4 transition hover:underline focus:outline-none focus:ring-4 focus:ring-slate-500/20"
-          aria-label="Sign in placeholder"
         >
           Sign In
-        </button>
+        </Link>
       </p>
     </form>
   );
