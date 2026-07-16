@@ -1,9 +1,7 @@
-import { BarChart3, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { DashboardStats } from "@/services/notes.service";
 import {
   helperTextClassName,
-  sectionEyebrowClassName,
   sectionShellClassName,
   sectionTitleClassName,
 } from "@/components/ui/styles";
@@ -63,9 +61,6 @@ function formatPercent(value: number, total: number) {
 export function DashboardInsights({ stats }: DashboardInsightsProps) {
   const totalNotes = stats.totalNotes;
   const insights = priorityInsights(stats);
-  const dominantInsight = insights.reduce((winner, current) =>
-    current.value > winner.value ? current : winner
-  );
 
   return (
     <section className={cn(sectionShellClassName, "relative overflow-hidden p-5 sm:p-6")}>
@@ -75,29 +70,12 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
       </div>
 
       <div className="relative space-y-4">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="space-y-2">
-            <div className={sectionEyebrowClassName}>
-              <BarChart3 className="h-3.5 w-3.5" />
-              Priority bars
-            </div>
-            <div className="space-y-2">
-              <h2 className={sectionTitleClassName}>Where your notes are concentrated</h2>
-              <p className={helperTextClassName}>
-                A clean bar-only view of urgency, balance, and momentum so you can scan the
-                workspace in seconds.
-              </p>
-            </div>
-          </div>
-
-          <div className="inline-flex items-center gap-2 self-start rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] shadow-sm">
-            <TrendingUp className="h-4 w-4 text-[color:var(--primary)]" />
-            <span>
-              {totalNotes === 0
-                ? "No notes yet"
-                : `${dominantInsight.label} leads with ${formatPercent(dominantInsight.value, totalNotes)}%`}
-            </span>
-          </div>
+        <div className="space-y-2">
+          <h2 className={sectionTitleClassName}>Where your notes are concentrated</h2>
+          <p className={helperTextClassName}>
+            A clean bar-only view of urgency, balance, and momentum so you can scan the workspace
+            in seconds.
+          </p>
         </div>
 
         <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6">
@@ -109,10 +87,6 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
               <p className="mt-1 text-sm font-medium text-[color:var(--foreground)]">
                 Priority distribution by note count
               </p>
-            </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-1.5 text-xs font-semibold text-[color:var(--muted-foreground)]">
-              <BarChart3 className="h-3.5 w-3.5 text-[color:var(--primary)]" />
-              {totalNotes.toLocaleString()} total
             </div>
           </div>
 
