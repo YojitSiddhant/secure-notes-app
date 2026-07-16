@@ -61,6 +61,7 @@ function formatPercent(value: number, total: number) {
 export function DashboardInsights({ stats }: DashboardInsightsProps) {
   const totalNotes = stats.totalNotes;
   const insights = priorityInsights(stats);
+  const maxValue = Math.max(0, ...insights.map((item) => item.value));
 
   return (
     <section className={cn(sectionShellClassName, "relative overflow-hidden p-5 sm:p-6")}>
@@ -90,49 +91,62 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
             </div>
           </div>
 
-          <div className="mt-6 space-y-5">
-            {insights.map((item) => {
-              const percent = formatPercent(item.value, totalNotes);
+          <div className="mt-6">
+            <div className="grid min-h-72 grid-cols-3 items-end gap-3 rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:gap-4 sm:p-5">
+              {insights.map((item) => {
+                const percent = formatPercent(item.value, totalNotes);
+                const heightPercent = maxValue === 0 ? 0 : Math.max(8, (item.value / maxValue) * 100);
 
-              return (
-                <div key={item.key} className="space-y-2">
-                  <div className="flex items-center justify-between gap-3 text-sm">
-                    <div className="flex items-center gap-2">
+                return (
+                  <div key={item.key} className="flex h-full flex-col justify-end gap-3">
+                    <div className="flex min-h-8 items-center justify-center">
                       <span
-                        className="h-2.5 w-2.5 rounded-full"
-                        style={{ backgroundColor: item.color }}
-                      />
-                      <span className={cn("font-medium", item.accentClassName)}>{item.label}</span>
+                        className={cn(
+                          "rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ring-inset",
+                          item.accentClassName,
+                          "bg-[color:var(--surface-elevated)] ring-[color:var(--border)]"
+                        )}
+                      >
+                        {item.label}
+                      </span>
                     </div>
-                    <span className="tabular-nums text-[color:var(--muted-foreground)]">
-                      {item.value} note{item.value === 1 ? "" : "s"} · {percent}%
-                    </span>
-                  </div>
 
-                  <div className="h-4 overflow-hidden rounded-full bg-[color:var(--surface-muted)]">
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{
-                        width: `${percent}%`,
-                        background: `linear-gradient(90deg, ${item.softColor}, ${item.color})`,
-                      }}
-                    />
+                    <div className="relative flex flex-1 items-end justify-center rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(148,163,184,0.06),rgba(148,163,184,0.02))] px-2 py-3">
+                      <div className="absolute inset-x-3 bottom-3 h-px bg-[color:var(--border)]" />
+                      <div
+                        className="relative w-full max-w-20 rounded-[1rem] border border-white/60 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.32)] transition-all duration-500"
+                        style={{
+                          height: `${heightPercent}%`,
+                          minHeight: item.value === 0 ? "0.5rem" : "1.25rem",
+                          background: `linear-gradient(180deg, ${item.softColor}, ${item.color})`,
+                        }}
+                      />
+                    </div>
+
+                    <div className="space-y-1 text-center">
+                      <p className="text-sm font-semibold tabular-nums text-[color:var(--foreground)]">
+                        {item.value}
+                      </p>
+                      <p className="text-xs text-[color:var(--muted-foreground)]">
+                        {percent}% of total
+                      </p>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           <div className="mt-5 rounded-[1.25rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4">
             <p className="text-sm font-medium text-[color:var(--foreground)]">
               {totalNotes === 0
-                ? "Add notes to see the bars grow."
-                : "The longest bar shows the current priority concentration."}
+                ? "Add notes to see the columns grow."
+                : "The tallest column shows the current priority concentration."}
             </p>
             <p className="mt-1 text-sm leading-6 text-[color:var(--muted-foreground)]">
               {totalNotes === 0
                 ? "Once you capture a few notes, the bar chart will reflect how your workspace is split."
-                : "This view keeps the focus on bar lengths only, so the distribution stays easy to read at a glance."}
+                : "This view keeps the focus on vertical bars only, so the distribution stays easy to read at a glance."}
             </p>
           </div>
         </div>
