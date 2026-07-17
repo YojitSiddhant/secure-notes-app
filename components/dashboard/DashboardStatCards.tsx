@@ -62,8 +62,8 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
           )}
           style={{ animationDelay: `${index * 90}ms` }}
         >
-          <div className="flex w-full items-center justify-between gap-4">
-            <div className="min-w-0 space-y-1">
+          <div className="grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
+            <div className="min-w-0 space-y-1 text-center">
               <p
                 className={cn(
                   "whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--muted-foreground)] sm:text-xs",
@@ -74,7 +74,7 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
               </p>
               <p
                 className={cn(
-                  "text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-[color:var(--foreground)] sm:text-[2.75rem]",
+                  "mx-auto text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-[color:var(--foreground)] sm:text-[2.75rem]",
                   valueClass
                 )}
               >
