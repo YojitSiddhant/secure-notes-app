@@ -54,7 +54,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto px-2 py-2 sm:px-4 sm:py-6 landscape:items-start landscape:px-3 landscape:py-3"
+      className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto px-2 py-2 sm:px-4 sm:py-6"
       role="presentation"
     >
       <button
