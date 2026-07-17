@@ -3,7 +3,7 @@
 :root {
   --background: #f5f7fb;
   --foreground: #0f172a;
-  --muted-foreground: #64748b;
+  --muted-foreground: #334155;
   --surface: rgba(255, 255, 255, 0.94);
   --surface-elevated: rgba(255, 255, 255, 0.9);
   --surface-muted: #f8fafc;
@@ -179,7 +179,7 @@ button {
 }
 
 ::selection {
-    background: rgba(37, 99, 235, 0.16);
+  background: rgba(37, 99, 235, 0.16);
   color: #0f172a;
 }
 

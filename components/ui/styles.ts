@@ -8,14 +8,14 @@ export const pageTitleClassName =
   "text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[2.4rem] lg:text-[2.65rem]";
 
 export const pageSubtitleClassName =
-  "max-w-3xl text-sm leading-6 text-[color:var(--muted-foreground)] sm:text-base";
+  "max-w-3xl text-sm leading-7 text-[color:var(--muted-foreground)] sm:text-base";
 
 export const sectionTitleClassName =
   "text-2xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[1.75rem]";
 
-export const helperTextClassName = "text-sm leading-6 text-[color:var(--muted-foreground)]";
+export const helperTextClassName = "text-sm leading-7 text-[color:var(--muted-foreground)]";
 
-export const labelClassName = "text-sm font-medium text-[color:var(--foreground)]";
+export const labelClassName = "text-sm font-semibold text-[color:var(--foreground)]";
 
 export const primaryButtonClassName =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-lg shadow-blue-950/20 transition-all duration-150 ease-out hover:-translate-y-0.5 hover:opacity-95 hover:shadow-xl hover:shadow-blue-950/25 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0";
