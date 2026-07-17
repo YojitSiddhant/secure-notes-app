@@ -116,21 +116,42 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
   return (
     <Modal
       open={open}
-      title={isEditing ? "Edit Note" : "Create Note"}
+      title={isEditing ? "Edit note" : "Create note"}
       description={
         isEditing
           ? "Update the title, description, or priority of this note."
           : "Capture a new thought, task, or reminder in your workspace."
       }
       onClose={() => onOpenChange(false)}
-      maxWidthClassName="max-w-2xl lg:max-w-3xl"
+      maxWidthClassName="max-w-3xl"
     >
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="grid gap-4 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)]">
+          <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,250,255,0.94))] p-4 shadow-[0_18px_42px_-32px_rgba(15,23,42,0.2)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+              Secure note editor
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
+              Everything stays in the current workspace flow. Use clear titles and concise details
+              so the note is easy to revisit later.
+            </p>
+          </div>
+
+          <div className="rounded-[1.5rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,250,255,0.94))] p-4 shadow-[0_18px_42px_-32px_rgba(15,23,42,0.2)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
+              Priority
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[color:var(--muted-foreground)]">
+              Set the note importance before you save.
+            </p>
+          </div>
+        </div>
+
         {errors.root?.message ? (
           <div
             role="alert"
             aria-live="polite"
-            className="rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm leading-6 text-[color:var(--danger)]"
+            className="rounded-2xl border border-[color:var(--danger-soft)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,247,248,0.96))] px-4 py-3 text-sm leading-6 text-[color:var(--danger)]"
           >
             {errors.root.message}
           </div>
@@ -212,9 +233,7 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
               <select
                 id="note-priority"
                 aria-invalid={errors.priority ? "true" : "false"}
-                aria-describedby={
-                  errors.priority ? "note-priority-error" : "note-priority-help"
-                }
+                aria-describedby={errors.priority ? "note-priority-error" : "note-priority-help"}
                 className={cn(
                   selectClassName,
                   "pl-11 pr-4",
@@ -259,12 +278,12 @@ export function NoteDialog({ open, onOpenChange, note }: NoteDialogProps) {
             {isSubmitting || createMutation.isPending || updateMutation.isPending ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                {isEditing ? "Updating" : "Creating"}
+                Saving
               </>
             ) : isEditing ? (
-              "Update Note"
+              "Save changes"
             ) : (
-              "Create Note"
+              "Create note"
             )}
           </button>
         </div>

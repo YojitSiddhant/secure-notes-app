@@ -17,6 +17,7 @@ import type { NoteItem } from "@/services/notes.service";
 function NotesContent() {
   const [search, setSearch] = useState("");
   const [priority, setPriority] = useState<NotesPriorityFilter>("ALL");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [manualCreateOpen, setManualCreateOpen] = useState(false);
   const [editingNote, setEditingNote] = useState<NoteItem | null>(null);
   const [deletingNote, setDeletingNote] = useState<NoteItem | null>(null);
@@ -46,12 +47,10 @@ function NotesContent() {
 
   if (notesQuery.isError) {
     const description =
-      notesQuery.error instanceof Error
-        ? notesQuery.error.message
-        : "Please try again.";
+      notesQuery.error instanceof Error ? notesQuery.error.message : "Please try again.";
 
     return (
-        <ErrorState
+      <ErrorState
         icon={<SearchX className="h-7 w-7" />}
         title="We couldn&apos;t load your notes."
         description={description}
@@ -59,7 +58,7 @@ function NotesContent() {
           <button
             type="button"
             onClick={() => notesQuery.refetch()}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-lg shadow-rose-950/10 transition hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-[0_18px_40px_-22px_rgba(56,86,240,0.65)] transition hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 sm:w-auto"
           >
             Retry
           </button>
@@ -77,6 +76,8 @@ function NotesContent() {
         onPriorityChange={setPriority}
         onCreateClick={() => setManualCreateOpen(true)}
         totalNotes={notes.length}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
       />
 
       {notes.length > 0 ? (
@@ -84,6 +85,7 @@ function NotesContent() {
           notes={notes}
           onEdit={(note) => setEditingNote(note)}
           onDelete={(note) => setDeletingNote(note)}
+          viewMode={viewMode}
         />
       ) : (
         <EmptyState
@@ -96,14 +98,14 @@ function NotesContent() {
           }
           action={
             hasFilters ? null : (
-            <button
-              type="button"
-              onClick={() => setManualCreateOpen(true)}
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-lg shadow-rose-950/10 transition-all duration-150 ease-out hover:-translate-y-0.5 hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 sm:w-auto"
-            >
-              Create Note
-            </button>
-          )
+              <button
+                type="button"
+                onClick={() => setManualCreateOpen(true)}
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-[0_18px_40px_-22px_rgba(56,86,240,0.65)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-slate-500/20 sm:w-auto"
+              >
+                Create Note
+              </button>
+            )
           }
         />
       )}

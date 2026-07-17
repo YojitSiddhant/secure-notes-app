@@ -14,35 +14,27 @@ type DashboardStatCardsProps = {
 const statCards = [
   {
     key: "totalNotes",
-    label: "Total Notes",
+    label: "Total notes",
     icon: NotebookPen,
-    labelClass: "text-[color:var(--foreground)]",
-    valueClass: "text-[color:var(--foreground)]",
-    iconClass: "text-[color:var(--primary)]",
+    accent: "bg-[color:var(--primary-soft)] text-[color:var(--primary)]",
   },
   {
     key: "highPriority",
-    label: "High Priority",
+    label: "High priority",
     icon: AlertCircle,
-    labelClass: "text-[color:var(--foreground)]",
-    valueClass: "text-[color:var(--foreground)]",
-    iconClass: "text-[color:var(--danger)]",
+    accent: "bg-[color:var(--danger-soft)] text-[color:var(--danger)]",
   },
   {
     key: "mediumPriority",
-    label: "Medium Priority",
+    label: "Medium priority",
     icon: ChartColumn,
-    labelClass: "text-[color:var(--foreground)]",
-    valueClass: "text-[color:var(--foreground)]",
-    iconClass: "text-[color:var(--warning)]",
+    accent: "bg-[color:var(--warning-soft)] text-[color:var(--warning)]",
   },
   {
     key: "lowPriority",
-    label: "Low Priority",
+    label: "Low priority",
     icon: CircleDot,
-    labelClass: "text-[color:var(--foreground)]",
-    valueClass: "text-[color:var(--foreground)]",
-    iconClass: "text-[color:var(--success)]",
+    accent: "bg-[color:var(--success-soft)] text-[color:var(--success)]",
   },
 ] as const;
 
@@ -51,37 +43,30 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
     <div
       className="grid gap-4 sm:gap-5"
       style={{
-        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 13rem), 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 14rem), 1fr))",
       }}
     >
-      {statCards.map(({ key, label, icon: Icon, labelClass, valueClass, iconClass }) => (
+      {statCards.map(({ key, label, icon: Icon, accent }) => (
         <article
           key={label}
-          className={cn(
-            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
-          )}
+          className="group overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(247,250,255,0.9))] p-4 shadow-[0_24px_70px_-50px_rgba(15,23,42,0.24)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:shadow-[0_30px_90px_-52px_rgba(56,86,240,0.22)] sm:p-5"
         >
-          <div className="flex w-full items-center justify-between gap-4">
-            <div className="min-w-0 space-y-1">
-              <p
-                className={cn(
-                  "whitespace-nowrap text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--muted-foreground)] sm:text-xs",
-                  labelClass
-                )}
-              >
+          <div className={cn("h-1.5 rounded-full", accent)} />
+          <div className="mt-4 flex items-start justify-between gap-4">
+            <div className="min-w-0 space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
                 {label}
               </p>
-              <p
-                className={cn(
-                  "text-[2.35rem] font-semibold leading-none tracking-tight tabular-nums text-[color:var(--foreground)] sm:text-[2.75rem]",
-                  valueClass
-                )}
-              >
+              <p className="text-4xl font-semibold tracking-tight text-[color:var(--foreground)] tabular-nums sm:text-[2.85rem]">
                 {stats[key].toLocaleString()}
               </p>
+              <p className="text-sm text-[color:var(--muted-foreground)]">
+                Notes currently visible in the workspace.
+              </p>
             </div>
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--surface-muted)] ring-1 ring-inset ring-[color:var(--border)] transition-transform duration-150 ease-out group-hover:scale-[1.02] sm:h-14 sm:w-14">
-              <Icon className={cn("h-5.5 w-5.5 sm:h-6 sm:w-6", iconClass)} />
+
+            <div className={cn("flex h-12 w-12 items-center justify-center rounded-2xl sm:h-14 sm:w-14", accent)}>
+              <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
             </div>
           </div>
         </article>

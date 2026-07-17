@@ -20,7 +20,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-dashed border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-5 py-12 text-center shadow-[0_24px_70px_-42px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:px-6 sm:py-16",
+        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-dashed border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(247,250,255,0.88))] px-5 py-12 text-center shadow-[0_28px_80px_-52px_rgba(15,23,42,0.22)] backdrop-blur-xl sm:px-6 sm:py-16",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function ErrorState({
   return (
     <div
       className={cn(
-        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-[color:var(--danger-soft)] bg-[color:var(--surface-elevated)] px-5 py-12 text-center shadow-[0_24px_70px_-42px_rgba(225,29,72,0.16)] backdrop-blur-xl sm:px-6 sm:py-16",
+        "flex w-full flex-col items-center justify-center rounded-[2rem] border border-[color:var(--danger-soft)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(255,248,249,0.92))] px-5 py-12 text-center shadow-[0_28px_80px_-52px_rgba(219,49,81,0.18)] backdrop-blur-xl sm:px-6 sm:py-16",
         className
       )}
     >

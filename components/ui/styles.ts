@@ -1,11 +1,11 @@
 export const sectionShellClassName =
-  "rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_24px_70px_-42px_rgba(15,23,42,0.16)] backdrop-blur-xl";
+  "rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_28px_80px_-56px_rgba(15,23,42,0.22)] backdrop-blur-xl";
 
 export const sectionEyebrowClassName =
   "inline-flex min-h-8 items-center gap-2 rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-3 text-xs font-semibold text-[color:var(--primary)] shadow-sm shadow-neutral-950/5 backdrop-blur";
 
 export const pageTitleClassName =
-  "text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[2.4rem] lg:text-[2.65rem]";
+  "text-3xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[2.4rem] lg:text-[2.75rem]";
 
 export const pageSubtitleClassName =
   "max-w-3xl text-sm leading-6 text-[color:var(--muted-foreground)] sm:text-base";
@@ -18,7 +18,7 @@ export const helperTextClassName = "text-sm leading-6 text-[color:var(--muted-fo
 export const labelClassName = "text-sm font-medium text-[color:var(--foreground)]";
 
 export const primaryButtonClassName =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-[color:var(--primary)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-lg shadow-neutral-950/15 transition-all duration-150 ease-out hover:-translate-y-0.5 hover:opacity-95 hover:shadow-xl hover:shadow-neutral-950/20 focus:outline-none focus:ring-4 focus:ring-slate-500/20 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,var(--primary),#2336b5)] px-5 py-2.5 text-sm font-semibold text-[color:var(--primary-foreground)] shadow-[0_18px_40px_-22px_rgba(56,86,240,0.65)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:opacity-95 hover:shadow-[0_22px_44px_-20px_rgba(56,86,240,0.75)] focus:outline-none focus:ring-4 focus:ring-slate-500/20 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0";
 
 export const secondaryButtonClassName =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-5 py-2.5 text-sm font-semibold text-[color:var(--foreground)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0";
@@ -27,19 +27,19 @@ export const iconButtonClassName =
   "inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--muted-foreground)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20";
 
 export const fieldClassName =
-  "min-h-12 w-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--foreground)] shadow-sm outline-none transition duration-150 ease-out placeholder:text-[color:var(--muted-foreground)] focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
+  "min-h-12 w-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--foreground)] shadow-[0_8px_30px_-24px_rgba(15,23,42,0.28)] outline-none transition duration-150 ease-out placeholder:text-[color:var(--muted-foreground)] focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
 
 export const textareaClassName =
-  "min-h-44 w-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm leading-6 text-[color:var(--foreground)] shadow-sm outline-none transition duration-150 ease-out placeholder:text-[color:var(--muted-foreground)] focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
+  "min-h-44 w-full rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm leading-6 text-[color:var(--foreground)] shadow-[0_8px_30px_-24px_rgba(15,23,42,0.28)] outline-none transition duration-150 ease-out placeholder:text-[color:var(--muted-foreground)] focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
 
 export const selectClassName =
-  "min-h-12 w-full appearance-none rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm font-medium text-[color:var(--foreground)] shadow-sm outline-none transition duration-150 ease-out focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
+  "min-h-12 w-full appearance-none rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-4 py-3 text-sm font-medium text-[color:var(--foreground)] shadow-[0_8px_30px_-24px_rgba(15,23,42,0.28)] outline-none transition duration-150 ease-out focus:border-[color:var(--primary-border)] focus:ring-4 focus:ring-slate-500/20";
 
 export const cardShellClassName =
-  "rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_20px_60px_-42px_rgba(15,23,42,0.16)] backdrop-blur-xl";
+  "rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_24px_70px_-46px_rgba(15,23,42,0.2)] backdrop-blur-xl";
 
 export const cardShellInteractiveClassName =
-  "rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_20px_60px_-42px_rgba(15,23,42,0.16)] backdrop-blur-xl transition-all duration-150 ease-out hover:-translate-y-1 hover:border-[color:var(--primary-border)] hover:shadow-[0_28px_80px_-44px_rgba(79,70,229,0.18)]";
+  "rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-[0_24px_70px_-46px_rgba(15,23,42,0.2)] backdrop-blur-xl transition-all duration-150 ease-out hover:-translate-y-1 hover:border-[color:var(--primary-border)] hover:shadow-[0_32px_90px_-50px_rgba(56,86,240,0.24)]";
 
 export const badgeClassName =
   "inline-flex min-h-8 items-center rounded-full px-3 py-1 text-xs font-semibold tracking-tight ring-1 ring-inset transition-colors duration-150 ease-out";
@@ -70,3 +70,6 @@ export const mobileBottomNavIndicatorClassName =
 
 export const mobileBottomNavIconClassName =
   "shrink-0 transition-all duration-150 ease-out";
+
+export const appShellSurfaceClassName =
+  "rounded-[2rem] border border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.92),rgba(247,250,255,0.8))] shadow-[0_30px_100px_-60px_rgba(15,23,42,0.28)] backdrop-blur-2xl";

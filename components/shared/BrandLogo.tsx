@@ -24,7 +24,7 @@ export function BrandLogo({ className, variant = "header" }: BrandLogoProps) {
   return (
     <div
       className={cn(
-        "flex items-center justify-center rounded-full border border-[color:var(--border)] bg-white shadow-sm",
+        "flex items-center justify-center rounded-[1.25rem] border border-white/70 bg-[linear-gradient(135deg,rgba(56,86,240,0.16),rgba(15,132,170,0.12))] shadow-[0_16px_36px_-24px_rgba(15,23,42,0.45)] ring-1 ring-inset ring-white/50",
         variantClasses[variant],
         className
       )}
