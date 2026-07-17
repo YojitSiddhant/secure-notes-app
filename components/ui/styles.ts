@@ -54,7 +54,7 @@ export const mobileHeaderActionButtonClassName =
   "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--foreground)] shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-500/20 landscape:h-10 landscape:w-10";
 
 export const mobileBottomNavShellClassName =
-  "overflow-hidden rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-2.5 py-2.5 shadow-[0_18px_60px_-30px_rgba(15,23,42,0.28)] backdrop-blur-2xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]";
+  "overflow-hidden rounded-t-[1.75rem] rounded-b-none border border-b-0 border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-2.5 py-2.5 shadow-[0_18px_60px_-30px_rgba(15,23,42,0.28)] backdrop-blur-2xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]";
 
 export const mobileBottomNavItemClassName =
   "group relative flex min-h-14 flex-col items-center justify-center gap-1 overflow-hidden rounded-2xl px-4 py-3 text-sm font-medium transition-all duration-150 ease-out focus:outline-none focus:ring-4 focus:ring-blue-500/20 active:scale-[0.98]";
