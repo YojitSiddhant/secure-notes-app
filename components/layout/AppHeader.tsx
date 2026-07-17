@@ -125,7 +125,7 @@ export function AppHeader({
           </div>
 
           <nav className="mx-4 flex flex-1 items-center justify-center" aria-label="Primary">
-            <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] p-1 shadow-sm">
+            <div className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] px-2 py-1.5 shadow-sm">
               {appNavItems.map((item) => {
                 const Icon = item.icon;
                 const active = isActive(item.href);
@@ -135,7 +135,7 @@ export function AppHeader({
                     key={item.label}
                     href={item.href}
                     className={cn(
-                      "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-150 ease-out focus:outline-none focus:ring-4 focus:ring-slate-500/20 xl:px-4",
+                      "inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-all duration-150 ease-out focus:outline-none focus:ring-4 focus:ring-blue-500/20 xl:px-5",
                       active
                         ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-blue-950/20"
                         : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
