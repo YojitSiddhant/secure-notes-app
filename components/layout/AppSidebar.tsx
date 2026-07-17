@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 import { appNavItems } from "@/components/layout/navigation";
@@ -55,10 +56,10 @@ export function AppSidebar({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border)] text-[color:var(--muted-foreground)] transition hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--muted-foreground)] shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-blue-500/20"
             aria-label="Close sidebar menu"
           >
-            <span className="text-lg leading-none">×</span>
+            <X className="h-4 w-4" />
           </button>
         </div>
 
