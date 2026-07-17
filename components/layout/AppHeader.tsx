@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { AuthUser } from "@/services/auth.service";
 import { useLogout } from "@/hooks/useLogout";
-import { CircleUserRound, LogOut, Menu } from "lucide-react";
+import { CircleUserRound, LogOut, Menu, UserRound } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
@@ -30,11 +30,51 @@ export function AppHeader({
 }: AppHeaderProps) {
   const logoutMutation = useLogout();
   const profileTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const profileMenuRef = useRef<HTMLDivElement | null>(null);
+  const profileLogoutButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const isActive = (href: string) =>
     pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
+
+  useEffect(() => {
+    if (!isProfileMenuOpen) {
+      return undefined;
+    }
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+
+      if (
+        profileMenuRef.current?.contains(target) ||
+        profileTriggerRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setIsProfileMenuOpen(false);
+    };
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsProfileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+
+    const focusTimer = window.setTimeout(() => {
+      profileLogoutButtonRef.current?.focus();
+    }, 0);
+
+    return () => {
+      window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+      window.clearTimeout(focusTimer);
+    };
+  }, [isProfileMenuOpen]);
 
   return (
     <>
@@ -111,49 +151,76 @@ export function AppHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-2 sm:gap-3">
-            <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 shadow-sm">
-              {isUserLoading ? (
-                <>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
-                    <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary)]/20" />
-                  </div>
-                  <div className="hidden min-w-0 space-y-1 sm:block">
-                    <div className="h-4 w-28 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
-                    <div className="h-3 w-24 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
-                    <CircleUserRound className="h-5 w-5" />
-                  </div>
-                  <div className="hidden min-w-0 sm:block">
-                    <p className="truncate text-sm font-medium text-[color:var(--foreground)]">
-                      {user?.name ?? "Workspace Member"}
-                    </p>
-                    <p className="truncate text-xs text-[color:var(--muted-foreground)]">
-                      Workspace Member
-                    </p>
-                  </div>
-                </>
-              )}
+            <div className="relative">
               <button
+                ref={profileTriggerRef}
                 type="button"
-                onClick={() => {
-                  if (!logoutMutation.isPending) {
-                    void logoutMutation.mutateAsync();
-                  }
-                }}
-                disabled={logoutMutation.isPending}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
-                aria-label="Logout"
-                aria-busy={logoutMutation.isPending}
+                onClick={() => setIsProfileMenuOpen((value) => !value)}
+                className={cn(
+                  "inline-flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] text-[color:var(--primary)] shadow-sm transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:bg-[color:var(--surface-muted)] focus:outline-none focus:ring-4 focus:ring-blue-500/20",
+                  isProfileMenuOpen && "border-[color:var(--primary-border)] bg-[color:var(--surface-muted)]"
+                )}
+                aria-label="Open profile menu"
+                aria-haspopup="menu"
+                aria-expanded={isProfileMenuOpen}
               >
-                <LogOut className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">
-                  {logoutMutation.isPending ? "Logging out" : "Logout"}
-                </span>
+                {isUserLoading ? (
+                  <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary-soft)]" />
+                ) : (
+                  <UserRound className="h-5 w-5" />
+                )}
               </button>
+
+              {isProfileMenuOpen ? (
+                <div
+                  ref={profileMenuRef}
+                  className="absolute right-0 top-[calc(100%+0.75rem)] z-50 w-[20rem] overflow-hidden rounded-[1.5rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-2 shadow-[0_26px_70px_-34px_rgba(15,23,42,0.34)] backdrop-blur-2xl motion-safe:animate-[ui-pop-in_160ms_ease-out]"
+                  role="menu"
+                  aria-label="Profile menu"
+                >
+                  <div className="rounded-[1.15rem] border border-[color:var(--border)] bg-[color:var(--surface)] p-4">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)] ring-1 ring-inset ring-[color:var(--primary-border)]">
+                        {isUserLoading ? (
+                          <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary)]/20" />
+                        ) : (
+                          <CircleUserRound className="h-5 w-5" />
+                        )}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)]">
+                          {isUserLoading ? "Loading profile" : user?.name ?? "Workspace Member"}
+                        </p>
+                        <p className="truncate text-sm text-[color:var(--muted-foreground)]">
+                          {isUserLoading ? "Loading email" : user?.email ?? ""}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      ref={profileLogoutButtonRef}
+                      type="button"
+                      onClick={() => {
+                        setIsProfileMenuOpen(false);
+                        if (!logoutMutation.isPending) {
+                          void logoutMutation.mutateAsync();
+                        }
+                      }}
+                      disabled={logoutMutation.isPending}
+                      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[color:var(--danger)] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-950/15 transition duration-150 ease-out hover:opacity-95 focus:outline-none focus:ring-4 focus:ring-rose-500/20 disabled:cursor-not-allowed disabled:opacity-70"
+                      aria-label="Logout"
+                      aria-busy={logoutMutation.isPending}
+                      role="menuitem"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      {logoutMutation.isPending ? "Logging out" : "Logout"}
+                    </button>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
