@@ -97,7 +97,7 @@ export function AppHeader({
                     className={cn(
                       "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-150 ease-out focus:outline-none focus:ring-4 focus:ring-slate-500/20 xl:px-4",
                       active
-                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-neutral-950/15"
+                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-blue-950/20"
                         : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
                     )}
                     aria-current={active ? "page" : undefined}
