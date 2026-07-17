@@ -44,6 +44,8 @@ export const loginSchema = z
       .string({ error: "Password is required." })
       .min(1, "Password is required.")
       .max(128, "Password cannot exceed 128 characters."),
+    // Optional checkbox that controls whether the auth cookie persists.
+    rememberMe: z.boolean().optional(),
   })
   .strict();
 

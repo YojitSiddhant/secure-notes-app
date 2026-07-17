@@ -63,7 +63,7 @@ export async function POST(request: Request) {
       return createValidationErrorResponse("Validation failed.", validationResult.error.flatten().fieldErrors);
     }
 
-    const { email, password } = validationResult.data;
+    const { email, password, rememberMe = false } = validationResult.data;
 
     const rateLimitResponse = await enforceAuthRateLimit(request, "login", email);
 
@@ -99,7 +99,7 @@ export async function POST(request: Request) {
       { status: 200 },
     );
 
-    response.cookies.set(createAuthCookieValue(token));
+    response.cookies.set(createAuthCookieValue(token, { persistent: rememberMe }));
 
     return response;
   } catch (error) {

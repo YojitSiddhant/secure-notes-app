@@ -123,11 +123,11 @@ export async function getAuthenticatedUserFromCookies(): Promise<AuthTokenPayloa
   return getAuthenticatedUserFromToken(token);
 }
 
-export function createAuthCookieValue(token: string) {
+export function createAuthCookieValue(token: string, options?: { persistent?: boolean }) {
   return {
     name: getAuthCookieName(),
     value: token,
-    ...getAuthCookieOptions(),
+    ...getAuthCookieOptions(options),
   };
 }
 

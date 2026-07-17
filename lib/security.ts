@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { env } from "@/lib/env";
 
 export const AUTH_COOKIE_BASE_NAME = "auth_token";
-export const AUTH_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
+export const AUTH_COOKIE_PERSISTENT_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
 export const AUTH_JWT_AUDIENCE = "secure-notes-app-web";
 export const AUTH_JWT_ISSUER = "secure-notes-app";
 export const JWT_ALGORITHM = "HS256";
@@ -40,14 +40,22 @@ export function getAuthCookieName() {
   return env.NODE_ENV === "production" ? "__Host-auth_token" : AUTH_COOKIE_BASE_NAME;
 }
 
-export function getAuthCookieOptions() {
-  return {
+export function getAuthCookieOptions(options?: { persistent?: boolean }) {
+  const cookieOptions = {
     httpOnly: true,
     secure: env.NODE_ENV === "production",
     sameSite: "lax" as const,
     path: "/",
-    maxAge: AUTH_COOKIE_MAX_AGE_SECONDS,
   };
+
+  if (options?.persistent) {
+    return {
+      ...cookieOptions,
+      maxAge: AUTH_COOKIE_PERSISTENT_MAX_AGE_SECONDS,
+    };
+  }
+
+  return cookieOptions;
 }
 
 export function createNoStoreJsonResponse(

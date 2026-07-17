@@ -6,8 +6,7 @@ import Link from "next/link";
 import { Eye, EyeOff, Loader2, Mail, Lock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { loginSchema } from "@/lib/validations/auth";
+import { loginSchema, type LoginInput } from "@/lib/validations/auth";
 import { cn } from "@/lib/cn";
 import {
   fieldClassName,
@@ -16,11 +15,9 @@ import {
   primaryButtonClassName,
 } from "@/components/ui/styles";
 
-const loginFormSchema = loginSchema.extend({
-  rememberMe: z.boolean().optional(),
-});
+const loginFormSchema = loginSchema;
 
-type LoginFormValues = z.infer<typeof loginFormSchema>;
+type LoginFormValues = LoginInput;
 
 type AuthDebugErrorResponse = {
   error?: unknown;
@@ -70,6 +67,7 @@ export function LoginForm() {
     const payload = {
       email: values.email,
       password: values.password,
+      rememberMe: values.rememberMe ?? false,
     };
 
     try {
@@ -211,17 +209,22 @@ export function LoginForm() {
         )}
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-[color:var(--muted-foreground)]">
+      <div className="flex flex-col gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-[color:var(--foreground)]">
           <input
             type="checkbox"
             className={cn(
-              "h-4 w-4 rounded border-[color:var(--border)] text-[color:var(--foreground)] focus:ring-4 focus:ring-slate-900/5"
+              "h-4 w-4 rounded border-[color:var(--border)] text-[color:var(--primary)] focus:ring-4 focus:ring-slate-900/5"
             )}
             {...register("rememberMe")}
             aria-label="Remember me"
           />
-          <span>Remember Me</span>
+          <span>
+            <span className="block font-medium">Remember me</span>
+            <span className="block text-xs text-[color:var(--muted-foreground)]">
+              Keep me signed in on this device.
+            </span>
+          </span>
         </label>
 
         <button
