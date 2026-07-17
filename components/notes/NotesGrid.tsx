@@ -5,31 +5,9 @@ type NotesGridProps = {
   notes: NoteItem[];
   onEdit: (note: NoteItem) => void;
   onDelete: (note: NoteItem) => void;
-  viewMode?: "grid" | "list";
 };
 
-export function NotesGrid({
-  notes,
-  onEdit,
-  onDelete,
-  viewMode = "grid",
-}: NotesGridProps) {
-  if (viewMode === "list") {
-    return (
-      <div className="space-y-4">
-        {notes.map((note) => (
-          <NoteCard
-            key={note.id}
-            note={note}
-            onEdit={onEdit}
-            onDelete={onDelete}
-            variant="list"
-          />
-        ))}
-      </div>
-    );
-  }
-
+export function NotesGrid({ notes, onEdit, onDelete }: NotesGridProps) {
   return (
     <div
       className="grid gap-4 sm:gap-5"

@@ -3,9 +3,9 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CircleUserRound, LogOut, Menu, NotebookPen } from "lucide-react";
 import type { AuthUser } from "@/services/auth.service";
 import { useLogout } from "@/hooks/useLogout";
+import { CircleUserRound, LogOut, Menu } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 import { AppMobileProfileMenu } from "@/components/layout/AppMobileProfileMenu";
@@ -33,22 +33,14 @@ export function AppHeader({
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const activeItem =
-    appNavItems.find(
-      (item) =>
-        pathname === item.href ||
-        (item.href !== "/dashboard" && pathname.startsWith(item.href + "/"))
-    ) ?? appNavItems[0];
-  const currentTitle = activeItem?.label ?? "Workspace";
-  const currentSubtitle = pathname.startsWith("/notes")
-    ? "Capture, refine, and prioritize your notes."
-    : "Overview of your secure workspace.";
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
 
   return (
     <>
       <header
         className={cn(
-          "sticky top-0 z-30 border-b border-[color:var(--border)] bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(247,250,255,0.82))] backdrop-blur-2xl supports-[backdrop-filter]:bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(247,250,255,0.82))]",
+          "sticky top-0 z-30 border-b border-[color:var(--border)] bg-[color:var(--surface-elevated)] backdrop-blur-xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]",
           className
         )}
       >
@@ -61,15 +53,6 @@ export function AppHeader({
           >
             <Menu className="h-[22px] w-[22px] text-[color:var(--primary)]" />
           </button>
-
-          <div className="flex min-w-0 flex-1 flex-col items-center px-2 text-center">
-            <p className="truncate text-[0.98rem] font-semibold tracking-tight text-[color:var(--foreground)]">
-              {currentTitle}
-            </p>
-            <p className="truncate text-[0.75rem] text-[color:var(--muted-foreground)]">
-              {currentSubtitle}
-            </p>
-          </div>
 
           <button
             ref={profileTriggerRef}
@@ -88,47 +71,60 @@ export function AppHeader({
           </button>
         </div>
 
-        <div className="hidden min-h-20 items-center gap-4 px-4 py-4 lg:flex lg:px-8">
+        <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
           <div className="flex min-w-0 items-center gap-3">
             <BrandLogo variant="header" />
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[0.98rem]">
-                  {currentTitle}
-                </p>
-                <span className="hidden rounded-full border border-[color:var(--primary-border)] bg-[color:var(--primary-soft)] px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--primary)] xl:inline-flex">
-                  {pathname.startsWith("/notes") ? "Capture" : "Overview"}
-                </span>
-              </div>
-              <p className="truncate text-sm text-[color:var(--muted-foreground)]">
-                {currentSubtitle}
+              <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[0.95rem]">
+                Secure Notes
+              </p>
+              <p className="truncate text-xs text-[color:var(--muted-foreground)] sm:text-sm">
+                Organized private note workspace
               </p>
             </div>
           </div>
 
-          <div className="ml-auto flex items-center gap-3">
-            <Link
-              href="/notes?create=1"
-              className="inline-flex min-h-11 items-center gap-2 rounded-2xl border border-[color:var(--primary-border)] bg-[linear-gradient(135deg,rgba(56,86,240,0.1),rgba(255,255,255,0.94))] px-4 text-sm font-semibold text-[color:var(--foreground)] transition-all duration-150 ease-out hover:-translate-y-0.5 hover:text-[color:var(--primary)] focus:outline-none focus:ring-4 focus:ring-slate-500/20"
-            >
-              <NotebookPen className="h-4 w-4 text-[color:var(--primary)]" />
-              New Note
-            </Link>
+          <nav className="mx-4 flex flex-1 items-center justify-center" aria-label="Primary">
+            <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[color:var(--border)] bg-[color:var(--surface)] p-1 shadow-sm">
+              {appNavItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
 
-            <div className="flex items-center gap-3 rounded-[1.25rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] px-3 py-2 shadow-sm">
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-all duration-150 ease-out focus:outline-none focus:ring-4 focus:ring-slate-500/20 xl:px-4",
+                      active
+                        ? "bg-[color:var(--primary)] text-[color:var(--primary-foreground)] shadow-md shadow-neutral-950/15"
+                        : "text-[color:var(--muted-foreground)] hover:bg-[color:var(--surface-muted)] hover:text-[color:var(--foreground)]"
+                    )}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    <Icon className="h-4 w-4 shrink-0" />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+
+          <div className="ml-auto flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface)] px-3 py-2 shadow-sm">
               {isUserLoading ? (
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
+                <>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
                     <span className="h-5 w-5 animate-pulse rounded-full bg-[color:var(--primary)]/20" />
                   </div>
                   <div className="hidden min-w-0 space-y-1 sm:block">
                     <div className="h-4 w-28 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
                     <div className="h-3 w-24 animate-pulse rounded-full bg-[color:var(--surface-muted)]" />
                   </div>
-                </div>
+                </>
               ) : (
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
+                <>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--primary-soft)] text-[color:var(--primary)]">
                     <CircleUserRound className="h-5 w-5" />
                   </div>
                   <div className="hidden min-w-0 sm:block">
@@ -136,10 +132,10 @@ export function AppHeader({
                       {user?.name ?? "Workspace Member"}
                     </p>
                     <p className="truncate text-xs text-[color:var(--muted-foreground)]">
-                      {user?.email ?? "Private account"}
+                      Workspace Member
                     </p>
                   </div>
-                </div>
+                </>
               )}
               <button
                 type="button"
