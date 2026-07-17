@@ -26,7 +26,7 @@ export function AppSidebar({
     <>
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-sm transition-opacity duration-150 ease-out lg:hidden",
+          "fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-sm transition-opacity duration-150 ease-out lg:hidden motion-safe:animate-[ui-fade-in_160ms_ease-out]",
           isMobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
         )}
         aria-hidden="true"
@@ -35,7 +35,7 @@ export function AppSidebar({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-180 ease-out lg:hidden",
+          "fixed inset-y-0 left-0 z-50 flex w-[min(92vw,20rem)] flex-col border-r border-[color:var(--border)] bg-[color:var(--surface-elevated)] text-[color:var(--foreground)] shadow-2xl shadow-slate-950/10 backdrop-blur-xl transition-transform duration-180 ease-out lg:hidden motion-safe:animate-[ui-slide-in-left_180ms_ease-out]",
           isMobileOpen ? "pointer-events-auto translate-x-0" : "pointer-events-none -translate-x-full",
           className
         )}

@@ -29,7 +29,7 @@ export function NotesToolbar({
   totalNotes,
 }: NotesToolbarProps) {
   return (
-    <section className={cn(sectionShellClassName, "p-4 sm:p-5 lg:p-6")}>
+    <section className={cn(sectionShellClassName, "ui-animate-rise-in p-4 sm:p-5 lg:p-6")}>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <h2 className={sectionTitleClassName}>Notes</h2>
@@ -42,7 +42,7 @@ export function NotesToolbar({
         <button
           type="button"
           onClick={onCreateClick}
-          className={cn(primaryButtonClassName, "w-full sm:w-auto")}
+          className={cn(primaryButtonClassName, "ui-animate-rise-in-delay-1 w-full sm:w-auto")}
         >
           <Plus className="h-4 w-4" />
           Create Note
@@ -60,9 +60,9 @@ export function NotesToolbar({
             onChange={(event) => onSearchChange(event.target.value)}
             placeholder="Search notes by title or description"
             aria-label="Search notes"
-            className={cn(fieldClassName, "pl-14")}
-          />
-        </label>
+          className={cn(fieldClassName, "pl-14")}
+        />
+      </label>
 
         <label className="relative block">
           <span className="pointer-events-none absolute left-4 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-xl bg-[color:var(--primary-soft)] text-[color:var(--primary)]">

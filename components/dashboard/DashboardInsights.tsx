@@ -64,7 +64,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
   const maxValue = Math.max(0, ...insights.map((item) => item.value));
 
   return (
-    <section className={cn(sectionShellClassName, "relative overflow-hidden p-5 sm:p-6")}>
+    <section className={cn(sectionShellClassName, "ui-animate-rise-in relative overflow-hidden p-5 sm:p-6")}>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-[-6rem] top-[-5rem] h-40 w-40 rounded-full bg-[color:var(--primary-soft)] blur-3xl" />
         <div className="absolute right-[-5rem] top-6 h-48 w-48 rounded-full bg-[color:var(--warning-soft)] blur-3xl" />
@@ -79,7 +79,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
           </p>
         </div>
 
-        <div className="rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6">
+        <div className="ui-animate-rise-in-delay-1 rounded-[2rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-5 shadow-[0_24px_70px_-44px_rgba(15,23,42,0.2)] backdrop-blur-xl sm:p-6">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted-foreground)]">
@@ -98,12 +98,16 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
                 gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr))",
               }}
             >
-              {insights.map((item) => {
+              {insights.map((item, index) => {
                 const percent = formatPercent(item.value, totalNotes);
                 const heightPercent = maxValue === 0 ? 0 : Math.max(8, (item.value / maxValue) * 100);
 
                 return (
-                  <div key={item.key} className="flex h-full flex-col justify-end gap-3">
+                  <div
+                    key={item.key}
+                    className="flex h-full flex-col justify-end gap-3 motion-safe:animate-[ui-rise-in_420ms_ease-out]"
+                    style={{ animationDelay: `${index * 90 + 80}ms` }}
+                  >
                     <div className="flex min-h-8 items-center justify-center">
                       <span
                         className={cn(
@@ -119,7 +123,7 @@ export function DashboardInsights({ stats }: DashboardInsightsProps) {
                     <div className="relative flex flex-1 items-end justify-center rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(148,163,184,0.06),rgba(148,163,184,0.02))] px-2 py-3">
                       <div className="absolute inset-x-3 bottom-3 h-px bg-[color:var(--border)]" />
                       <div
-                        className="relative w-full max-w-20 rounded-[1rem] border border-white/60 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.32)] transition-all duration-180 ease-out"
+                        className="relative w-full max-w-20 rounded-[1rem] border border-white/60 shadow-[0_12px_24px_-18px_rgba(15,23,42,0.32)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_28px_-20px_rgba(15,23,42,0.34)]"
                         style={{
                           height: `${heightPercent}%`,
                           minHeight: item.value === 0 ? "0.5rem" : "1.25rem",

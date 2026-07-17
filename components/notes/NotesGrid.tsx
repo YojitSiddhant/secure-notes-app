@@ -15,8 +15,14 @@ export function NotesGrid({ notes, onEdit, onDelete }: NotesGridProps) {
         gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
       }}
     >
-      {notes.map((note) => (
-        <NoteCard key={note.id} note={note} onEdit={onEdit} onDelete={onDelete} />
+      {notes.map((note, index) => (
+        <NoteCard
+          key={note.id}
+          note={note}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          animationDelay={`${index * 70}ms`}
+        />
       ))}
     </div>
   );

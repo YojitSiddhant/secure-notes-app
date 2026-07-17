@@ -144,12 +144,12 @@ export function SignupForm() {
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className="space-y-5 ui-animate-rise-in" onSubmit={handleSubmit(onSubmit)} noValidate>
       {errors.root?.message ? (
         <div
           role="alert"
           aria-live="polite"
-          className="rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--danger)]"
+          className="ui-animate-rise-in-delay-1 rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--danger)]"
         >
           {errors.root.message}
         </div>
@@ -159,13 +159,13 @@ export function SignupForm() {
         <div
           role="status"
           aria-live="polite"
-          className="rounded-2xl border border-[color:var(--success-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--success)]"
+          className="ui-animate-rise-in-delay-1 rounded-2xl border border-[color:var(--success-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--success)]"
         >
           {successMessage}
         </div>
       ) : null}
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-1">
         <label htmlFor="name" className={labelClassName}>
           Full Name
         </label>
@@ -198,7 +198,7 @@ export function SignupForm() {
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-2">
         <label htmlFor="email" className={labelClassName}>
           Email
         </label>
@@ -231,7 +231,7 @@ export function SignupForm() {
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-3">
         <label htmlFor="password" className={labelClassName}>
           Password
         </label>
@@ -276,7 +276,7 @@ export function SignupForm() {
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-3">
         <label htmlFor="confirmPassword" className={labelClassName}>
           Confirm Password
         </label>
@@ -326,7 +326,7 @@ export function SignupForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={cn(primaryButtonClassName, "w-full")}
+        className={cn(primaryButtonClassName, "ui-animate-rise-in-delay-3 w-full")}
         aria-busy={isSubmitting}
       >
         {isSubmitting ? (
@@ -339,7 +339,7 @@ export function SignupForm() {
         )}
       </button>
 
-      <p className="text-center text-sm text-[color:var(--muted-foreground)]">
+      <p className="ui-animate-rise-in-delay-3 text-center text-sm text-[color:var(--muted-foreground)]">
         Already have an account?{" "}
         <Link
           href="/login"

@@ -31,7 +31,7 @@ export function AppMobileBottomNav() {
     pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-20 md:hidden landscape:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-20 md:hidden landscape:hidden motion-safe:animate-[ui-rise-in_300ms_ease-out]">
       <div className="mx-auto w-full max-w-[24rem] px-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-2">
         <nav aria-label="Primary mobile" className={mobileBottomNavShellClassName}>
           <div className="grid grid-cols-2 gap-2">

@@ -12,6 +12,7 @@ type NoteCardProps = {
   note: NoteItem;
   onEdit: (note: NoteItem) => void;
   onDelete: (note: NoteItem) => void;
+  animationDelay?: string;
 };
 
 const priorityStyles: Record<
@@ -43,16 +44,17 @@ function formatDate(value: string) {
   }).format(new Date(value));
 }
 
-export function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
+export function NoteCard({ note, onEdit, onDelete, animationDelay }: NoteCardProps) {
   const priority = priorityStyles[note.priority];
 
   return (
-    <article
+      <article
       className={cn(
-        "group relative flex h-full min-h-[16rem] flex-col overflow-hidden p-5 sm:min-h-[18rem] sm:p-6",
+        "ui-animate-rise-in group relative flex h-full min-h-[16rem] flex-col overflow-hidden p-5 sm:min-h-[18rem] sm:p-6",
         cardShellInteractiveClassName,
         priority.shellClassName
       )}
+      style={animationDelay ? { animationDelay } : undefined}
     >
         <div className="flex items-start justify-between gap-3">
         <span

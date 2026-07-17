@@ -40,7 +40,7 @@ export function AppHeader({
     <>
       <header
         className={cn(
-          "sticky top-0 z-30 border-b border-[color:var(--border)] bg-[color:var(--surface-elevated)] backdrop-blur-xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)]",
+          "sticky top-0 z-30 border-b border-[color:var(--border)] bg-[color:var(--surface-elevated)] backdrop-blur-xl supports-[backdrop-filter]:bg-[color:var(--surface-elevated)] motion-safe:animate-[ui-fade-in_220ms_ease-out]",
           className
         )}
       >
