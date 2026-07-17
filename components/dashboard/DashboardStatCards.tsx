@@ -54,12 +54,13 @@ export function DashboardStatCards({ stats }: DashboardStatCardsProps) {
         gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 13rem), 1fr))",
       }}
     >
-      {statCards.map(({ key, label, icon: Icon, labelClass, valueClass, iconClass }) => (
+      {statCards.map(({ key, label, icon: Icon, labelClass, valueClass, iconClass }, index) => (
         <article
           key={label}
           className={cn(
-            "group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
+            "ui-animate-rise-in group flex h-full min-h-[8.5rem] items-center rounded-[1.75rem] border border-[color:var(--border)] bg-[color:var(--surface-elevated)] p-4 shadow-[0_18px_50px_-40px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-150 ease-out hover:-translate-y-0.5 hover:border-[color:var(--primary-border)] hover:shadow-[0_22px_60px_-42px_rgba(79,70,229,0.18)] sm:min-h-[9rem] sm:p-5"
           )}
+          style={{ animationDelay: `${index * 90}ms` }}
         >
           <div className="flex w-full items-center justify-between gap-4">
             <div className="min-w-0 space-y-1">

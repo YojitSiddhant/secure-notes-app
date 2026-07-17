@@ -114,6 +114,70 @@ button {
   }
 }
 
+@keyframes ui-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes ui-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0) scale(1.04);
+  }
+}
+
+@keyframes ui-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.ui-animate-rise-in {
+  animation: ui-rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ui-animate-rise-in-delay-1 {
+  animation: ui-rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+
+.ui-animate-rise-in-delay-2 {
+  animation: ui-rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+.ui-animate-rise-in-delay-3 {
+  animation: ui-rise-in 420ms cubic-bezier(0.16, 1, 0.3, 1) 200ms both;
+}
+
+.ui-animate-drift {
+  animation: ui-drift 12s ease-in-out infinite;
+}
+
+.ui-animate-drift-slow {
+  animation: ui-drift 16s ease-in-out infinite;
+}
+
+.ui-animate-pulse-soft {
+  animation: ui-pulse-soft 5s ease-in-out infinite;
+}
+
 ::selection {
   background: rgba(99, 102, 241, 0.16);
   color: #0f172a;

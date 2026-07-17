@@ -120,18 +120,18 @@ export function LoginForm() {
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className="space-y-5 ui-animate-rise-in" onSubmit={handleSubmit(onSubmit)} noValidate>
       {errors.root?.message ? (
         <div
           role="alert"
           aria-live="polite"
-          className="rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--danger)]"
+          className="ui-animate-rise-in-delay-1 rounded-2xl border border-[color:var(--danger-soft)] bg-[color:var(--surface)] px-4 py-3 text-sm text-[color:var(--danger)]"
         >
           {errors.root.message}
         </div>
       ) : null}
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-1">
         <label htmlFor="email" className={labelClassName}>
           Email
         </label>
@@ -164,7 +164,7 @@ export function LoginForm() {
         )}
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 ui-animate-rise-in-delay-2">
         <label htmlFor="password" className={labelClassName}>
           Password
         </label>
@@ -209,7 +209,7 @@ export function LoginForm() {
         )}
       </div>
 
-      <div className="flex flex-col gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="ui-animate-rise-in-delay-3 flex flex-col gap-4 rounded-2xl border border-[color:var(--border)] bg-[color:var(--surface-muted)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
         <label className="inline-flex cursor-pointer items-center gap-3 text-sm text-[color:var(--foreground)]">
           <input
             type="checkbox"
@@ -239,7 +239,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={cn(primaryButtonClassName, "w-full")}
+        className={cn(primaryButtonClassName, "ui-animate-rise-in-delay-3 w-full")}
         aria-busy={isSubmitting}
       >
         {isSubmitting ? (
@@ -252,7 +252,7 @@ export function LoginForm() {
         )}
       </button>
 
-      <p className="text-center text-sm text-[color:var(--muted-foreground)]">
+      <p className="text-center text-sm text-[color:var(--muted-foreground)] ui-animate-rise-in-delay-3">
         Don&apos;t have an account?{" "}
         <Link
           href="/signup"

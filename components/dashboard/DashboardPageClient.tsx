@@ -66,7 +66,7 @@ function DashboardContent() {
       <section
         className={cn(
           sectionShellClassName,
-          "p-5 sm:p-6"
+          "ui-animate-rise-in p-5 sm:p-6"
         )}
       >
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -88,7 +88,7 @@ function DashboardContent() {
             <button
               type="button"
               onClick={() => setManualCreateOpen(true)}
-              className={cn(primaryButtonClassName, "w-full sm:w-auto")}
+              className={cn(primaryButtonClassName, "ui-animate-rise-in-delay-2 w-full sm:w-auto")}
             >
               Create Note
             </button>
@@ -120,7 +120,9 @@ function DashboardContent() {
 export function DashboardPageClient() {
   return (
     <ProtectedAppShell loadingFallback={<DashboardSkeleton />}>
-      <DashboardContent />
+      <div className="space-y-6 sm:space-y-7">
+        <DashboardContent />
+      </div>
     </ProtectedAppShell>
   );
 }
