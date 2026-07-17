@@ -111,8 +111,8 @@ export function AppHeader({
           </button>
         </div>
 
-        <div className="hidden min-h-16 items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:flex">
-          <div className="flex min-w-0 items-center gap-3">
+        <div className="hidden min-h-16 grid w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-3 px-4 py-3 sm:px-6 lg:px-8 lg:grid">
+          <div className="flex min-w-0 items-center gap-3 justify-self-start">
             <BrandLogo variant="header" />
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold tracking-tight text-[color:var(--foreground)] sm:text-[0.95rem]">
@@ -124,7 +124,7 @@ export function AppHeader({
             </div>
           </div>
 
-          <nav className="mx-4 flex flex-1 items-center justify-center" aria-label="Primary">
+          <nav className="justify-self-center" aria-label="Primary">
             <div className="inline-flex max-w-full items-center justify-center gap-8 px-2 py-1.5">
               {appNavItems.map((item) => {
                 const Icon = item.icon;
@@ -155,7 +155,7 @@ export function AppHeader({
             </div>
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center justify-self-end gap-2 sm:gap-3">
             <div className="relative">
               <button
                 ref={profileTriggerRef}
