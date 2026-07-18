@@ -14,6 +14,7 @@ type AppMobileProfileMenuProps = {
   onLogout: () => void;
   triggerRef: RefObject<HTMLButtonElement | null>;
   menuRef: RefObject<HTMLDivElement | null>;
+  logoutConfirmRef: RefObject<HTMLDivElement | null>;
 };
 
 export function AppMobileProfileMenu({
@@ -24,6 +25,7 @@ export function AppMobileProfileMenu({
   onLogout,
   triggerRef,
   menuRef,
+  logoutConfirmRef,
 }: AppMobileProfileMenuProps) {
   const logoutButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isRendered, setIsRendered] = useState(open);
@@ -201,6 +203,7 @@ export function AppMobileProfileMenu({
         title="Sign out?"
         description="Are you sure you want to sign out of Secure Notes?"
         maxWidthClassName="max-w-md"
+        containerRef={logoutConfirmRef}
         footer={
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
             <button

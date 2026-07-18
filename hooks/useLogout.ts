@@ -11,7 +11,7 @@ export function useLogout() {
 
   return useMutation({
     mutationFn: () => authService.logout(),
-    onMutate: () => {
+    onSuccess: async () => {
       queryClient.removeQueries({ queryKey: currentUserQueryKey });
       router.replace("/login");
     },

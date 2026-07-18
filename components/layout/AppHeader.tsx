@@ -32,6 +32,7 @@ export function AppHeader({
   const profileTriggerRef = useRef<HTMLButtonElement | null>(null);
   const profileMenuRef = useRef<HTMLDivElement | null>(null);
   const mobileProfileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileLogoutConfirmRef = useRef<HTMLDivElement | null>(null);
   const profileLogoutButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -50,7 +51,8 @@ export function AppHeader({
       if (
         profileMenuRef.current?.contains(target) ||
         profileTriggerRef.current?.contains(target) ||
-        mobileProfileMenuRef.current?.contains(target)
+        mobileProfileMenuRef.current?.contains(target) ||
+        mobileLogoutConfirmRef.current?.contains(target)
       ) {
         return;
       }
@@ -237,6 +239,7 @@ export function AppHeader({
         open={isProfileMenuOpen}
         triggerRef={profileTriggerRef}
         menuRef={mobileProfileMenuRef}
+        logoutConfirmRef={mobileLogoutConfirmRef}
         user={user}
         isUserLoading={isUserLoading}
         onClose={() => setIsProfileMenuOpen(false)}

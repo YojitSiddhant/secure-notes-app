@@ -12,6 +12,7 @@ type ModalProps = {
   children: ReactNode;
   footer?: ReactNode;
   maxWidthClassName?: string;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export function Modal({
@@ -22,6 +23,7 @@ export function Modal({
   children,
   footer,
   maxWidthClassName = "max-w-2xl",
+  containerRef,
 }: ModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -54,6 +56,7 @@ export function Modal({
 
   return (
     <div
+      ref={containerRef}
       className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto px-2 py-2 sm:px-4 sm:py-6"
       role="presentation"
     >
