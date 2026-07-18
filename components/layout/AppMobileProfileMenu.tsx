@@ -13,6 +13,7 @@ type AppMobileProfileMenuProps = {
   onClose: () => void;
   onLogout: () => void;
   triggerRef: RefObject<HTMLButtonElement | null>;
+  menuRef: RefObject<HTMLDivElement | null>;
 };
 
 export function AppMobileProfileMenu({
@@ -22,6 +23,7 @@ export function AppMobileProfileMenu({
   onClose,
   onLogout,
   triggerRef,
+  menuRef,
 }: AppMobileProfileMenuProps) {
   const logoutButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isRendered, setIsRendered] = useState(open);
@@ -129,6 +131,7 @@ export function AppMobileProfileMenu({
       />
 
       <div
+        ref={menuRef}
         className={cn(
           "fixed inset-0 z-[66] flex items-center justify-center px-3 py-3 md:hidden",
           "transition-transform duration-180 ease-out",
